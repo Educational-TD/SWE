@@ -48,10 +48,12 @@ When working on an issue, it is best practice that **only** the assignee will be
 
     ```bash
     git fetch
-    git checkout <#-newly-created-branch>
+    git checkout 0-newly-created-branch
     ```
 
 2) Make changes and commit them as you normally would
+
+3) If changes are made to the target branch, use `rebase` to update your feature branch
 
 ### Getting feedback
 
