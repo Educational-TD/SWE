@@ -1,0 +1,104 @@
+%DOCUMENT SET-UP
+\documentclass[12pt]{article}
+\addtolength{\oddsidemargin}{-0.6in}
+\addtolength{\evensidemargin}{-0.6in}
+\addtolength{\textwidth}{1in}
+\addtolength{\topmargin}{-0.6in}
+\addtolength{\textheight}{1.2in}
+
+
+%DEFAULT PACKAGES
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{hhline}
+\usepackage{graphicx}
+\usepackage{tikz-uml}
+
+
+%HEADER + FOOTER
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\name}
+\chead{\assignment}
+\rhead{Due Date \\ \duedate}
+
+
+%PAGE ONE HEADER
+\fancypagestyle{footer-only}{
+	\fancyhead{}
+	\renewcommand{\headrulewidth}{0pt}
+}
+\newcommand{\starthead}{
+	\thispagestyle{footer-only}
+	\begin{center}
+		\framebox{\vbox{
+				\vspace{2mm}
+				\hbox to 5.8in{Aurora Theriault \hfill \textbf{\class}}
+				\vspace{2mm}
+				\hbox to 5.8in{Quinlin Taylor \hfill}
+				\vspace{2mm}
+				\hbox to 5.8in{Marcus Hernandez \hfill}
+				\vspace{-8mm}
+				\hbox to 5.8in{\Large \hfill \assignment \hfill}
+				\hbox to 5.8in{\hfill \duedate \hfill}
+				\vspace{6mm}
+		}}
+		\vspace{2mm}
+	\end{center}
+}
+
+
+%HELPFUL COMMANDS
+\newcommand{\ds}{\displaystyle}
+\newcommand{\st}{~|~}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+
+
+%DOCUMENT INFO
+\newcommand{\name}{Aurora Theriault, Quinlin Taylor, Marcus Hernandez}
+\newcommand{\assignment}{Design 3}
+\newcommand{\duedate}{October 9, 2026}
+\newcommand{\class}{COMP4110}
+
+\usepackage{hyperref}
+\hypersetup{
+	linkcolor=blue,
+	filecolor=magenta,
+	urlcolor=cyan,
+	pdftitle={\assignment},
+	pdfpagemode=FullScreen
+}
+
+
+\usepackage{xpatch}
+\xpatchcmd{\umlusecase}
+{style/.style={}}
+{}
+{}{}
+\tikzumlset{
+	fill system=gray!5,
+	fill usecase=white,
+	font=\scriptsize,
+	usecase/style/.style={text width=2cm}
+}
+
+%DOCUMENT DATA
+\begin{document}
+	\starthead
+	
+	\vspace{0.9cm}
+	
+	\hspace{-1.8cm}
+	\begin{tikzpicture}
+		\umlactor[x=-1.5, y=0]{Player}
+		
+		\begin{umlsystem}[x=2, y=5]{Geometry Defense}
+		\end{umlsystem}
+	\end{tikzpicture}
+\end{document}
