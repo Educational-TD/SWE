@@ -1,0 +1,141 @@
+%DOCUMENT SET-UP
+\documentclass[12pt]{article}
+\addtolength{\oddsidemargin}{-0.6in}
+\addtolength{\evensidemargin}{-0.6in}
+\addtolength{\textwidth}{1in}
+\addtolength{\topmargin}{-0.6in}
+\addtolength{\textheight}{1.2in}
+
+
+%DEFAULT PACKAGES
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{hhline}
+\usepackage{graphicx}
+\usepackage{tikz-uml}
+
+
+%HEADER + FOOTER
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\chead{\assignment}
+\rhead{Due Date \\ \duedate}
+
+
+%PAGE ONE HEADER
+\fancypagestyle{footer-only}{
+	\fancyhead{}
+	\renewcommand{\headrulewidth}{0pt}
+}
+\newcommand{\starthead}{
+	\thispagestyle{footer-only}
+	\begin{center}
+		\framebox{\vbox{
+				\vspace{2mm}
+				\hbox to 5.8in{Aurora Theriault \hfill \textbf{\class}}
+				\vspace{2mm}
+				\hbox to 5.8in{Leo Dang \hfill}
+				\vspace{2mm}
+				\hbox to 5.8in{Marcus Hernandez \hfill}
+				\vspace{2mm}
+				\hbox to 5.8in{Quinlin Taylor \hfill}
+				\vspace{-11mm}
+				\hbox to 5.8in{\Large \hfill \assignment \hfill}
+				\hbox to 5.8in{\hfill \duedate \hfill}
+				\vspace{6mm}
+		}}
+		\vspace{2mm}
+	\end{center}
+}
+
+
+%DOCUMENT INFO
+\newcommand{\assignment}{Use Case Diagram}
+\newcommand{\duedate}{October 28, 2026}
+\newcommand{\class}{COMP4110}
+
+
+\usepackage{xpatch}
+\xpatchcmd{\umlusecase}
+{style/.style={}}
+{}
+{}{}
+\tikzumlset{
+	fill system=gray!5,
+	fill usecase=white,
+	font=\scriptsize,
+	usecase/style/.style={text width=2cm}
+}
+
+%DOCUMENT DATA
+\begin{document}
+	\starthead
+	
+	\hspace{-2.3cm}
+	\begin{tikzpicture}
+		\umlactor[x=-1.5, y=11]{Player}
+		
+		\begin{umlsystem}[x=2, y=5]{Game}
+			\umlusecase[name=credits, x=0, y=-2.5]{View Credits}
+			\umlassoc{Player}{credits}
+			
+			\umlusecase[name=scores, x=1, y=-0.8]{View Best Scores}
+			\umlassoc{Player}{scores}
+			
+			\umlusecase[name=settings, x=1, y=1.9]{Change Settings}
+			\umlassoc{Player}{settings}
+			
+			\umlusecase[name=difficulty, x=6.5, y=3]{Select \\Difficulty}
+			\umlextend{difficulty}{settings}
+			
+			\umlusecase[name=keybinds, x=6.5, y=1]{Change Keybinds}
+			\umlextend{keybinds}{settings}
+			
+			\umlusecase[name=volume, x=6.5, y=-1]{Change Volume}
+			\umlextend{volume}{settings}
+			
+			\umlusecase[name=volumeup, x=11, y=0]{Volume Up}
+			\umlextend{volumeup}{volume}
+			
+			\umlusecase[name=volumedown, x=11, y=-2]{Volume Down}
+			\umlextend{volumedown}{volume}
+			
+			\umlusecase[name=map, x=0.4, y=8.6]{Choose Map}
+			\umlassoc{Player}{map}
+			
+			\umlusecase[name=start, x=4.8, y=9.3]{Start Run}
+			\umlassoc{Player}{start}
+			\umlinclude{start}{difficulty}
+			\umlinclude{start}{map}
+			
+			\umlusecase[name=pause, x=3.5, y=5.5]{Pause Run}
+			\umlassoc{Player}{pause}
+			\umlinclude{pause}{settings}
+			\umlinclude{pause}{start}
+			
+			\umlusecase[name=resume, x=0, y=4.5]{Resume Run}
+			\umlassoc{Player}{resume}
+			\umlinclude{resume}{pause}
+			
+			\umlusecase[name=quit, x=0, y=6.6]{Quit Run}
+			\umlassoc{Player}{quit}
+			\umlinclude{quit}{pause}
+			
+			\umlusecase[name=advance, x=0.4, y=10.6]{Start \\Defense Stage}
+			\umlassoc{Player}{advance}
+			\umlinclude{advance}{start}
+			
+			\umlusecase[name=upgrade, x=0, y=13.2]{Upgrade Tower}
+			\umlassoc{Player}{upgrade}
+			\umlinclude{upgrade}{start}
+			
+			\umlusecase[name=math, x=6, y=10.5]{Answer Question}
+			\umlinclude{upgrade}{math}
+			
+			\umlusecase[name=mathfail, x=6,y=12.5]{Answer Incorrectly}
+			\umlextend{mathfail}{math}
+		\end{umlsystem}
+	\end{tikzpicture}
+\end{document}

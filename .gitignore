@@ -1,0 +1,6 @@
+# LaTeX outpout files
+*.aux
+*.log
+*.out
+*.pdf
+*.synctex.gz
