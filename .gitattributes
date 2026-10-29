@@ -1,0 +1,5 @@
+# Handle text files automatically and normalize them to LF on check-in
+* text=auto
+
+# Explicitly force LF (Linux format) for all text files on checkout
+* text eol=lf
