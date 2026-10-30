@@ -1,0 +1,85 @@
+[gd_scene format=3 uid="uid://33k1fu103tyb"]
+
+[ext_resource type="Script" uid="uid://qayhru2o3646" path="res://scripts/main_menu.gd" id="1_l6cm7"]
+
+[node name="Control" type="Control" unique_id=1764844499]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_l6cm7")
+
+[node name="HelloWorld" type="Label" parent="." unique_id=1068841649]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -104.0
+offset_top = -36.0
+offset_right = 107.0
+offset_bottom = -13.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "STILL WAITING FOR GODOT"
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1403075409]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 180
+theme_override_constants/margin_top = 90
+theme_override_constants/margin_right = 180
+theme_override_constants/margin_bottom = 90
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1783684278]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1106559392]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+text = "Game Title"
+
+[node name="MenuOptions" type="VBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=551721352]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme_override_constants/separation = 12
+
+[node name="NewGame" type="Label" parent="MarginContainer/VBoxContainer/MenuOptions" unique_id=1763684282]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+mouse_filter = 0
+text = "New Game"
+
+[node name="Settings" type="Label" parent="MarginContainer/VBoxContainer/MenuOptions" unique_id=985029943]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+mouse_filter = 0
+text = "Settings"
+
+[node name="Scoreboard" type="Label" parent="MarginContainer/VBoxContainer/MenuOptions" unique_id=354645614]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+mouse_filter = 0
+text = "Scoreboard"
+
+[node name="Credits" type="Label" parent="MarginContainer/VBoxContainer/MenuOptions" unique_id=1218111348]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+mouse_filter = 0
+text = "Credits"
+
+[connection signal="gui_input" from="MarginContainer/VBoxContainer/MenuOptions/NewGame" to="." method="_on_new_game_gui_input"]
