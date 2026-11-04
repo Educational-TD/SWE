@@ -94,13 +94,14 @@
                 {
                     / hasKeybindConflict(): bool
                 }
+            \umlunicompo{Game}{Settings}
             \umlenum[x=11, y=-1]{Difficulty}
                 {
                     + GRADE\_6 \\
                     + GRADE\_7 \\
                     + GRADE\_8
-                }
-                {}
+                }{}
+            \umlassoc{Settings}{Difficulty}
             \umlclass[x=1, y=-4]{Run}
                 {
                     - phase: WavePhase \\
@@ -112,11 +113,13 @@
                 {
                     + advancePhase()
                 }
+            \umlunicompo{Game}{Run}
             \umlenum[x=5, y=-3.5]{WavePhase}
                 {
                     + REST \\
                     + ATTACK
                 }{}
+            \umlassoc{Run}{WavePhase}
             \umlclass[x=11, y=-4.5]{Question}
                 {
                     - expectedAnswer: String \\
@@ -126,6 +129,7 @@
                 {
                     + answer(response: String): bool
                 }
+            \umlassoc{Question}{Difficulty}
             \umlclass[x=6, y=-8]{Map}
                 {
                     + path: Vec2[]
@@ -133,6 +137,7 @@
                 {
                     + spawnEnemy(): Enemy
                 }
+            \umlunicompo{Run}{Map}
             \umlenum[x=12, y=-8]{TowerAttributes}
                 {
                     + DAMAGE \\
@@ -147,12 +152,15 @@
                 {
                     + isColliding(target: Enemy): bool
                 }
+            \umlunicompo{Map}{Projectile}
             \umlclass[x=6, y=-12]{Enemy}
                 {
                     - speed: float \\
                     + location: float \\
                     + health: int
                 }{}
+            \umlunicompo{Map}{Enemy}
+            \umluniassoc{Projectile}{Enemy}
             \umlclass[x=12, y=-12]{Tower}
                 {
                     + damage: int \\
@@ -161,9 +169,13 @@
                 }
                 {
                     + shoot(target: Enemy): Projectile \\
-                    + upgradeTower(attribute: TowerAttributes, \\ 
-                                            inc: int): bool
+                    + upgradeTower(attribute: TowerAttributes, inc: int): bool
                 }
-        \end{umlpackage}
+            \umlunicompo{Map}{Tower}
+            \umluniassoc{Tower}{Enemy}
+            \umluniassoc{Tower}{Projectile}
+            \umluniassoc{Tower}{Question}
+            \umlassoc{Tower}{TowerAttributes}
+            \end{umlpackage}
     \end{tikzpicture}
 \end{document}
