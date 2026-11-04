@@ -94,7 +94,7 @@
                 {
                     / hasKeybindConflict(): bool
                 }
-            \umlunicompo{Game}{Settings}
+            \umlunicompo[geometry=--]{Game}{Settings}
             \umlenum[x=11, y=-1]{Difficulty}
                 {
                     + GRADE\_6 \\
@@ -113,7 +113,7 @@
                 {
                     + advancePhase()
                 }
-            \umlunicompo{Game}{Run}
+            \umlunicompo[geometry=|-|]{Game}{Run}
             \umlenum[x=5, y=-3.5]{WavePhase}
                 {
                     + REST \\
@@ -137,14 +137,14 @@
                 {
                     + spawnEnemy(): Enemy
                 }
-            \umlunicompo{Run}{Map}
-            \umlenum[x=12, y=-8]{TowerAttributes}
+            \umlunicompo[geometry=|-|]{Run}{Map}
+            \umlenum[x=14, y=-8]{TowerAttributes}
                 {
                     + DAMAGE \\
                     + FREQUENCY \\
                     + RANGE
                 }{}
-            \umlclass[x=0, y=-12]{Projectile}
+            \umlclass[x=0, y=-14]{Projectile}
                 {
                     - position: Vec2
                     - velocity: Vec2
@@ -152,7 +152,7 @@
                 {
                     + isColliding(target: Enemy): bool
                 }
-            \umlunicompo{Map}{Projectile}
+            \umlunicompo[geometry=-|]{Map}{Projectile}
             \umlclass[x=6, y=-12]{Enemy}
                 {
                     - speed: float \\
@@ -161,7 +161,7 @@
                 }{}
             \umlunicompo{Map}{Enemy}
             \umluniassoc{Projectile}{Enemy}
-            \umlclass[x=12, y=-12]{Tower}
+            \umlclass[x=12, y=-14]{Tower}
                 {
                     + damage: int \\
                     + frequency: int \\
@@ -169,13 +169,13 @@
                 }
                 {
                     + shoot(target: Enemy): Projectile \\
-                    + upgradeTower(attribute: TowerAttributes, inc: int): bool
+                    + upgradeTower(attribute: TowerAttributes, \\ inc: int): bool
                 }
-            \umlunicompo{Map}{Tower}
+            \umlunicompo[geometry=-|, anchor2=150]{Map}{Tower}
             \umluniassoc{Tower}{Enemy}
-            \umluniassoc{Tower}{Projectile}
-            \umluniassoc{Tower}{Question}
-            \umlassoc{Tower}{TowerAttributes}
+            \umluniassoc[geometry=--, anchors=-180 and 0]{Tower}{Projectile}
+            \umluniassoc[anchors=121 and -90]{Tower}{Question}
+            \umlassoc[geometry=-|]{Tower}{TowerAttributes}
             \end{umlpackage}
     \end{tikzpicture}
 \end{document}
