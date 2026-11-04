@@ -74,17 +74,94 @@
 	\starthead
 
     \begin{tikzpicture}
-        \begin{umlpackage}{Game}
-            \umlclass{Game}{}{}
-            \umlclass{Settings}{}{}
-            \umlenum{Difficulty}{}{}
-            \umlclass{Run}{}{}
-            \umlenum{WavePhase}{}{}
-            \umlclass{Question}{}{}
-            \umlclass{Map}{}{}
-            \umlclass{Tower}{}{}
-            \umlclass{Enemy}{}{}
-            \umlclass{Projectile}{}{}
+        \begin{umlpackage}{Test}
+            \umlclass{Game}
+                {
+                  + highScores: int[]
+                }
+                {
+                   + rollCredits() \\
+                   + startRun(map: Map) \\
+                   + finishRun()
+                }
+            \umlclass{Settings}
+                {
+                    + keybinds: dict[String, String] \\
+                    + volume: float \\
+                    + difficulty: Difficulty
+                }
+                {
+                    / hasKeybindConflict(): bool
+                }
+            \umlenum{Difficulty}
+                {
+                    + GRADE\_6 \\
+                    + GRADE\_7 \\
+                    + GRADE\_8
+                }
+                {}
+            \umlclass{Run}
+                {
+                    - phase: WavePhase \\
+                    + wave: int \\
+                    + gameTime: Time \\
+                    + isPaused: bool \\
+                    + health: int
+                }
+                {
+                    + advancePhase()
+                }
+            \umlenum{WavePhase}
+                {
+                    + REST \\
+                    + ATTACK
+                }{}
+            \umlclass{Question}
+                {
+                    - expectedAnswer: String \\
+                    + prompt: String \\
+                    + difficulty
+                }
+                {
+                    + answer(response: String): bool
+                }
+            \umlclass{Map}
+                {
+                    + path: Vec2[]
+                }
+                {
+                    + spawnEnemy(): Enemy
+                }
+            \umlclass{Tower}
+                {
+                    + damage: int \\
+                    + frequency: int \\
+                    + range: float
+                }
+                {
+                    + shoot(target: Enemy): Projectile \\
+                    + upgradeTower(attribute: TowerAttributes, inc: int): bool
+                }
+            \umlenum{TowerAttributes}
+                {
+                    + DAMAGE \\
+                    + FREQUENCY \\
+                    + RANGE
+                }{}
+            \umlclass{Enemy}
+                {
+                    - speed: float \\
+                    + location: float \\
+                    + health: int
+                }{}
+            \umlclass{Projectile}
+                {
+                    - position: Vec2
+                    - velocity: Vec2
+                }
+                {
+                    + isColliding(target: Enemy): bool
+                }
         \end{umlpackage}
     \end{tikzpicture}
 \end{document}
