@@ -51,7 +51,6 @@
 }
 
 
-
 %DOCUMENT INFO
 \newcommand{\assignment}{Class Diagram}
 \newcommand{\duedate}{November 3, 2026}
@@ -69,13 +68,14 @@
 	usecase/style/.style={text width=2cm}
 }
 
+
 %DOCUMENT DATA
 \begin{document}
 	\starthead
 
     \hspace{-1.5cm}
-    \begin{tikzpicture}
-        \begin{umlpackage}{Test}
+    \begin{tikzpicture}[every node/.style={font=\scriptsize}]
+        \begin{umlpackage}[fill=white]{Tower Defense}
             \umlclass[x=0, y=0]{Game}
                 {
                   + highScores: int[]
@@ -94,7 +94,7 @@
                 {
                     / hasKeybindConflict(): bool
                 }
-            \umlunicompo[geometry=--]{Game}{Settings}
+            \umlunicompo[geometry=--, mult1=1]{Game}{Settings}
             \umlenum[x=11, y=-1]{Difficulty}
                 {
                     + GRADE\_6 \\
@@ -113,7 +113,7 @@
                 {
                     + advancePhase()
                 }
-            \umlunicompo[geometry=|-|]{Game}{Run}
+            \umlunicompo[geometry=|-|, mult1=1, pos1=0.5]{Game}{Run}
             \umlenum[x=5, y=-3.5]{WavePhase}
                 {
                     + REST \\
@@ -130,21 +130,21 @@
                     + answer(response: String): bool
                 }
             \umlassoc{Question}{Difficulty}
-            \umlclass[x=6, y=-8]{Map}
+            \umlclass[x=5.5, y=-8]{Map}
                 {
                     + path: Vec2[]
                 }
                 {
                     + spawnEnemy(): Enemy
                 }
-            \umlunicompo[geometry=|-|]{Run}{Map}
+            \umlunicompo[geometry=|-|, mult1=1, pos1=0.5, mult2=1, pos2=2.5]{Run}{Map}
             \umlenum[x=14, y=-8]{TowerAttributes}
                 {
                     + DAMAGE \\
                     + FREQUENCY \\
                     + RANGE
                 }{}
-            \umlclass[x=0, y=-14]{Projectile}
+            \umlclass[x=0, y=-14.3]{Projectile}
                 {
                     - position: Vec2
                     - velocity: Vec2
@@ -152,16 +152,17 @@
                 {
                     + isColliding(target: Enemy): bool
                 }
-            \umlunicompo[geometry=-|]{Map}{Projectile}
-            \umlclass[x=6, y=-12]{Enemy}
+            \umlunicompo[geometry=-|, mult1=1, pos1=0.05, mult2=*, pos2=1.95]{Map}{Projectile}
+            \umlclass[x=5.5, y=-12]{Enemy}
                 {
                     - speed: float \\
                     + location: float \\
                     + health: int
                 }{}
-            \umlunicompo{Map}{Enemy}
+            \umlunicompo[mult1=1, mult2=*]{Map}{Enemy}
             \umluniassoc{Projectile}{Enemy}
-            \umlclass[x=12, y=-14]{Tower}
+            \node [fill=white, inner sep=1pt, rotate=22] at (3.2, -12.9) {Damages};
+            \umlclass[x=12, y=-14.3]{Tower}
                 {
                     + damage: int \\
                     + frequency: int \\
@@ -171,10 +172,13 @@
                     + shoot(target: Enemy): Projectile \\
                     + upgradeTower(attribute: TowerAttributes, \\ inc: int): bool
                 }
-            \umlunicompo[geometry=-|, anchor2=150]{Map}{Tower}
+            \umlunicompo[geometry=-|, anchor2=150, mult1=1, pos1=0.3, mult2=*, pos2=1.9]{Map}{Tower}
             \umluniassoc{Tower}{Enemy}
+            \node [fill=white, inner sep=1pt, rotate=-18] at (8, -12.9) {Targets};
             \umluniassoc[geometry=--, anchors=-180 and 0]{Tower}{Projectile}
-            \umluniassoc[anchors=121 and -90]{Tower}{Question}
+            \node [fill=white, inner sep=1pt] at (6,-14.3) {Fires};
+            \umluniassoc[anchors=121 and -90, pos1=0.5]{Tower}{Question}
+            \node [fill=white, inner sep=1pt] at (11,-9) {Asks};
             \umlassoc[geometry=-|]{Tower}{TowerAttributes}
             \end{umlpackage}
     \end{tikzpicture}
