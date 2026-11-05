@@ -73,7 +73,7 @@
 \begin{document}
 	\starthead
     \vspace{.8cm}
-    \hspace{-1.1cm}
+    \hspace{-1.5cm}
     \begin{tikzpicture}[every node/.style={font=\scriptsize}]
         \begin{umlpackage}{Tower Defense}
             \umlclass[x=0, y=0]{Game}
@@ -82,7 +82,8 @@
                 }
                 {
                    + rollCredits() \\
-                   + startRun(map: Map) \\
+                   + startRun(map: Map, \\
+                   \qquad difficulty: Difficulty) \\
                    + finishRun()
                 }
             \umlclass[x=6, y=0]{Settings}
@@ -92,7 +93,7 @@
                     + difficulty: Difficulty
                 }
                 {
-                    / hasKeybindConflict(): bool
+                    / hasKeybindConflict(key: String): bool
                 }
             \umlunicompo[geometry=--, mult1=1]{Game}{Settings}
             \umlenum[x=11, y=-1]{Difficulty}
@@ -124,7 +125,7 @@
                 {
                     - expectedAnswer: String \\
                     + prompt: String \\
-                    + difficulty
+                    + difficulty: Difficulty
                 }
                 {
                     + answer(response: String): bool
@@ -141,12 +142,12 @@
             \umlenum[x=14, y=-8]{TowerAttributes}
                 {
                     + DAMAGE \\
-                    + FREQUENCY \\
+                    + FIRE\_RATE \\
                     + RANGE
                 }{}
-            \umlclass[x=0, y=-14.3]{Projectile}
+            \umlclass[x=-0.2, y=-14.3]{Projectile}
                 {
-                    - position: Vec2
+                    - position: Vec2 \\
                     - velocity: Vec2
                 }
                 {
@@ -162,23 +163,22 @@
             \umlunicompo[mult1=1, mult2=*]{Map}{Enemy}
             \umluniassoc{Projectile}{Enemy}
             \node [fill=gray!5, inner sep=1pt, rotate=22] at (3.2, -12.9) {Damages};
-            \umlclass[x=12, y=-14.3]{Tower}
+            \umlclass[x=12.5, y=-14.3]{Tower}
                 {
                     + damage: int \\
-                    + frequency: int \\
+                    + fire\_rate: int \\
                     + range: float
                 }
                 {
                     + shoot(target: Enemy): Projectile \\
-                    + upgradeTower(attribute: TowerAttributes, \\ 
-                        \qquad\qquad inc: int): bool
+                    + upgradeTower(attribute: TowerAttributes): bool
                 }
             \umlunicompo[geometry=-|, anchor2=150, mult1=1, pos1=0.3, mult2=*, pos2=1.9]{Map}{Tower}
             \umluniassoc{Tower}{Enemy}
-            \node [fill=gray!5, inner sep=1pt, rotate=-18] at (8, -12.9) {Targets};
+            \node [fill=gray!5, inner sep=1pt, rotate=-16] at (8, -12.8) {Targets};
             \umluniassoc[geometry=--, anchors=-180 and 0]{Tower}{Projectile}
             \node [fill=gray!5, inner sep=1pt] at (6,-14.3) {Fires};
-            \umluniassoc[anchors=121 and -90, pos1=0.5]{Tower}{Question}
+            \umluniassoc[anchors=135 and -90, pos1=0.5]{Tower}{Question}
             \node [fill=gray!5, inner sep=1pt] at (11,-9) {Asks};
             \umlassoc[geometry=-|]{Tower}{TowerAttributes}
         \end{umlpackage}
