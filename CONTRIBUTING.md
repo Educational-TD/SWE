@@ -51,7 +51,7 @@ When working on an issue, it is best practice that **only** the assignee will be
     git checkout 0-newly-created-branch
     ```
 
-2) Make changes and commit them as you normally would, following the principle of atomic commits. A good commit message involves a sub-50 character one-line brief description, followed by a more detailed description.
+2) Make changes and commit them as you normally would, following the principle of atomic commits (i.e. each commit consists of a singular small, complete change). A good commit message involves a sub-50 character one-line brief description, followed by a more detailed description that may include specific implementation details and/or design choices if needed.
 
 3) If changes are made to the target branch, use `rebase` to update your feature branch
 
@@ -67,7 +67,7 @@ In order to merge your changes into `main` you're required to create and receive
 
 ## Coding Standards
 
-All game work will be done in GDScript.
+All game work will be done in GDScript, using the latest stable version of [Godot Engine](https://godotengine.org/).
 
 GDScript has an [official coding standard](https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_styleguide.html) published by Godot.
 
@@ -80,7 +80,8 @@ Documentation comments should start with a double ##.
 All scripts should have a documentation header that explains what it does. This should come in two parts: a one-line quick summary, followed by a more detailed explanation.
 
 All functions and signals should have a preface explaining what it does, along with an explanation for any arguments and/or return types. e.g.:
-```
+
+```gdscript
 ## This is an example function that adds two integer inputs
 ##
 ## lhs - The first operand
@@ -90,7 +91,7 @@ func add(lhs: int, rhs: int) -> int:
     return lhs + rhs
 ```
 
-All exported properties should have a preface that explains what it does to get a description in the editor. Enums, constants, and variables should also be prefaced with an explanation if their functioning or purpose is not immediately clear.
+All exported properties should have a preface that explains what it does to get a description in the editor. Enums, constants, and variables should also be prefaced with an explanation if their function or purpose is not immediately clear.
 
 Godot has [many features](https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_documentation_comments.html) that can make format documentation prettily.
 
