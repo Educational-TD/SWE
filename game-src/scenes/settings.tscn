@@ -2,6 +2,10 @@
 
 [ext_resource type="Script" uid="uid://cdn316455ctts" path="res://scripts/settings.gd" id="1_5p8wc"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5p8wc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r6d6q"]
+
 [node name="Control" type="Control" unique_id=800033000]
 layout_mode = 3
 anchors_preset = 15
@@ -46,9 +50,22 @@ text = "Difficulty"
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="DifficultySlider" type="HSlider" parent="MarginContainer/VBoxContainer/DifficultyHBox" unique_id=221637054]
+[node name="CurrentDifficultyLabel" type="Label" parent="MarginContainer/VBoxContainer/DifficultyHBox" unique_id=1225882706]
+custom_minimum_size = Vector2(70, 0)
 layout_mode = 2
-size_flags_horizontal = 8
+size_flags_horizontal = 4
+horizontal_alignment = 2
+
+[node name="DifficultySlider" type="HSlider" parent="MarginContainer/VBoxContainer/DifficultyHBox" unique_id=221637054]
+custom_minimum_size = Vector2(320, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.0
+theme_override_styles/grabber_area = SubResource("StyleBoxEmpty_5p8wc")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_r6d6q")
+tick_count = 3
+ticks_on_borders = true
+ticks_position = 3
 
 [node name="VolumeHBox" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1986397624]
 layout_mode = 2
@@ -62,8 +79,18 @@ text = "Volume"
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="VolumeSlider" type="HSlider" parent="MarginContainer/VBoxContainer/VolumeHBox" unique_id=1012710301]
+[node name="CurrentVolumeLabel" type="Label" parent="MarginContainer/VBoxContainer/VolumeHBox" unique_id=1102212221]
+custom_minimum_size = Vector2(70, 0)
 layout_mode = 2
+size_flags_horizontal = 4
+horizontal_alignment = 2
+
+[node name="VolumeSlider" type="HSlider" parent="MarginContainer/VBoxContainer/VolumeHBox" unique_id=1012710301]
+custom_minimum_size = Vector2(320, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.0
+ticks_on_borders = true
 
 [node name="KeybindHBox" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=2043701880]
 layout_mode = 2
