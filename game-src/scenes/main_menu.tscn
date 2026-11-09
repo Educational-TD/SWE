@@ -83,3 +83,4 @@ mouse_filter = 0
 text = "Credits"
 
 [connection signal="gui_input" from="MarginContainer/VBoxContainer/MenuOptions/NewGame" to="." method="_on_new_game_gui_input"]
+[connection signal="gui_input" from="MarginContainer/VBoxContainer/MenuOptions/Settings" to="." method="_on_settings_gui_input"]
