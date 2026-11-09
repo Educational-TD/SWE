@@ -11,18 +11,6 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_5p8wc")
 
-[node name="Label" type="Label" parent="." unique_id=1471419085]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -31.0
-offset_right = 31.0
-offset_bottom = 23.0
-grow_horizontal = 2
-text = "Settings"
-horizontal_alignment = 1
-
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=829188091]
 layout_mode = 1
 anchors_preset = 15
@@ -37,3 +25,74 @@ theme_override_constants/margin_bottom = 90
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=779249188]
 layout_mode = 2
+
+[node name="HeaderLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1471419085]
+layout_mode = 2
+size_flags_vertical = 2
+size_flags_stretch_ratio = 0.5
+text = "Settings"
+horizontal_alignment = 1
+
+[node name="DifficultyHBox" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1932257124]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="DifficultyLabel" type="Label" parent="MarginContainer/VBoxContainer/DifficultyHBox" unique_id=1256636850]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Difficulty"
+
+[node name="DifficultySpacer" type="Control" parent="MarginContainer/VBoxContainer/DifficultyHBox" unique_id=1594154774]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="DifficultySlider" type="HSlider" parent="MarginContainer/VBoxContainer/DifficultyHBox" unique_id=221637054]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="VolumeHBox" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1986397624]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="VolumeLabel" type="Label" parent="MarginContainer/VBoxContainer/VolumeHBox" unique_id=74578595]
+layout_mode = 2
+text = "Volume"
+
+[node name="VolumeSpacer" type="Control" parent="MarginContainer/VBoxContainer/VolumeHBox" unique_id=1805385323]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VolumeSlider" type="HSlider" parent="MarginContainer/VBoxContainer/VolumeHBox" unique_id=1012710301]
+layout_mode = 2
+
+[node name="KeybindHBox" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=2043701880]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="KeybindLabel" type="Label" parent="MarginContainer/VBoxContainer/KeybindHBox" unique_id=625236349]
+layout_mode = 2
+text = "Keybinds"
+
+[node name="KeybindSpacer" type="Control" parent="MarginContainer/VBoxContainer/KeybindHBox" unique_id=971513385]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="KeybindMenu" type="MenuButton" parent="MarginContainer/VBoxContainer/KeybindHBox" unique_id=2093554701]
+layout_mode = 2
+text = "edit keybinds..."
+
+[node name="SaveHBox" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1741418241]
+layout_mode = 2
+size_flags_vertical = 10
+
+[node name="BackLabel" type="Label" parent="MarginContainer/VBoxContainer/SaveHBox" unique_id=1791434890]
+layout_mode = 2
+text = "Back"
+
+[node name="SaveSpacer" type="Control" parent="MarginContainer/VBoxContainer/SaveHBox" unique_id=2054351963]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SaveLabel" type="Label" parent="MarginContainer/VBoxContainer/SaveHBox" unique_id=1552765307]
+layout_mode = 2
+text = "Save settings"
