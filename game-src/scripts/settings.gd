@@ -1,61 +1,49 @@
-extends Control
+extends Node
+class_name Settings
 
 enum Difficulty {GRADE_6, GRADE_7, GRADE_8}
 
-# Difficulty nodes
-@onready var difficultyHBox: HBoxContainer = $MarginContainer/VBoxContainer/DifficultyHBox
-@onready var difficultySlider: HSlider = difficultyHBox.get_node("DifficultySlider")
-@onready var currentDifficulty: Label = difficultyHBox.get_node("CurrentDifficultyLabel")
-# Volume nodes
-@onready var volumeHBox: HBoxContainer = $MarginContainer/VBoxContainer/VolumeHBox
-@onready var currentVolume: Label = volumeHBox.get_node("CurrentVolumeLabel")
+# TODO: change this to actual keybinds
+const default_keybinds: Dictionary[String, String]= {"test": "test"}
+const file_path: String = "user://user_config.cfg"
 
-func _input(event: InputEvent) -> void:
-	if Input.is_action_just_pressed("escape"):
-		back_to_title()
+var difficulty: Difficulty
+var volume: int
+var keybinds: Dictionary[String, String]
+var settings_config: ConfigFile
 
-
-func is_left_click(event: InputEvent) -> bool:
-	if (
-		event is InputEventMouseButton 
-		and event.button_index == MOUSE_BUTTON_LEFT
-		and event.is_pressed()
-	):
-		return true
+# Initing this object load current settings
+func _init() -> void:
+	settings_config = ConfigFile.new()
+	var err = settings_config.load(file_path)
+	
+	if err != OK: # if settings cannot be loaded use defaults
+		difficulty = Difficulty.GRADE_6
+		volume = 50
+		keybinds = default_keybinds
 	else:
-		return false
+		difficulty = settings_config.get_value("UserSettings", "difficulty", Difficulty.GRADE_6)
+		volume = settings_config.get_value("UserSettings", "volume", 50)
+		keybinds = settings_config.get_value("UserSettings", "keybinds", default_keybinds)
+
+
+func save_user_config() -> void:
+	# set values
+	settings_config.set_value("UserSettings", "difficulty", difficulty)
+	settings_config.set_value("UserSettings", "volume", volume)
+	settings_config.set_value("UserSettings", "keybinds", keybinds)
+	# save config to file system
+	var err = settings_config.save(file_path)
+	
+	if err == OK:
+		# TODO: handle this error case, add to use case possibly
+		print("error in saving config")
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	difficultySlider.max_value = Difficulty.size() - 1 # 0 indexed
-
+	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
-
-
-func back_to_title() -> void:
-	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
-
-
-func _on_difficulty_slider_value_changed(value: float) -> void:
-	var difficulty: Difficulty = int(value) as Difficulty
-	match difficulty:
-		Difficulty.GRADE_6:
-			currentDifficulty.text = "Grade 6"
-		Difficulty.GRADE_7:
-			currentDifficulty.text = "Grade 7"
-		Difficulty.GRADE_8:
-			currentDifficulty.text = "Grade 8"
-
-
-func _on_volume_slider_value_changed(value: float) -> void:
-	var formatted := "%d%%"
-	currentVolume.text = (formatted % value)
-
-
-func _on_back_label_gui_input(event: InputEvent) -> void:
-	if (is_left_click(event)):
-		back_to_title()

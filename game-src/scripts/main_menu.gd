@@ -2,7 +2,7 @@ extends Control
 
 var SCENES = {
 	"title": "res://scenes/main_menu.tscn",
-	"settings": "res://scenes/settings.tscn"
+	"settings": "res://scenes/settings_menu.tscn"
 }
 
 

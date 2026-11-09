@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dmhf23eymv0gb"]
 
-[ext_resource type="Script" uid="uid://cdn316455ctts" path="res://scripts/settings.gd" id="1_5p8wc"]
+[ext_resource type="Script" uid="uid://cdn316455ctts" path="res://scripts/settings_menu.gd" id="1_5p8wc"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5p8wc"]
 
@@ -123,8 +123,10 @@ size_flags_horizontal = 3
 
 [node name="SaveLabel" type="Label" parent="MarginContainer/VBoxContainer/SaveHBox" unique_id=1552765307]
 layout_mode = 2
+mouse_filter = 0
 text = "Save settings"
 
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/DifficultyHBox/DifficultySlider" to="." method="_on_difficulty_slider_value_changed"]
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/VolumeHBox/VolumeSlider" to="." method="_on_volume_slider_value_changed"]
 [connection signal="gui_input" from="MarginContainer/VBoxContainer/SaveHBox/BackLabel" to="." method="_on_back_label_gui_input"]
+[connection signal="gui_input" from="MarginContainer/VBoxContainer/SaveHBox/SaveLabel" to="." method="_on_save_label_gui_input"]
