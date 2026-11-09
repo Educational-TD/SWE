@@ -13,11 +13,10 @@ func _input(event: InputEvent) -> void:
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	difficultySlider.max_value = Difficulty.size() - 1
-	difficultySlider.value_changed.connect(_difficulty_changed)
+	difficultySlider.max_value = Difficulty.size() - 1 # 0 indexed
 
 
-func _difficulty_changed(value: float) -> void:
+func _on_difficulty_slider_value_changed(value: float) -> void:
 	var difficulty: Difficulty = int(value) as Difficulty
 	match difficulty:
 		Difficulty.GRADE_6:
@@ -28,11 +27,11 @@ func _difficulty_changed(value: float) -> void:
 			currentDifficulty.text = "Grade 8"
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
-
 func _on_volume_slider_value_changed(value: float) -> void:
 	var formatted := "%d%%"
 	currentVolume.text = (formatted % value)
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
