@@ -2,9 +2,13 @@ extends Control
 
 enum Difficulty {GRADE_6, GRADE_7, GRADE_8}
 
-@onready var difficultySlider: HSlider = $MarginContainer/VBoxContainer/DifficultyHBox/DifficultySlider
-@onready var currentDifficulty: Label = $MarginContainer/VBoxContainer/DifficultyHBox/CurrentDifficultyLabel
-@onready var currentVolume: Label = $MarginContainer/VBoxContainer/VolumeHBox/CurrentVolumeLabel
+# Difficulty nodes
+@onready var difficultyHBox: HBoxContainer = $MarginContainer/VBoxContainer/DifficultyHBox
+@onready var difficultySlider: HSlider = difficultyHBox.get_node("DifficultySlider")
+@onready var currentDifficulty: Label = difficultyHBox.get_node("CurrentDifficultyLabel")
+# Volume nodes
+@onready var volumeHBox: HBoxContainer = $MarginContainer/VBoxContainer/VolumeHBox
+@onready var currentVolume: Label = volumeHBox.get_node("CurrentVolumeLabel")
 
 func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("escape"):
