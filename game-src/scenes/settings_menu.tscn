@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dmhf23eymv0gb"]
 
-[ext_resource type="Script" uid="uid://cdn316455ctts" path="res://scripts/settings_menu.gd" id="1_5p8wc"]
+[ext_resource type="Script" uid="uid://cdn316455ctts" path="res://scripts/settings_menu.gd" id="1_05p07"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5p8wc"]
 
@@ -13,7 +13,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_5p8wc")
+script = ExtResource("1_05p07")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=829188091]
 layout_mode = 1

@@ -3,9 +3,11 @@ extends Control
 
 const Difficulty = Settings.Difficulty
 
-const DIFF_TO_STRING = {Difficulty.GRADE_6 : "Grade 6",
-						Difficulty.GRADE_7 : "Grade 7",
-						Difficulty.GRADE_8 : "Grade 8"}
+const DIFF_TO_STRING = {
+	Difficulty.GRADE_6 : "Grade 6",
+	Difficulty.GRADE_7 : "Grade 7",
+	Difficulty.GRADE_8 : "Grade 8",
+}
 
 # Difficulty nodes
 @onready var difficultyHBox: HBoxContainer = $MarginContainer/VBoxContainer/DifficultyHBox
@@ -60,8 +62,6 @@ func back_to_title() -> void:
 func _on_difficulty_slider_value_changed(value: float) -> void:
 	var selected = int(value) as Difficulty
 	currentDifficulty.text = DIFF_TO_STRING[selected]
-	
-	localSettings.difficulty = selected
 
 
 func _on_volume_slider_value_changed(value: float) -> void:
@@ -76,5 +76,7 @@ func _on_back_label_gui_input(event: InputEvent) -> void:
 
 func _on_save_label_gui_input(event: InputEvent) -> void:
 	if (is_left_click(event)):
+		localSettings.difficulty = difficultySlider.value
+		localSettings.volume = volumeSlider.value
 		localSettings.save_user_config()
 		back_to_title()
