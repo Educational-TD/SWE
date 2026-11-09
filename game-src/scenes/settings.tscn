@@ -123,3 +123,5 @@ size_flags_horizontal = 3
 [node name="SaveLabel" type="Label" parent="MarginContainer/VBoxContainer/SaveHBox" unique_id=1552765307]
 layout_mode = 2
 text = "Save settings"
+
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/VolumeHBox/VolumeSlider" to="." method="_on_volume_slider_value_changed"]
