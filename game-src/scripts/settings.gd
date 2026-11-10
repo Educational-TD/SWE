@@ -23,8 +23,8 @@ const DIFF_TO_STRING = {
 }
 
 # TODO: change this to actual keybinds once we have that figured out
-const default_keybinds: Dictionary[String, String]= {"test": "test"}
-const _file_path: String = "user://user_config.cfg" ## Defualt save locaiton
+const default_keybinds: Dictionary[String, String] = {"test": "test"}
+const _file_path: String = "user://user_config.cfg" ## Default save location
 
 var difficulty: Difficulty ## Question difficulty
 var volume: int ## Volume in range of 0 - 100

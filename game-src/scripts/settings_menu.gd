@@ -1,29 +1,41 @@
 extends Control
+## This script handles all interaction logic within the settings menu
 
-
+## Question difficulty
 const Difficulty := Settings.Difficulty
 
 
 # Difficulty nodes
-@onready var difficulty_hbox: HBoxContainer = $MarginContainer/VBoxContainer/DifficultyHBox
-@onready var difficulty_slider: HSlider = difficulty_hbox.get_node("DifficultySlider")
-@onready var current_difficulty: Label = difficulty_hbox.get_node("CurrentDifficultyLabel")
+@onready var _difficulty_hbox: HBoxContainer = $MarginContainer/VBoxContainer/DifficultyHBox
+## Slider used to change the difficulty setting
+@onready var difficulty_slider: HSlider = _difficulty_hbox.get_node("DifficultySlider")
+## Visually represents the difficulty level
+@onready var current_difficulty: Label = _difficulty_hbox.get_node("CurrentDifficultyLabel")
 # Volume nodes
-@onready var volume_hbox: HBoxContainer = $MarginContainer/VBoxContainer/VolumeHBox
-@onready var volume_slider: HSlider = volume_hbox.get_node("VolumeSlider")
-@onready var current_volume: Label = volume_hbox.get_node("CurrentVolumeLabel")
+@onready var _volume_hbox: HBoxContainer = $MarginContainer/VBoxContainer/VolumeHBox
+## Slider used to change the volume setting
+@onready var volume_slider: HSlider = _volume_hbox.get_node("VolumeSlider")
+## Visually represents the volume level
+@onready var current_volume: Label = _volume_hbox.get_node("CurrentVolumeLabel")
 
 var user_settings: Settings
 
-# TODO: check if this is captured even in the confirmation popup
+# The player pressing escape will initiate exiting the settings menu
 func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("escape"):
-		if not settings_unsaved():
-			back_to_title()
+		var changes = settings_unsaved()
+		if changes.size() > 0:
+			spawn_confirmation(changes)
+		else:
+			_back_to_title()
 
+## Validates if an event is a left mouse click
+##
+## event - The GUI input event
+## returns true if the event is a left click, false otherwise
 func is_left_click(event: InputEvent) -> bool:
 	if (
-		event is InputEventMouseButton 
+		event is InputEventMouseButton
 		and event.button_index == MOUSE_BUTTON_LEFT
 		and event.is_pressed()
 	):
@@ -36,12 +48,15 @@ func is_left_click(event: InputEvent) -> bool:
 func _ready() -> void:
 	user_settings = Settings.new() # get settings object
 	
+	# Setup difficulty slider and visual representation
+	var diff = user_settings.difficulty # Current or default difficulty
 	difficulty_slider.max_value = Difficulty.size() - 1 # 0 indexed
-	
-	var current_diff = user_settings.difficulty
-	difficulty_slider.value = current_diff
-	current_difficulty.text = Settings.DIFF_TO_STRING[current_diff]
-	volume_slider.value = user_settings.volume
+	current_difficulty.text = Settings.DIFF_TO_STRING[diff]
+	difficulty_slider.value = diff
+	# Setup volume slider and visual representation
+	var volume = user_settings.volume
+	current_volume.text = "%d%%" % volume
+	volume_slider.value = volume
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -49,24 +64,26 @@ func _process(delta: float) -> void:
 	pass
 
 
-func back_to_title() -> void:
+## Change the scene back to the title menu
+func _back_to_title() -> void:
 	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
 
 
-func settings_unsaved() -> bool:
+## Compares settings node values with currently saved settings.
+##
+## returns a list of strings with the name of each unsaved setting.
+func settings_unsaved() -> PackedStringArray:
 	var changes: PackedStringArray
 	if volume_slider.value != user_settings.volume:
 		changes.append("Volume")
 	if difficulty_slider.value != user_settings.difficulty:
 		changes.append("Difficulty")
 	
-	if changes.size() > 0:
-		spawn_confirmation(changes)
-		return true
-	else:
-		return false
+	return changes
 
 
+## Prevents the player from unintentionally not saving any changes 
+## they make to the game settings.
 func spawn_confirmation(changes: PackedStringArray) -> void:
 	var confirmation = ConfirmationDialog.new()
 	
@@ -80,12 +97,12 @@ func spawn_confirmation(changes: PackedStringArray) -> void:
 	confirmation.ok_button_text = "Save"
 	confirmation.cancel_button_text = "Don't Save"
 	
-	confirmation.confirmed.connect( func():
+	confirmation.confirmed.connect(func():
 		save_changes()
 		confirmation.queue_free()
 	) # save if user clicks 'Save'
-	confirmation.canceled.connect( func():
-		back_to_title()
+	confirmation.canceled.connect(func():
+		_back_to_title()
 		confirmation.queue_free()
 	) # else go back to title
 	
@@ -93,29 +110,39 @@ func spawn_confirmation(changes: PackedStringArray) -> void:
 	confirmation.popup_centered_clamped() # show confirmation
 
 
+## Handles updating the visual representation of chosen difficulty level
 func _on_difficulty_slider_value_changed(value: float) -> void:
 	var selected: Difficulty = int(value) as Difficulty
 	current_difficulty.text = Settings.DIFF_TO_STRING[selected]
 
 
+## Handles updating the visual representation of chosen volume level
 func _on_volume_slider_value_changed(value: float) -> void:
 	var formatted := "%d%%"
 	current_volume.text = (formatted % value)
 
 
+## Handler for when player clicks the 'Back' button
 func _on_back_label_gui_input(event: InputEvent) -> void:
 	if is_left_click(event):
-		if not settings_unsaved():
-			back_to_title()
+		var changes = settings_unsaved()
+		if changes.size() > 0:
+			spawn_confirmation(changes)
+		else:
+			_back_to_title()
 
 
+## Handler for when the player clicks the 'Save' button
 func _on_save_label_gui_input(event: InputEvent) -> void:
 	if is_left_click(event):
 		save_changes()
-		back_to_title() # TODO: decide if saving goes back to title
+		_back_to_title() # TODO: decide if saving should go back to title
 
+
+## Moves values from settings menu nodes into the actual Settings object
+## and saves to file.
 func save_changes() -> void:
 	user_settings.difficulty = int(difficulty_slider.value)
 	user_settings.volume = volume_slider.value
-	user_settings.keybinds = {"test1": "test2"}
+	user_settings.keybinds = {"test1": "test2"} ## TODO: change this
 	user_settings.save_user_config()
