@@ -3,11 +3,6 @@ extends Control
 
 const Difficulty := Settings.Difficulty
 
-const DIFF_TO_STRING = {
-	Difficulty.GRADE_6 : "Grade 6",
-	Difficulty.GRADE_7 : "Grade 7",
-	Difficulty.GRADE_8 : "Grade 8",
-}
 
 # Difficulty nodes
 @onready var difficulty_hbox: HBoxContainer = $MarginContainer/VBoxContainer/DifficultyHBox
@@ -45,7 +40,7 @@ func _ready() -> void:
 	
 	var current_diff = user_settings.difficulty
 	difficulty_slider.value = current_diff
-	current_difficulty.text = DIFF_TO_STRING[current_diff]
+	current_difficulty.text = Settings.DIFF_TO_STRING[current_diff]
 	volume_slider.value = user_settings.volume
 
 
@@ -100,7 +95,7 @@ func spawn_confirmation(changes: PackedStringArray) -> void:
 
 func _on_difficulty_slider_value_changed(value: float) -> void:
 	var selected: Difficulty = int(value) as Difficulty
-	current_difficulty.text = DIFF_TO_STRING[selected]
+	current_difficulty.text = Settings.DIFF_TO_STRING[selected]
 
 
 func _on_volume_slider_value_changed(value: float) -> void:

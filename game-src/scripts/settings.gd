@@ -15,6 +15,13 @@ enum Difficulty {
 	GRADE_8,
 }
 
+## Mapping from enum value to string representation
+const DIFF_TO_STRING = {
+	Difficulty.GRADE_6 : "Grade 6",
+	Difficulty.GRADE_7 : "Grade 7",
+	Difficulty.GRADE_8 : "Grade 8",
+}
+
 # TODO: change this to actual keybinds once we have that figured out
 const default_keybinds: Dictionary[String, String]= {"test": "test"}
 const _file_path: String = "user://user_config.cfg" ## Defualt save locaiton
