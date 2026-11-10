@@ -12,7 +12,7 @@ var volume: int
 var keybinds: Dictionary[String, String]
 var settings_config: ConfigFile
 
-# Initing this object load current settings
+# Initing this object loads current settings
 func _init() -> void:
 	settings_config = ConfigFile.new()
 	var err = settings_config.load(file_path)
@@ -35,7 +35,7 @@ func save_user_config() -> void:
 	# save config to file system
 	var err = settings_config.save(file_path)
 	
-	if err == OK:
+	if err != OK:
 		# TODO: handle this error case, add to use case possibly
 		print("error in saving config")
 
