@@ -21,14 +21,31 @@ const Difficulty := Settings.Difficulty
 ## Keybind popup menu
 @onready var keybind_popup: Control = $KeybindPopup
 ## Item list of keybinds
-@onready var keybind_list: VBoxContainer = keybind_popup.get_node("PanelContainer/MarginContainer/KeybindItemList")
+@onready var keybind_list: VBoxContainer = keybind_popup.find_child("KeybindItemList")
 ## Keybind item template
 @onready var keybind_item: PackedScene = preload("res://scenes/keybind_item.tscn")
 
-var user_settings: Settings
+var user_settings: Settings = Settings.new()
+var _update_keybind: bool = false
+var _action_to_remap: String = ""
+var _keybind_item_to_remap: Button = null
+
 
 # The player pressing escape will initiate exiting the settings menu
 func _input(event: InputEvent) -> void:
+	# Setting new keybind
+	if (_update_keybind and event is InputEventKey): # Only allow keyboard inputs
+		if  !_has_keybind_conflict(event):
+			user_settings.keybinds[_action_to_remap] = var_to_str(event)
+			_keybind_item_to_remap.find_child("Keycode").text = _format_keybind_event(event)
+			_update_keybind = false
+			_action_to_remap = ""
+			_keybind_item_to_remap = null
+			accept_event()
+		else:
+			pass # TODO: handle if keybind is already in use
+	
+	# Exiting menus
 	if Input.is_action_just_pressed("escape"):
 		if keybind_popup.visible == true:
 			keybind_popup.visible = false
@@ -56,8 +73,6 @@ func is_left_click(event: InputEvent) -> bool:
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	user_settings = Settings.new() # get settings object
-	
 	# Setup difficulty slider and visual representation
 	var diff = user_settings.difficulty # Current or default difficulty
 	difficulty_slider.max_value = Difficulty.size() - 1 # 0 indexed
@@ -68,13 +83,7 @@ func _ready() -> void:
 	current_volume.text = "%d%%" % volume
 	volume_slider.value = volume
 	# Setup keybinds menu
-	keybind_popup.visible = false # ensure this starts hidden
-
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+	keybind_popup.visible = false # ensure keybind popup begins hidden
 
 
 ## Change the scene back to the title menu
@@ -111,7 +120,7 @@ func spawn_confirmation(changes: PackedStringArray) -> void:
 	confirmation.cancel_button_text = "Don't Save"
 	
 	confirmation.confirmed.connect(func():
-		save_changes()
+		user_settings.save_user_config()
 		confirmation.queue_free()
 	) # save if user clicks 'Save'
 	confirmation.canceled.connect(func():
@@ -126,12 +135,14 @@ func spawn_confirmation(changes: PackedStringArray) -> void:
 ## Handles updating the visual representation of chosen difficulty level
 func _on_difficulty_slider_value_changed(value: float) -> void:
 	var selected: Difficulty = int(value) as Difficulty
+	user_settings.difficulty = selected
 	current_difficulty.text = Settings.DIFF_TO_STRING[selected]
 
 
 ## Handles updating the visual representation of chosen volume level
 func _on_volume_slider_value_changed(value: float) -> void:
 	var formatted := "%d%%"
+	user_settings.volume = int(value)
 	current_volume.text = (formatted % value)
 
 
@@ -148,17 +159,8 @@ func _on_back_label_gui_input(event: InputEvent) -> void:
 ## Handler for when the player clicks the 'Save' button
 func _on_save_label_gui_input(event: InputEvent) -> void:
 	if is_left_click(event):
-		save_changes()
+		user_settings.save_user_config()
 		_back_to_title() # TODO: decide if saving should go back to title
-
-
-## Moves values from settings menu nodes into the actual Settings object
-## and saves to file.
-func save_changes() -> void:
-	user_settings.difficulty = int(difficulty_slider.value)
-	user_settings.volume = volume_slider.value
-	user_settings.keybinds = Settings.default_keybinds ## TODO: change this
-	user_settings.save_user_config()
 
 
 ## Gets the current keybind actions and their keycodes to populate the keybind
@@ -170,26 +172,53 @@ func _keybinds_popup() -> void:
 		item.queue_free() # Clear list
 	
 	for action in user_settings.keybinds:
-		var item := keybind_item.instantiate()
-		var action_label: Label = item.find_child("KeybindActionLabel")
-		var keycode: Label = item.find_child("KeybindKeycodeLabel")
+		var item: Button = keybind_item.instantiate()
+		var action_label: Label = item.find_child("Action")
+		var keycode: Label = item.find_child("Keycode")
 		
 		action_label.text = action.replace("_", " ") # upgrade_dmg -> upgrade dmg
-		var temp = InputMap.action_get_events(action)
-		keycode.text = temp[0].as_text().trim_suffix(" - Physical")
+		var events = InputMap.action_get_events(action)
+		keycode.text = _format_keybind_event(events[0])
 		
 		item.pressed.connect(_on_input_button_pressed.bind(item, action))
 		keybind_list.add_child(item)
 	
 	keybind_popup.visible = true
-	
-	
-func _on_input_button_pressed(item, action) -> void:
-	pass
 
 
-## Sets up and makes visible the keybind config menu when 'edit keybinds...'
-## is cliked
+## Removes the default ' - Physical' text from keyboard events
+## 
+## event - The user input event (i.e. 'p' key)
+## returns the event string representation without the ' - Physical' suffix
+func _format_keybind_event(event: InputEvent) -> String:
+	return event.as_text().trim_suffix(" - Physical")
+
+
+## Validate if a given key is already bound
+##
+## key - The new keybind
+## returns true if this keybind is already in use, false otherwise
+func _has_keybind_conflict(key: InputEventKey) -> bool:
+	for action in InputMap.get_actions():
+		for event in InputMap.action_get_events(action):
+			if _format_keybind_event(event) == key.as_text():
+				return true
+	return false
+
+
+## Sets up the next keyboard input to be used as a new keybind
+##
+## item - The visual representation of the action and keybind being changed
+## action - The action being reassigned
+func _on_input_button_pressed(item: Button, action: String) -> void:
+	if not _update_keybind:
+		_update_keybind = true
+		_keybind_item_to_remap = item
+		_action_to_remap = action
+		item.find_child("Keycode").text = "Input new keybind..."
+
+
+## Show the keybing config popup when 'edit keybinds...' is clicked
 func _on_keybind_menu_gui_input(event: InputEvent) -> void:
 	if is_left_click(event):
 		_keybinds_popup()
