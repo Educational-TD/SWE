@@ -1,10 +1,14 @@
 [gd_scene format=3 uid="uid://dmhf23eymv0gb"]
 
 [ext_resource type="Script" uid="uid://cdn316455ctts" path="res://scripts/settings_menu.gd" id="1_05p07"]
+[ext_resource type="PackedScene" uid="uid://i1xgnyc1rl6t" path="res://scenes/keybind_item.tscn" id="2_cr101"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5p8wc"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r6d6q"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wswnh"]
+bg_color = Color(0.16745102, 0.16745105, 0.16745093, 1)
 
 [node name="Control" type="Control" unique_id=800033000]
 layout_mode = 3
@@ -20,6 +24,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 11.0
+offset_top = 23.0
+offset_right = 11.0
+offset_bottom = 23.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 180
@@ -104,8 +112,9 @@ text = "Keybinds"
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="KeybindMenu" type="MenuButton" parent="MarginContainer/VBoxContainer/KeybindHBox" unique_id=2093554701]
+[node name="KeybindMenu" type="Label" parent="MarginContainer/VBoxContainer/KeybindHBox" unique_id=1134325659]
 layout_mode = 2
+mouse_filter = 0
 text = "edit keybinds..."
 
 [node name="SaveHBox" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1741418241]
@@ -126,7 +135,58 @@ layout_mode = 2
 mouse_filter = 0
 text = "Save settings"
 
+[node name="KeybindPopup" type="Control" parent="." unique_id=830721836]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 308.0
+offset_top = 167.0
+offset_right = -308.0
+offset_bottom = -167.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="KeybindPopup" unique_id=454691774]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -202.0
+offset_top = -119.0
+offset_right = 202.0
+offset_bottom = 119.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_wswnh")
+
+[node name="MarginContainer" type="MarginContainer" parent="KeybindPopup/PanelContainer" unique_id=2110194498]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 30
+
+[node name="KeybindItemList" type="VBoxContainer" parent="KeybindPopup/PanelContainer/MarginContainer" unique_id=1394915718]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="KeybindItem" parent="KeybindPopup/PanelContainer/MarginContainer/KeybindItemList" unique_id=1010215126 instance=ExtResource("2_cr101")]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+
+[node name="KeybindPopupBack" type="Label" parent="KeybindPopup/PanelContainer/MarginContainer" unique_id=552501617]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+mouse_filter = 0
+text = "back"
+
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/DifficultyHBox/DifficultySlider" to="." method="_on_difficulty_slider_value_changed"]
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/VolumeHBox/VolumeSlider" to="." method="_on_volume_slider_value_changed"]
+[connection signal="gui_input" from="MarginContainer/VBoxContainer/KeybindHBox/KeybindMenu" to="." method="_on_keybind_menu_gui_input"]
 [connection signal="gui_input" from="MarginContainer/VBoxContainer/SaveHBox/BackLabel" to="." method="_on_back_label_gui_input"]
 [connection signal="gui_input" from="MarginContainer/VBoxContainer/SaveHBox/SaveLabel" to="." method="_on_save_label_gui_input"]
+[connection signal="gui_input" from="KeybindPopup/PanelContainer/MarginContainer/KeybindPopupBack" to="." method="_on_keybind_popup_back_gui_input"]

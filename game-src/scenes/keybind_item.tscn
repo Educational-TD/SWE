@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://i1xgnyc1rl6t"]
+
+[node name="KeybindItem" type="Button" unique_id=1010215126]
+custom_minimum_size = Vector2(0, 20)
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = -4.0
+offset_bottom = 24.0
+grow_horizontal = 2
+focus_mode = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=235338394]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=1923234700]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="KeybindActionLabel" type="Label" parent="MarginContainer/HBoxContainer" unique_id=1240167060]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "action"
+vertical_alignment = 1
+
+[node name="Spacer" type="Control" parent="MarginContainer/HBoxContainer" unique_id=357372743]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="KeybindKeycodeLabel" type="Label" parent="MarginContainer/HBoxContainer" unique_id=1123322638]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "keycode"
+horizontal_alignment = 2
+vertical_alignment = 1
