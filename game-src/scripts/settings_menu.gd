@@ -29,6 +29,7 @@ var user_settings: Settings = Settings.new()
 var _update_keybind: bool = false
 var _action_to_remap: String = ""
 var _keybind_item_to_remap: Button = null
+var _changes_unsaved: Array[bool] = [false, false, false]
 
 
 # The player pressing escape will initiate exiting the settings menu
@@ -36,12 +37,7 @@ func _input(event: InputEvent) -> void:
 	# Setting new keybind
 	if (_update_keybind and event is InputEventKey): # Only allow keyboard inputs
 		if  !_has_keybind_conflict(event):
-			user_settings.keybinds[_action_to_remap] = var_to_str(event)
-			_keybind_item_to_remap.find_child("Keycode").text = _format_keybind_event(event)
-
-			_update_keybind = false
-			_action_to_remap = ""
-			_keybind_item_to_remap = null
+			_change_keybind(event)
 			accept_event()
 		else:
 			pass # TODO: handle if keybind is already in use
@@ -87,6 +83,8 @@ func _ready() -> void:
 
 	# Setup keybinds menu
 	keybind_popup.visible = false # ensure keybind popup begins hidden
+	
+	_changes_unsaved = [false, false, false]
 
 
 ## Change the scene back to the title menu
@@ -99,10 +97,12 @@ func _back_to_title() -> void:
 ## returns a list of strings with the name of each unsaved setting.
 func settings_unsaved() -> PackedStringArray:
 	var changes: PackedStringArray
-	if volume_slider.value != user_settings.volume:
-		changes.append("Volume")
-	if difficulty_slider.value != user_settings.difficulty:
+	if _changes_unsaved[0]:
 		changes.append("Difficulty")
+	if _changes_unsaved[1]:
+		changes.append("Volume")
+	if _changes_unsaved[2]:
+		changes.append("Keybinds")
 	
 	return changes
 
@@ -124,6 +124,7 @@ func spawn_confirmation(changes: PackedStringArray) -> void:
 	
 	confirmation.confirmed.connect(func():
 		user_settings.save_user_config()
+		_changes_unsaved = [false, false, false]
 		confirmation.queue_free()
 	) # save if user clicks 'Save'
 	confirmation.canceled.connect(func():
@@ -140,6 +141,7 @@ func _on_difficulty_slider_value_changed(value: float) -> void:
 	var selected: Difficulty = int(value) as Difficulty
 	user_settings.difficulty = selected
 	current_difficulty.text = Settings.DIFF_TO_STRING[selected]
+	_changes_unsaved[0] = true
 
 
 ## Handles updating the visual representation of chosen volume level
@@ -147,6 +149,17 @@ func _on_volume_slider_value_changed(value: float) -> void:
 	var formatted := "%d%%"
 	user_settings.volume = int(value)
 	current_volume.text = (formatted % value)
+	_changes_unsaved[1] = true
+
+
+func _change_keybind(event: InputEventKey) -> void:
+	user_settings.keybinds[_action_to_remap] = var_to_str(event)
+	_keybind_item_to_remap.find_child("Keycode").text = _format_keybind_event(event)
+	_changes_unsaved[2] = true
+
+	_update_keybind = false
+	_action_to_remap = ""
+	_keybind_item_to_remap = null
 
 
 ## Handler for when player clicks the 'Back' button
@@ -163,6 +176,7 @@ func _on_back_label_gui_input(event: InputEvent) -> void:
 func _on_save_label_gui_input(event: InputEvent) -> void:
 	if is_left_click(event):
 		user_settings.save_user_config()
+		_changes_unsaved = [false, false, false]
 		_back_to_title() # TODO: decide if saving should go back to title
 
 
