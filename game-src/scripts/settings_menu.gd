@@ -17,17 +17,27 @@ const Difficulty := Settings.Difficulty
 @onready var volume_slider: HSlider = _volume_hbox.get_node("VolumeSlider")
 ## Visually represents the volume level
 @onready var current_volume: Label = _volume_hbox.get_node("CurrentVolumeLabel")
+# Keybind nodes
+## Keybind popup menu
+@onready var keybind_popup: Control = $KeybindPopup
+## Item list of keybinds
+@onready var keybind_list: VBoxContainer = keybind_popup.get_node("PanelContainer/MarginContainer/KeybindItemList")
+## Keybind item template
+@onready var keybind_item: PackedScene = preload("res://scenes/keybind_item.tscn")
 
 var user_settings: Settings
 
 # The player pressing escape will initiate exiting the settings menu
 func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("escape"):
-		var changes = settings_unsaved()
-		if changes.size() > 0:
-			spawn_confirmation(changes)
+		if keybind_popup.visible == true:
+			keybind_popup.visible = false
 		else:
-			_back_to_title()
+			var changes = settings_unsaved()
+			if changes.size() > 0:
+				spawn_confirmation(changes)
+			else:
+				_back_to_title()
 
 ## Validates if an event is a left mouse click
 ##
@@ -57,6 +67,9 @@ func _ready() -> void:
 	var volume = user_settings.volume
 	current_volume.text = "%d%%" % volume
 	volume_slider.value = volume
+	# Setup keybinds menu
+	keybind_popup.visible = false # ensure this starts hidden
+
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -144,5 +157,45 @@ func _on_save_label_gui_input(event: InputEvent) -> void:
 func save_changes() -> void:
 	user_settings.difficulty = int(difficulty_slider.value)
 	user_settings.volume = volume_slider.value
-	user_settings.keybinds = {"test1": "test2"} ## TODO: change this
+	user_settings.keybinds = Settings.default_keybinds ## TODO: change this
 	user_settings.save_user_config()
+
+
+## Gets the current keybind actions and their keycodes to populate the keybind
+## config menu. After doing so the menu will be visible to the player.
+func _keybinds_popup() -> void:
+	InputMap.load_from_project_settings()
+	
+	for item in keybind_list.get_children():
+		item.queue_free() # Clear list
+	
+	for action in user_settings.keybinds:
+		var item := keybind_item.instantiate()
+		var action_label: Label = item.find_child("KeybindActionLabel")
+		var keycode: Label = item.find_child("KeybindKeycodeLabel")
+		
+		action_label.text = action.replace("_", " ") # upgrade_dmg -> upgrade dmg
+		var temp = InputMap.action_get_events(action)
+		keycode.text = temp[0].as_text().trim_suffix(" - Physical")
+		
+		item.pressed.connect(_on_input_button_pressed.bind(item, action))
+		keybind_list.add_child(item)
+	
+	keybind_popup.visible = true
+	
+	
+func _on_input_button_pressed(item, action) -> void:
+	pass
+
+
+## Sets up and makes visible the keybind config menu when 'edit keybinds...'
+## is cliked
+func _on_keybind_menu_gui_input(event: InputEvent) -> void:
+	if is_left_click(event):
+		_keybinds_popup()
+
+
+## Hides the keybind config popup when the 'back' label is clicked
+func _on_keybind_popup_back_gui_input(event: InputEvent) -> void:
+	if is_left_click(event):
+		keybind_popup.visible = false
