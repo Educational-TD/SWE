@@ -2,7 +2,7 @@
     --background-color: light-dark(#ddddee, #000011);
     --text-color: light-dark(#000000, #ffffff);
 
-    --primary-color: light-dark(#fbb476, #f4a763);
+    --primary-color: light-dark(#be5504, #f4a763);
     --primary-accent-color: light-dark(#ffc991, #fbb476);
     --secondary-color: light-dark(#7bb1ff, #00c3db);
     --secondary-accent-color: light-dark(#a2c7ff, #7bb1ff);
@@ -41,19 +41,39 @@ iframe {
 h1, h2, h3, h4, h5, h6 {
     color: var(--text-color);
     font-weight: bold;
-    text-align: center;
 
     margin-bottom: 2rem;
 }
 h1 {
     font-size: 4rem;
+    text-align: center;
 }
 h2 {
     font-size: 3rem;
+    text-align: center;
+}
+h3 {
+    font-size: 2rem;
 }
 
-p {
+p, ul {
     margin-bottom: 1rem;
+}
+
+li {
+    margin-left: 2rem;
+    margin-bottom: 0.25rem;
+}
+
+a {
+    color: var(--text-color);
+    transition: color 0.1s;
+    &:hover, &:focus {
+        color: var(--primary-color);
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    transition: color 0;
 }
 
 
@@ -70,6 +90,7 @@ p {
 
         background-repeat: repeat;
         z-index: -1;
+    }
 }
 @media (prefers-color-scheme: dark) {
     .bg-image {
@@ -83,4 +104,16 @@ p {
     max-width: 60rem;
     aspect-ratio: 16/9;
     margin: auto;
+}
+
+
+#bibliography {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+
+    & > * {
+        min-width: 16rem;
+        flex: 1;
+    }
 }
