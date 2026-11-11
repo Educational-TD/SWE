@@ -38,6 +38,7 @@ func _input(event: InputEvent) -> void:
 		if  !_has_keybind_conflict(event):
 			user_settings.keybinds[_action_to_remap] = var_to_str(event)
 			_keybind_item_to_remap.find_child("Keycode").text = _format_keybind_event(event)
+
 			_update_keybind = false
 			_action_to_remap = ""
 			_keybind_item_to_remap = null
@@ -78,10 +79,12 @@ func _ready() -> void:
 	difficulty_slider.max_value = Difficulty.size() - 1 # 0 indexed
 	current_difficulty.text = Settings.DIFF_TO_STRING[diff]
 	difficulty_slider.value = diff
+
 	# Setup volume slider and visual representation
 	var volume = user_settings.volume
 	current_volume.text = "%d%%" % volume
 	volume_slider.value = volume
+
 	# Setup keybinds menu
 	keybind_popup.visible = false # ensure keybind popup begins hidden
 
