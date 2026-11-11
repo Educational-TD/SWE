@@ -22,14 +22,19 @@ const DIFF_TO_STRING = {
 	Difficulty.GRADE_8 : "Grade 8",
 }
 
-# TODO: change this to actual keybinds once we have that figured out
-const default_keybinds: Dictionary[String, String] = {"test": "test"}
+
+## The default keybindings
+const default_keybinds: Dictionary[String, String] = {
+	"upgrade_damage" : "1",
+	"upgrade_fire_rate" : "2",
+	"upgrade_range" : "3",
+}
 const _file_path: String = "user://user_config.cfg" ## Default save location
 
+var _settings_config: ConfigFile ## Stores loaded settings
 var difficulty: Difficulty ## Question difficulty
 var volume: int ## Volume in range of 0 - 100
-var keybinds: Dictionary[String, String] ## Game keybinds ["keys": "command"]
-var _settings_config: ConfigFile ## Stores loaded settings
+var keybinds: Dictionary[String, String] ## Game keybinds ["command": "keycode"]
 
 ## On class construction, the player settings are loaded from the default
 ## save location and assigned to this class' instance variables.
@@ -42,11 +47,23 @@ func _init() -> void:
 		volume = 50
 		keybinds = default_keybinds
 	else: # Get current settings
-		difficulty = _settings_config.get_value("UserSettings", "difficulty", Difficulty.GRADE_6)
-		volume = _settings_config.get_value("UserSettings", "volume", 50)
-		keybinds = _settings_config.get_value("UserSettings", "keybinds", default_keybinds)
+		difficulty = _settings_config.get_value(
+			"UserSettings", 
+			"difficulty", 
+			Difficulty.GRADE_6,
+		)
+		volume = _settings_config.get_value(
+			"UserSettings", 
+			"volume", 
+			50,
+		)
+		keybinds = _settings_config.get_value(
+			"UserSettings", 
+			"keybinds", 
+			default_keybinds,
+		)
 
-## Save local settings into the ConfigFile obj and save to default location.
+## Save local settings into the ConfigFile object and save to default location.
 func save_user_config() -> void:
 	# set values
 	_settings_config.set_value("UserSettings", "difficulty", difficulty)
