@@ -1,14 +1,86 @@
 :root {
-    --background-color: light-dark(#eeeeee, #000011);
+    --background-color: light-dark(#ddddee, #000011);
     --text-color: light-dark(#000000, #ffffff);
 
-    --primary-color: light-dark(#ffffff, #111122);
+    --primary-color: light-dark(#fbb476, #f4a763);
+    --primary-accent-color: light-dark(#ffc991, #fbb476);
+    --secondary-color: light-dark(#7bb1ff, #00c3db);
+    --secondary-accent-color: light-dark(#a2c7ff, #7bb1ff);
+    --accent-color: light-dark(#bbbbbb, #444444);
+
+    --body-width: min(95vw, 67rem);
+}
+
+* {
+    scrollbar-color: var(--primary-color) var(--accent-color);
+    margin: 0;
+    padding: 0;
 }
 
 body {
     background-color: var(--background-color);
     color: var(--text-color);
 
-    max-width: min(95vw, 67rem);
+    max-width: var(--body-width);
+    margin: auto;
+
+    display: flex;
+    justify-content: center;
+}
+
+section {
+    display: block;
+    padding: 1rem 0;
+}
+
+iframe {
+    display: block;
+}
+
+
+h1, h2, h3, h4, h5, h6 {
+    color: var(--text-color);
+    font-weight: bold;
+    text-align: center;
+
+    margin-bottom: 2rem;
+}
+h1 {
+    font-size: 4rem;
+}
+h2 {
+    font-size: 3rem;
+}
+
+p {
+    margin-bottom: 1rem;
+}
+
+
+*:has(> .bg-image:first-child) {
+    position: relative;
+
+    & > .bg-image:first-child {
+        position: absolute;
+        top: 0;
+        left: calc(var(--body-width) / 2 - 50vw);
+
+        width: 100vw;
+        height: 100%;
+
+        background-repeat: repeat;
+        z-index: -1;
+}
+@media (prefers-color-scheme: dark) {
+    .bg-image {
+        filter: brightness(0.3);
+    }
+}
+
+
+#demo {
+    width: 100%;
+    max-width: 60rem;
+    aspect-ratio: 16/9;
     margin: auto;
 }
