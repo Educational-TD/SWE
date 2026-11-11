@@ -17,17 +17,17 @@ enum Difficulty {
 
 ## Mapping from enum value to string representation
 const DIFF_TO_STRING = {
-	Difficulty.GRADE_6 : "Grade 6",
-	Difficulty.GRADE_7 : "Grade 7",
-	Difficulty.GRADE_8 : "Grade 8",
+	Difficulty.GRADE_6: "Grade 6",
+	Difficulty.GRADE_7: "Grade 7",
+	Difficulty.GRADE_8: "Grade 8",
 }
 
 
 ## The default keybindings
 const default_keybinds: Dictionary[String, String] = {
-	"upgrade_damage" : "49",
-	"upgrade_fire_rate" : "50",
-	"upgrade_range" : "51",
+	"upgrade_damage": "49",
+	"upgrade_fire_rate": "50",
+	"upgrade_range": "51",
 }
 const _file_path: String = "user://user_config.cfg" ## Default save location
 
@@ -48,18 +48,18 @@ func _init() -> void:
 		keybinds = default_keybinds.duplicate()
 	else: # Get current settings
 		difficulty = _settings_config.get_value(
-			"UserSettings", 
-			"difficulty", 
+			"UserSettings",
+			"difficulty",
 			Difficulty.GRADE_6,
 		)
 		volume = _settings_config.get_value(
-			"UserSettings", 
-			"volume", 
+			"UserSettings",
+			"volume",
 			50,
 		)
 		keybinds = _settings_config.get_value(
-			"UserSettings", 
-			"keybinds", 
+			"UserSettings",
+			"keybinds",
 			default_keybinds.duplicate(),
 		)
 
