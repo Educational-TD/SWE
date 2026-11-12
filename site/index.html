@@ -36,21 +36,24 @@
                 <h1>
                     Geometry Defense
                 </h1>
-                <iframe src="https://foxsylv.dev"
-                        title = "Geometry Defense Demo"
-                        id = "demo"
-                        allowfullscreen="true"
-                        webkitallowfullscreen="true"
-                        mozallowfullscreen="true"
-                        msallowfullscreen="true"
-                        allow="fullscreen *; clipboard-read; clipboard-write; autoplay; execution-while-not-rendered; execution-while-out-of-viewport; gamepad"
-                        sandbox="allow-modals allow-pointer-lock allow-scripts allow-downloads allow-orientation-lock allow-popups allow-same-origin allow-forms allow-popups-to-escape-sandbox">
-                </iframe>
-                <p style="text-align: center;">
-                    <em>(Placeholder; Will replace with the actual prototype)</em> Download Link
-                <p>
+                <div id="demo">
+                    <iframe src="https://example.com"
+                            title = "Geometry Defense Demo"
+                            name = "demo-iframe"
+                            allowfullscreen
+                            webkitallowfullscreen="true"
+                            mozallowfullscreen="true"
+                            msallowfullscreen="true"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin"
+                    ></iframe>
+                    <a href="favicon.png"><img src="download.svg" alt="Download" /></a>
+                </div>
+                <p style="text-align: center; margin-top: 0.5rem; margin-bottom: 2rem;">
+                    Can't play? <a href="https://www.youtube.com/embed/dQw4w9WgXcQ" target="demo-iframe">Watch a demo video</a> instead!
+                </p>
 
-                <p>
+                <p class="box" style="padding: 2rem;">
                     Geometry Defense is a tower defense game about defending against various shapes.
                     The purpose is to help middle-schoolers learn the foundational math that they will use in their day-to-day life.
                     The game accomplishes this by having towers only upgradeable by answering a age-appropriate math problems, with higher level towers more capable of defeating the enemy shapes.

@@ -68,6 +68,9 @@ h3 {
         font-size: 1.5rem;
     }
 }
+p {
+    font-size: 1.1rem;
+}
 
 p, ul, ol {
     margin-bottom: 1rem;
@@ -137,6 +140,39 @@ a {
     max-width: 60rem;
     aspect-ratio: 16/9;
     margin: auto;
+
+    position: relative;
+
+    & > iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+
+        border: 0.25rem solid var(--secondary-color);
+    }
+
+    & > a {
+        position: absolute;
+        bottom: -0.25rem;
+        right: -0.25rem;
+        width: 2.5rem;
+        height: 2.5rem;
+
+        background-color: var(--primary-accent-color);
+        &:hover, &:focus {
+            background-color: var(--primary-color);
+        }
+        transition: background-color 0.1s ease-in-out;
+        @media (prefers-reduced-motion: reduce) {
+            transition: background-color 0s;
+        }
+
+        border: solid var(--secondary-color);
+        border-width: 0.125rem 0 0 0.125rem;
+        border-top-left-radius: 0.75rem;
+    }
 }
 
 
