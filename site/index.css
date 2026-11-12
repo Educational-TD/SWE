@@ -9,6 +9,10 @@
     --accent-color: light-dark(#bbbbbb, #444444);
 
     --body-width: min(95vw, 67rem);
+    --box-padding: 4rem;
+    @media (width <= 500px) {
+        --box-padding: 1rem;
+    }
 }
 
 * {
@@ -47,27 +51,42 @@ h1, h2, h3, h4, h5, h6 {
 h1 {
     font-size: 4rem;
     text-align: center;
+    @media (width <= 500px) {
+        font-size: 3rem;
+    }
 }
 h2 {
     font-size: 3rem;
     text-align: center;
+    @media (width <= 500px) {
+        font-size: 2rem;
+    }
 }
 h3 {
     font-size: 2rem;
+    @media (width <= 500px) {
+        font-size: 1.5rem;
+    }
 }
 
-p, ul {
+p, ul, ol {
     margin-bottom: 1rem;
 }
 
+ul, ol {
+    list-style-type: none;
+}
+
 li {
-    margin-left: 2rem;
     margin-bottom: 0.25rem;
 }
 
 a {
     color: var(--text-color);
     transition: color 0.1s;
+    @media (prefers-reduced-motion: reduce) {
+        transition: color 0s;
+    }
     &:hover, &:focus {
         color: var(--primary-color);
     }
@@ -76,6 +95,19 @@ a {
     transition: color 0;
 }
 
+
+.box {
+    border: 0.5rem double var(--accent-color);
+    border-radius: 1rem;
+
+    padding: var(--box-padding);
+
+    background-color: color-mix(in srgb, var(--secondary-accent-color) 10%, transparent);
+    backdrop-filter: blur(6px);
+}
+@media (width <= 600px) {
+    
+}
 
 *:has(> .bg-image:first-child) {
     position: relative;
@@ -99,6 +131,7 @@ a {
 }
 
 
+
 #demo {
     width: 100%;
     max-width: 60rem;
@@ -107,13 +140,84 @@ a {
 }
 
 
-#bibliography {
+ul#contact {
+    margin-bottom: 4rem;
+
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    @media (width >= 850px) { /* gaps cannot be negative, so we have to do a workaround */
+        padding-top: calc(var(--box-padding) + 3rem);
+        & > * {
+            margin-top: -3rem;
+        }
+    }
+
+    & > li {
+        display: flex;
+        gap: 0.5rem;
+        &:nth-child(even) {
+            flex-direction: row-reverse;
+            text-align: right;
+            & > div > ul {
+                justify-content: right;
+            }
+        }
+
+        & > img {
+            height: 9rem;
+            aspect-ratio: 1;
+
+            border: 2px solid var(--primary-accent-color);
+            border-radius: 0.5rem;
+        }
+
+        & > div {
+            display: flex;
+            flex-direction: column;
+            & > * {
+                margin: 0;
+            }
+
+            & > ul {
+                display: flex; 
+                & > li {
+                    height: 1.5rem;
+                    aspect-ratio: 1;
+                    padding: 0.125rem;
+
+                    @media (prefers-color-scheme: dark) {
+                        filter: invert(1);
+                    }
+
+                    transition: transform 0.1s ease-in-out;
+                    box-sizing: border-box;
+                    &:hover, &:focus-within {
+                        transform: translateY(0.2rem);
+                        @media (prefers-reduced-motion: reduce) {
+                            transform: translateY(0);
+                            padding: 0;
+                            border: 0.125rem solid var(--primary-color);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+ul#bibliography {
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
 
-    & > * {
+    & > li {
         min-width: 16rem;
         flex: 1;
+        margin-left: 2rem;
+
+        & > ul {
+            list-style-type: circle;
+        }
     }
 }
