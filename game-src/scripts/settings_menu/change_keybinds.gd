@@ -6,7 +6,8 @@ extends HBoxContainer
 ## Item list of keybinds
 @onready var keybind_list: VBoxContainer = keybind_popup.find_child("KeybindItemList")
 ## Keybind item template
-@onready var keybind_item: PackedScene = preload("res://scenes/settings_menu/keybind_item.tscn")
+const KeybindItemScene: PackedScene = preload("res://scenes/settings_menu/keybind_item.tscn")
+const KeybindItem := preload("res://scripts/settings_menu/keybind_item.gd")
 
 var _update_keybind: bool = false ## flag indicating if keybind is being remapped
 var _action_to_remap: String = "" ## the action being currently remapped
@@ -42,14 +43,13 @@ func _ready() -> void:
 ## config menu. After doing so the menu will be visible to the player.
 func _keybinds_popup() -> void:
 	#InputMap.load_from_project_settings()
-
 	# Load a fresh popup
 	_reset_keybind_change()
 	for item in keybind_list.get_children():
 		item.queue_free()
 
 	for action in Settings.keybinds:
-		var item: Button = keybind_item.instantiate()
+		var item: Button = KeybindItemScene.instantiate()
 		var action_label: Label = item.find_child("Action")
 		var keycode: Label = item.find_child("Keycode")
 		var events = InputMap.action_get_events(action)
@@ -58,7 +58,7 @@ func _keybinds_popup() -> void:
 		keycode.text = _format_keybind_event(events[0])
 		item.pressed.connect(_on_input_button_pressed.bind(item, action))
 		keybind_list.add_child(item)
-	
+
 	keybind_popup.visible = true
 
 
@@ -103,9 +103,6 @@ func _on_change_keybind(event: InputEventKey) -> void:
 	_keybind_item_to_remap.find_child("Keycode").text = _format_keybind_event(event)
 	
 	for key in _start_keybinds:
-		print(_start_keybinds[key])
-		print("\n\n")
-		print(Settings.keybinds[key])
 		if _start_keybinds[key] != Settings.keybinds[key]:
 			keybind_change.emit(true) # emit true if any keybind changed
 			break
@@ -126,13 +123,13 @@ func _reset_keybind_change() -> void:
 func _update_input_map(event: InputEvent) -> void:
 	InputMap.action_erase_events(_action_to_remap) # remove existing keybind
 	InputMap.action_add_event(_action_to_remap, event) # add new keybind
-	#InputMap.action_sav
+
 
 ## Hides the keybind config popup when the 'back' label is clicked
 func _on_keybind_popup_back_gui_input(event: InputEvent) -> void:
 	if (
 		Input.is_action_just_pressed("ui_accept")
-		or event is InputEventMouseButton 
+		or event is InputEventMouseButton
 		and event.button_index == MOUSE_BUTTON_LEFT
 		and event.is_pressed()
 	):
@@ -143,7 +140,7 @@ func _on_keybind_popup_back_gui_input(event: InputEvent) -> void:
 func _on_keybind_menu_gui_input(event: InputEvent) -> void:
 	if (
 		Input.is_action_just_pressed("ui_accept")
-		or event is InputEventMouseButton 
+		or event is InputEventMouseButton
 		and event.button_index == MOUSE_BUTTON_LEFT
 		and event.is_pressed()
 	):

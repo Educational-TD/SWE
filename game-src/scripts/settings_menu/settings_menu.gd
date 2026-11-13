@@ -88,7 +88,7 @@ func _back_to_title() -> void:
 func _on_save_label_gui_input(event: InputEvent) -> void:
 	if (
 		Input.is_action_just_pressed("ui_accept")
-		or event is InputEventMouseButton 
+		or event is InputEventMouseButton
 		and event.button_index == MOUSE_BUTTON_LEFT
 		and event.is_pressed()
 	):
@@ -100,7 +100,7 @@ func _on_save_label_gui_input(event: InputEvent) -> void:
 func _on_back_label_gui_input(event: InputEvent) -> void:
 	if (
 		Input.is_action_just_pressed("ui_accept")
-		or event is InputEventMouseButton 
+		or event is InputEventMouseButton
 		and event.button_index == MOUSE_BUTTON_LEFT
 		and event.is_pressed()
 	):

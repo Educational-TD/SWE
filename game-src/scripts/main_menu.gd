@@ -12,7 +12,7 @@ func _ready() -> void:
 func _on_new_game_gui_input(event: InputEvent) -> void:
 	if (
 		Input.is_action_just_pressed("ui_accept")
-		or event is InputEventMouseButton 
+		or event is InputEventMouseButton
 		and event.button_index == MOUSE_BUTTON_LEFT
 		and event.is_pressed()
 	):
@@ -28,11 +28,10 @@ func fade_hello_world() -> void:
 	tween.tween_property($HelloWorld, "self_modulate:a", 0, 1.0) # fade out
 	
 
-
 func _on_settings_gui_input(event: InputEvent) -> void:
 	if (
 		Input.is_action_just_pressed("ui_accept")
-		or event is InputEventMouseButton 
+		or event is InputEventMouseButton
 		and event.button_index == MOUSE_BUTTON_LEFT
 		and event.is_pressed()
 	):
