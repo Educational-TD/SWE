@@ -45,21 +45,28 @@ func _ready() -> void:
 	if err != OK:
 		pass # If loading config fails defaults get used
 	else: # Get current settings
-		difficulty = _settings_config.get_value(
-			"UserSettings",
-			"difficulty",
-			Difficulty.GRADE_6,
-		)
-		volume = _settings_config.get_value(
-			"UserSettings",
-			"volume",
-			50,
-		)
-		keybinds = _settings_config.get_value(
-			"UserSettings",
-			"keybinds",
-			default_keybinds.duplicate(),
-		)
+		sync_current_save()
+
+
+## Take the values saved in the ConfigFile and load them into
+## the settings class attributes.
+func sync_current_save() -> void:
+	difficulty = _settings_config.get_value(
+		"UserSettings",
+		"difficulty",
+		Difficulty.GRADE_6,
+	)
+	volume = _settings_config.get_value(
+		"UserSettings",
+		"volume",
+		50,
+	)
+	keybinds = _settings_config.get_value(
+		"UserSettings",
+		"keybinds",
+		default_keybinds.duplicate(),
+	)
+
 
 ## Save local settings into the ConfigFile object and save to default location.
 func save_user_config() -> void:

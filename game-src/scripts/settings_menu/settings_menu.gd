@@ -18,16 +18,12 @@ func _ready() -> void:
 
 
 # The player pressing escape will initiate exiting the settings menu
-func _input(event: InputEvent) -> void:
+func _input(_event: InputEvent) -> void:
 	# Exiting menus
 	if Input.is_action_just_pressed("ui_cancel"):
-		print(_volume_change)
 		var changes = _settings_unsaved()
 		if changes.size() > 0:
 			spawn_confirmation(changes)
-			if _confirmation != null and _confirmation.visible == true:
-				_confirmation.visibility = false
-				accept_event()
 		else:
 			_back_to_title()
 
@@ -50,7 +46,7 @@ func _settings_unsaved() -> PackedStringArray:
 ## Prevents the player from unintentionally not saving any changes 
 ## they make to the game settings.
 func spawn_confirmation(changes: PackedStringArray) -> void:
-	var _confirmation = ConfirmationDialog.new()
+	_confirmation = ConfirmationDialog.new()
 	
 	_confirmation.dialog_text = ("The following settings have been modified"
 		+" but not saved:\n\n"
@@ -72,6 +68,7 @@ func spawn_confirmation(changes: PackedStringArray) -> void:
 	cancel_btn.pressed.connect(
 		func():
 			_back_to_title()
+			Settings.sync_current_save() # Reset Settings attributes
 			_confirmation.queue_free()
 	) # exit without saving if they click 'Don't Save"
 	
