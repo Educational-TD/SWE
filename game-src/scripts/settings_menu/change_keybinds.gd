@@ -12,6 +12,7 @@ var _update_keybind: bool = false ## flag indicating if keybind is being remappe
 var _action_to_remap: String = "" ## the action being currently remapped
 var _keybind_item_to_remap: Button = null ## the visual representation of the keybing being remapped
 
+signal keybind_change(flag: bool)
 
 func _input(event) -> void:
 	# Setting new keybind
@@ -38,19 +39,19 @@ func _ready() -> void:
 func _keybinds_popup() -> void:
 	InputMap.load_from_project_settings()
 
+	# Load a fresh popup
 	_reset_keybind_change()
 	for item in keybind_list.get_children():
-		item.queue_free() # Clear list
+		item.queue_free()
 
 	for action in Settings.keybinds:
 		var item: Button = keybind_item.instantiate()
 		var action_label: Label = item.find_child("Action")
 		var keycode: Label = item.find_child("Keycode")
+		var events = InputMap.action_get_events(action)
 
 		action_label.text = action.replace("_", " ").capitalize() # upgrade_dmg -> upgrade dmg
-		var events = InputMap.action_get_events(action)
 		keycode.text = _format_keybind_event(events[0])
-		
 		item.pressed.connect(_on_input_button_pressed.bind(item, action))
 		keybind_list.add_child(item)
 	
@@ -112,14 +113,17 @@ func _has_keybind_conflict(key: InputEventKey) -> bool:
 func _on_change_keybind(event: InputEventKey) -> void:
 	Settings.keybinds[_action_to_remap] = var_to_str(event) # Update settings config
 	_update_input_map(event) # Update keybind immediately
+	keybind_change.emit(true) # Signal keybind change
 	_keybind_item_to_remap.find_child("Keycode").text = _format_keybind_event(event)
-
+	
 	_reset_keybind_change()
 
+## Resets the keybind change variables
 func _reset_keybind_change() -> void:
 	_update_keybind = false
 	_action_to_remap = ""
 	_keybind_item_to_remap = null
+
 
 ## Immediately update the InputMap
 ##

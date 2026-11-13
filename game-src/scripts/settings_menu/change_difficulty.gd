@@ -1,5 +1,7 @@
 extends HBoxContainer
 
+signal difficulty_change(flag: bool)
+
 ## Setup GUI on scene load
 func _ready() -> void:
 	# Setup difficulty slider and visual representation
@@ -13,3 +15,4 @@ func _on_difficulty_slider_value_changed(value: float) -> void:
 	var selected: Settings.Difficulty = int(value) as Settings.Difficulty
 	Settings.difficulty = selected
 	$CurrentDifficultyLabel.text = Settings.DIFF_TO_STRING[selected]
+	difficulty_change.emit(true)
