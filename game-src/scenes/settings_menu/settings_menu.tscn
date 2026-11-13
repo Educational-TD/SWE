@@ -160,12 +160,9 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 308.0
-offset_top = 167.0
-offset_right = -308.0
-offset_bottom = -167.0
 grow_horizontal = 2
 grow_vertical = 2
+focus_mode = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="KeybindPopup" unique_id=454691774]
 layout_mode = 1
@@ -201,6 +198,7 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
+focus_mode = 2
 mouse_filter = 0
 text = "Back"
 
@@ -209,4 +207,6 @@ text = "Back"
 [connection signal="gui_input" from="MarginContainer/VBoxContainer/KeybindHBox/KeybindMenu" to="MarginContainer/VBoxContainer/KeybindHBox" method="_on_keybind_menu_gui_input"]
 [connection signal="gui_input" from="MarginContainer/VBoxContainer/SaveHBox/BackLabel" to="." method="_on_back_label_gui_input"]
 [connection signal="gui_input" from="MarginContainer/VBoxContainer/SaveHBox/SaveLabel" to="." method="_on_save_label_gui_input"]
+[connection signal="hidden" from="KeybindPopup" to="MarginContainer/VBoxContainer/KeybindHBox" method="_on_keybind_popup_hidden"]
+[connection signal="visibility_changed" from="KeybindPopup" to="MarginContainer/VBoxContainer/KeybindHBox" method="_on_keybind_popup_visibility_changed"]
 [connection signal="gui_input" from="KeybindPopup/PanelContainer/MarginContainer/KeybindPopupBack" to="MarginContainer/VBoxContainer/KeybindHBox" method="_on_keybind_popup_back_gui_input"]

@@ -5,6 +5,8 @@ extends HBoxContainer
 @onready var keybind_popup = %KeybindPopup
 ## Item list of keybinds
 @onready var keybind_list: VBoxContainer = keybind_popup.find_child("KeybindItemList")
+## Back button for keybind config popup
+@onready var keybind_back: Label = keybind_popup.find_child("KeybindPopupBack")
 ## Keybind item template
 const KeybindItemScene: PackedScene = preload("res://scenes/settings_menu/keybind_item.tscn")
 const KeybindItem := preload("res://scripts/settings_menu/keybind_item.gd")
@@ -30,6 +32,7 @@ func _input(event) -> void:
 	if Input.is_action_just_pressed("ui_cancel"):
 		if keybind_popup.visible == true:
 			keybind_popup.visible = false
+			$"KeybindMenu".grab_focus() # focus back to 'edit keybind' on popup exit
 			accept_event()
 
 
@@ -42,12 +45,12 @@ func _ready() -> void:
 ## Gets the current keybind actions and their keycodes to populate the keybind
 ## config menu. After doing so the menu will be visible to the player.
 func _keybinds_popup() -> void:
-	#InputMap.load_from_project_settings()
 	# Load a fresh popup
 	_reset_keybind_change()
 	for item in keybind_list.get_children():
 		item.queue_free()
 
+	var buttons: Array[Button] = []
 	for action in Settings.keybinds:
 		var item: Button = KeybindItemScene.instantiate()
 		var action_label: Label = item.find_child("Action")
@@ -58,8 +61,45 @@ func _keybinds_popup() -> void:
 		keycode.text = _format_keybind_event(events[0])
 		item.pressed.connect(_on_input_button_pressed.bind(item, action))
 		keybind_list.add_child(item)
+		buttons.append(item)
 
 	keybind_popup.visible = true
+	_set_focus(buttons)
+	keybind_back.call_deferred("grab_focus")
+
+
+## Set the focus neighbors for all nodes of the keybind config popup
+##
+## list - Dynamic list of keybinds that can be changed
+func _set_focus(list: Array[Button]) -> void:
+	var node_count := list.size()
+	var back_btn_path: NodePath = keybind_back.get_path()
+	
+	if node_count > 0:
+		for i in range(node_count):
+			var top: NodePath
+			var bottom: NodePath
+			if i == 0:
+				var btn_path: NodePath = list[i].get_path()
+				top = back_btn_path
+				bottom = list[i + 1].get_path()
+				keybind_back.focus_neighbor_bottom = btn_path
+				keybind_back.focus_neighbor_right = btn_path
+			elif i == node_count - 1:
+				var btn_path: NodePath = list[i].get_path()
+				top = list[i - 1].get_path()
+				bottom = back_btn_path
+				keybind_back.focus_neighbor_top = btn_path
+				keybind_back.focus_neighbor_left = btn_path
+			else:
+				top = list[i - 1].get_path()
+				bottom = list[i + 1].get_path()
+
+			list[i].focus_mode = Control.FOCUS_ALL
+			list[i].focus_neighbor_top = top
+			list[i].focus_neighbor_left = top
+			list[i].focus_neighbor_bottom = bottom
+			list[i].focus_neighbor_right = bottom
 
 
 ## Sets up the next keyboard input to be used as a new keybind
@@ -134,6 +174,7 @@ func _on_keybind_popup_back_gui_input(event: InputEvent) -> void:
 		and event.is_pressed()
 	):
 		keybind_popup.visible = false
+		$"KeybindMenu".grab_focus() # focus back to 'edit keybind' on popup exit
 
 
 ## Show the keybing config popup when 'edit keybinds...' is clicked
