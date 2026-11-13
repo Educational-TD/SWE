@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://i1xgnyc1rl6t"]
 
+[ext_resource type="Script" uid="uid://b8qnlkcy5bkf" path="res://scripts/settings_menu/keybind_item.gd" id="1_d38se"]
+
 [node name="KeybindItem" type="Button" unique_id=1010215126]
 custom_minimum_size = Vector2(0, 20)
 anchors_preset = 10
@@ -8,6 +10,7 @@ offset_top = -4.0
 offset_bottom = 24.0
 grow_horizontal = 2
 focus_mode = 0
+script = ExtResource("1_d38se")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=235338394]
 layout_mode = 1

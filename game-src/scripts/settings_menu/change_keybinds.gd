@@ -20,7 +20,7 @@ func _input(event) -> void:
 			_on_change_keybind(event)
 			accept_event()
 		else:
-			pass # TODO: handle if keybind is already in use
+			_keybind_item_to_remap.shake() # Indicate invalid keybind
 	# Exiting popup
 	if Input.is_action_just_pressed("escape"):
 		if keybind_popup.visible == true:
@@ -37,15 +37,16 @@ func _ready() -> void:
 ## config menu. After doing so the menu will be visible to the player.
 func _keybinds_popup() -> void:
 	InputMap.load_from_project_settings()
-	
+
+	_reset_keybind_change()
 	for item in keybind_list.get_children():
 		item.queue_free() # Clear list
-	
+
 	for action in Settings.keybinds:
 		var item: Button = keybind_item.instantiate()
 		var action_label: Label = item.find_child("Action")
 		var keycode: Label = item.find_child("Keycode")
-		print(Settings.keybinds[action]) # TODO: rmv this once setting changes are concrete
+
 		action_label.text = action.replace("_", " ").capitalize() # upgrade_dmg -> upgrade dmg
 		var events = InputMap.action_get_events(action)
 		keycode.text = _format_keybind_event(events[0])
@@ -74,10 +75,6 @@ func _on_input_button_pressed(item: Button, action: String) -> void:
 ## returns the event string representation without the ' - Physical' suffix
 func _format_keybind_event(event: InputEvent) -> String:
 	return event.as_text().trim_suffix(" - Physical")
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
 
 
 func is_left_click(event: InputEvent) -> bool:
@@ -117,10 +114,12 @@ func _on_change_keybind(event: InputEventKey) -> void:
 	_update_input_map(event) # Update keybind immediately
 	_keybind_item_to_remap.find_child("Keycode").text = _format_keybind_event(event)
 
+	_reset_keybind_change()
+
+func _reset_keybind_change() -> void:
 	_update_keybind = false
 	_action_to_remap = ""
 	_keybind_item_to_remap = null
-
 
 ## Immediately update the InputMap
 ##
