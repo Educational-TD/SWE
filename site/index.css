@@ -2,7 +2,7 @@
     --background-color: light-dark(#ddddee, #000011);
     --text-color: light-dark(#000000, #ffffff);
 
-    --primary-color: light-dark(#be5504, #f4a763);
+    --primary-color: light-dark(#f4a763, #f4a763);
     --primary-accent-color: light-dark(#ffc991, #fbb476);
     --secondary-color: light-dark(#7bb1ff, #00c3db);
     --secondary-accent-color: light-dark(#a2c7ff, #7bb1ff);
@@ -153,9 +153,10 @@ a {
     & > a {
         position: absolute;
         bottom: -0.25rem;
-        right: -0.25rem;
         width: 2.5rem;
         height: 2.5rem;
+
+        border: solid var(--secondary-color);
 
         background-color: var(--primary-accent-color);
         &:hover, &:focus {
@@ -166,9 +167,16 @@ a {
             transition: background-color 0s;
         }
 
-        border: solid var(--secondary-color);
-        border-width: 0.125rem 0 0 0.125rem;
-        border-top-left-radius: 0.75rem;
+        &:nth-child(2) { /* Back Button */
+            left: 0.25rem;
+            border-width: 0.125rem 0.125rem 0 0;
+            border-top-right-radius: 0.75rem;
+        }
+        &:nth-child(3) { /* Download Button */
+            right: -0.25rem;
+            border-width: 0.125rem 0 0 0.125rem;
+            border-top-left-radius: 0.75rem;
+        }
     }
 }
 
