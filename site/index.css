@@ -182,24 +182,26 @@ ul#contact {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    @media (width >= 850px) { /* gaps cannot be negative, so we have to do a workaround */
+    @media (width >= 850px) { /* Gaps cannot be negative, so we have to do a workaround */
         padding-top: calc(var(--box-padding) + 3rem);
         & > * {
             margin-top: -3rem;
         }
     }
 
+    /* Team member */
     & > li {
         display: flex;
         gap: 0.5rem;
         &:nth-child(even) {
             flex-direction: row-reverse;
             text-align: right;
-            & > div > ul {
+            & .member-info > ul {
                 justify-content: right;
             }
         }
 
+        /* Member picture */
         & > img {
             height: 9rem;
             aspect-ratio: 1;
@@ -207,35 +209,36 @@ ul#contact {
             border: 2px solid var(--primary-accent-color);
             border-radius: 0.5rem;
         }
+    }
+}
+.member-info {
+    display: flex;
+    flex-direction: column;
+    & > * {
+        margin: 0;
+    }
 
-        & > div {
-            display: flex;
-            flex-direction: column;
-            & > * {
-                margin: 0;
+    /* Social Icons */
+    & > ul {
+        display: flex; 
+        & > li {
+            height: 1.5rem;
+            aspect-ratio: 1;
+            padding: 0.125rem;
+
+            /* The Social icon SVGs are black, which need to be inverted to be visible in dark mode */
+            @media (prefers-color-scheme: dark) {
+                filter: invert(1);
             }
 
-            & > ul {
-                display: flex; 
-                & > li {
-                    height: 1.5rem;
-                    aspect-ratio: 1;
-                    padding: 0.125rem;
-
-                    @media (prefers-color-scheme: dark) {
-                        filter: invert(1);
-                    }
-
-                    transition: transform 0.1s ease-in-out;
-                    box-sizing: border-box;
-                    &:hover, &:focus-within {
-                        transform: translateY(0.2rem);
-                        @media (prefers-reduced-motion: reduce) {
-                            transform: translateY(0);
-                            padding: 0;
-                            border: 0.125rem solid var(--primary-color);
-                        }
-                    }
+            transition: transform 0.15s ease-in-out;
+            box-sizing: border-box;
+            &:hover, &:focus-within {
+                transform: translateY(0.15rem);
+                @media (prefers-reduced-motion: reduce) {
+                    transform: translateY(0);
+                    padding: 0;
+                    border: 0.125rem solid var(--primary-color);
                 }
             }
         }
