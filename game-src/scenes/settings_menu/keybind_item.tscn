@@ -35,10 +35,6 @@ size_flags_horizontal = 3
 text = "action"
 vertical_alignment = 1
 
-[node name="Spacer" type="Control" parent="MarginContainer/HBoxContainer" unique_id=357372743]
-layout_mode = 2
-size_flags_horizontal = 3
-
 [node name="Keycode" type="Label" parent="MarginContainer/HBoxContainer" unique_id=1123322638]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2

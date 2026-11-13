@@ -55,12 +55,8 @@ script = ExtResource("2_j2s20")
 
 [node name="DifficultyLabel" type="Label" parent="MarginContainer/VBoxContainer/DifficultyHBox" unique_id=1256636850]
 layout_mode = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 2
 text = "Difficulty"
-
-[node name="DifficultySpacer" type="Control" parent="MarginContainer/VBoxContainer/DifficultyHBox" unique_id=1594154774]
-layout_mode = 2
-size_flags_horizontal = 3
 
 [node name="CurrentDifficultyLabel" type="Label" parent="MarginContainer/VBoxContainer/DifficultyHBox" unique_id=1225882706]
 custom_minimum_size = Vector2(70, 0)
@@ -68,10 +64,9 @@ layout_mode = 2
 size_flags_horizontal = 4
 
 [node name="DifficultySlider" type="HSlider" parent="MarginContainer/VBoxContainer/DifficultyHBox" unique_id=221637054]
-custom_minimum_size = Vector2(320, 0)
+custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.0
 focus_neighbor_bottom = NodePath("../../VolumeHBox/VolumeSlider")
 theme_override_styles/grabber_area = SubResource("StyleBoxEmpty_5p8wc")
 theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_r6d6q")
@@ -86,11 +81,8 @@ script = ExtResource("2_vlvk0")
 
 [node name="VolumeLabel" type="Label" parent="MarginContainer/VBoxContainer/VolumeHBox" unique_id=74578595]
 layout_mode = 2
-text = "Volume"
-
-[node name="VolumeSpacer" type="Control" parent="MarginContainer/VBoxContainer/VolumeHBox" unique_id=1805385323]
-layout_mode = 2
 size_flags_horizontal = 3
+text = "Volume"
 
 [node name="CurrentVolumeLabel" type="Label" parent="MarginContainer/VBoxContainer/VolumeHBox" unique_id=1102212221]
 custom_minimum_size = Vector2(70, 0)
@@ -98,10 +90,9 @@ layout_mode = 2
 size_flags_horizontal = 4
 
 [node name="VolumeSlider" type="HSlider" parent="MarginContainer/VBoxContainer/VolumeHBox" unique_id=1012710301]
-custom_minimum_size = Vector2(320, 0)
+custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.0
 focus_neighbor_top = NodePath("../../DifficultyHBox/DifficultySlider")
 focus_neighbor_bottom = NodePath("../../KeybindHBox/KeybindMenu")
 max_value = 1.0
@@ -117,11 +108,17 @@ script = ExtResource("4_5sljs")
 
 [node name="KeybindLabel" type="Label" parent="MarginContainer/VBoxContainer/KeybindHBox" unique_id=625236349]
 layout_mode = 2
+size_flags_horizontal = 3
 text = "Keybinds"
 
-[node name="KeybindSpacer" type="Control" parent="MarginContainer/VBoxContainer/KeybindHBox" unique_id=971513385]
+[node name="DefaultsLabel" type="Label" parent="MarginContainer/VBoxContainer/KeybindHBox" unique_id=1197781190]
 layout_mode = 2
-size_flags_horizontal = 3
+mouse_filter = 0
+text = "Reset Keybinds"
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/KeybindHBox" unique_id=2067462356]
+layout_mode = 2
+text = "|"
 
 [node name="KeybindMenu" type="Label" parent="MarginContainer/VBoxContainer/KeybindHBox" unique_id=1134325659]
 layout_mode = 2
@@ -138,18 +135,16 @@ size_flags_vertical = 10
 
 [node name="BackLabel" type="Label" parent="MarginContainer/VBoxContainer/SaveHBox" unique_id=1791434890]
 layout_mode = 2
+size_flags_horizontal = 2
 focus_neighbor_top = NodePath("../../KeybindHBox/KeybindMenu")
 focus_neighbor_right = NodePath("../SaveLabel")
 focus_mode = 2
 mouse_filter = 0
 text = "Back"
 
-[node name="SaveSpacer" type="Control" parent="MarginContainer/VBoxContainer/SaveHBox" unique_id=2054351963]
-layout_mode = 2
-size_flags_horizontal = 3
-
 [node name="SaveLabel" type="Label" parent="MarginContainer/VBoxContainer/SaveHBox" unique_id=1552765307]
 layout_mode = 2
+size_flags_horizontal = 8
 focus_neighbor_left = NodePath("../BackLabel")
 focus_neighbor_top = NodePath("../../KeybindHBox/KeybindMenu")
 focus_mode = 2
@@ -207,6 +202,7 @@ text = "Back"
 
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/DifficultyHBox/DifficultySlider" to="MarginContainer/VBoxContainer/DifficultyHBox" method="_on_difficulty_slider_value_changed"]
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/VolumeHBox/VolumeSlider" to="MarginContainer/VBoxContainer/VolumeHBox" method="_on_volume_slider_value_changed"]
+[connection signal="gui_input" from="MarginContainer/VBoxContainer/KeybindHBox/DefaultsLabel" to="MarginContainer/VBoxContainer/KeybindHBox" method="_on_defaults_label_gui_input"]
 [connection signal="gui_input" from="MarginContainer/VBoxContainer/KeybindHBox/KeybindMenu" to="MarginContainer/VBoxContainer/KeybindHBox" method="_on_keybind_menu_gui_input"]
 [connection signal="gui_input" from="MarginContainer/VBoxContainer/SaveHBox/BackLabel" to="." method="_on_back_label_gui_input"]
 [connection signal="gui_input" from="MarginContainer/VBoxContainer/SaveHBox/SaveLabel" to="." method="_on_save_label_gui_input"]
