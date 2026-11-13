@@ -7,23 +7,17 @@ extends Control
 @onready var difficulty_slider: HSlider = _difficulty_hbox.get_node("DifficultySlider")
 ## Visually represents the difficulty level
 @onready var current_difficulty: Label = _difficulty_hbox.get_node("CurrentDifficultyLabel")
-# Volume nodes
-@onready var _volume_hbox: HBoxContainer = $MarginContainer/VBoxContainer/VolumeHBox
-## Slider used to change the volume setting
-@onready var volume_slider: HSlider = _volume_hbox.get_node("VolumeSlider")
-## Visually represents the volume level
-@onready var current_volume: Label = _volume_hbox.get_node("CurrentVolumeLabel")
 # Keybind nodes
 ## Keybind popup menu
 @onready var keybind_popup: Control = $KeybindPopup
 ## Item list of keybinds
 @onready var keybind_list: VBoxContainer = keybind_popup.find_child("KeybindItemList")
 ## Keybind item template
-@onready var keybind_item: PackedScene = preload("res://scenes/keybind_item.tscn")
+@onready var keybind_item: PackedScene = preload("res://scenes/settings_menu/keybind_item.tscn")
 
 
 const Difficulty := Settings.Difficulty ## Question difficulty
-var user_settings: Settings = Settings.new() ## Current player settings
+#var user_settings: Settings = Settings.new() ## Current player settings
 var _update_keybind: bool = false ## flag indicating if keybind is being remapped
 var _action_to_remap: String = "" ## the action being currently remapped
 var _keybind_item_to_remap: Button = null ## the visual representation of the keybing being remapped
@@ -33,15 +27,10 @@ var _changes_unsaved: Array[bool] = [false, false, false] ## flags indicating if
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	# Setup difficulty slider and visual representation
-	var diff = user_settings.difficulty # Current or default difficulty
+	var diff = Settings.difficulty # Current or default difficulty
 	difficulty_slider.max_value = Difficulty.size() - 1 # 0 indexed
 	current_difficulty.text = Settings.DIFF_TO_STRING[diff]
 	difficulty_slider.value = diff
-
-	# Setup volume slider and visual representation
-	var volume = user_settings.volume
-	current_volume.text = "%d%%" % volume
-	volume_slider.value = volume
 
 	# Setup keybinds menu
 	keybind_popup.visible = false # ensure keybind popup begins hidden
@@ -75,21 +64,12 @@ func _input(event: InputEvent) -> void:
 ## Handles updating the visual representation of chosen difficulty level
 func _on_difficulty_slider_value_changed(value: float) -> void:
 	var selected: Difficulty = int(value) as Difficulty
-	user_settings.difficulty = selected
+	Settings.difficulty = selected
 	current_difficulty.text = Settings.DIFF_TO_STRING[selected]
 	_changes_unsaved[0] = true
 
-
-## Handles updating the visual representation of chosen volume level
-func _on_volume_slider_value_changed(value: float) -> void:
-	var formatted := "%d%%"
-	user_settings.volume = int(value)
-	current_volume.text = (formatted % value)
-	_changes_unsaved[1] = true
-
-
 func _on_change_keybind(event: InputEventKey) -> void:
-	user_settings.keybinds[_action_to_remap] = var_to_str(event)
+	Settings.keybinds[_action_to_remap] = var_to_str(event)
 	_keybind_item_to_remap.find_child("Keycode").text = _format_keybind_event(event)
 	_changes_unsaved[2] = true
 
@@ -112,7 +92,7 @@ func _on_back_label_gui_input(event: InputEvent) -> void:
 ## Handler for when the player clicks the 'Save' button
 func _on_save_label_gui_input(event: InputEvent) -> void:
 	if is_left_click(event):
-		user_settings.save_user_config()
+		Settings.save_user_config()
 		_changes_unsaved.fill(false)
 		_back_to_title() # TODO: decide if saving should go back to title
 
@@ -180,7 +160,7 @@ func spawn_confirmation(changes: PackedStringArray) -> void:
 	confirmation.cancel_button_text = "Don't Save"
 	
 	confirmation.confirmed.connect(func():
-		user_settings.save_user_config()
+		Settings.save_user_config()
 		_changes_unsaved.fill(false)
 		confirmation.queue_free()
 	) # save if user clicks 'Save'
@@ -201,11 +181,11 @@ func _keybinds_popup() -> void:
 	for item in keybind_list.get_children():
 		item.queue_free() # Clear list
 	
-	for action in user_settings.keybinds:
+	for action in Settings.keybinds:
 		var item: Button = keybind_item.instantiate()
 		var action_label: Label = item.find_child("Action")
 		var keycode: Label = item.find_child("Keycode")
-		print(user_settings.keybinds[action]) # TODO: rmv this once setting changes are concrete
+		print(Settings.keybinds[action]) # TODO: rmv this once setting changes are concrete
 		action_label.text = action.replace("_", " ") # upgrade_dmg -> upgrade dmg
 		var events = InputMap.action_get_events(action)
 		keycode.text = _format_keybind_event(events[0])

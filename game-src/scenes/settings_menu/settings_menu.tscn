@@ -1,7 +1,9 @@
 [gd_scene format=3 uid="uid://dmhf23eymv0gb"]
 
-[ext_resource type="Script" uid="uid://cdn316455ctts" path="res://scripts/settings_menu.gd" id="1_05p07"]
-[ext_resource type="PackedScene" uid="uid://i1xgnyc1rl6t" path="res://scenes/keybind_item.tscn" id="2_cr101"]
+[ext_resource type="Script" uid="uid://cdn316455ctts" path="res://scripts/settings_menu/settings_menu.gd" id="1_05p07"]
+[ext_resource type="PackedScene" uid="uid://i1xgnyc1rl6t" path="res://scenes/settings_menu/keybind_item.tscn" id="2_cr101"]
+[ext_resource type="Script" uid="uid://8tf1jjw3au2d" path="res://scripts/settings_menu/change_difficulty.gd" id="2_j2s20"]
+[ext_resource type="Script" uid="uid://tl67vek78xhp" path="res://scripts/settings_menu/change_volume.gd" id="2_vlvk0"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5p8wc"]
 
@@ -48,6 +50,7 @@ horizontal_alignment = 1
 [node name="DifficultyHBox" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1932257124]
 layout_mode = 2
 size_flags_vertical = 4
+script = ExtResource("2_j2s20")
 
 [node name="DifficultyLabel" type="Label" parent="MarginContainer/VBoxContainer/DifficultyHBox" unique_id=1256636850]
 layout_mode = 2
@@ -77,6 +80,7 @@ ticks_position = 3
 [node name="VolumeHBox" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1986397624]
 layout_mode = 2
 size_flags_vertical = 4
+script = ExtResource("2_vlvk0")
 
 [node name="VolumeLabel" type="Label" parent="MarginContainer/VBoxContainer/VolumeHBox" unique_id=74578595]
 layout_mode = 2
@@ -183,8 +187,8 @@ size_flags_vertical = 8
 mouse_filter = 0
 text = "back"
 
-[connection signal="value_changed" from="MarginContainer/VBoxContainer/DifficultyHBox/DifficultySlider" to="." method="_on_difficulty_slider_value_changed"]
-[connection signal="value_changed" from="MarginContainer/VBoxContainer/VolumeHBox/VolumeSlider" to="." method="_on_volume_slider_value_changed"]
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/DifficultyHBox/DifficultySlider" to="MarginContainer/VBoxContainer/DifficultyHBox" method="_on_difficulty_slider_value_changed"]
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/VolumeHBox/VolumeSlider" to="MarginContainer/VBoxContainer/VolumeHBox" method="_on_volume_slider_value_changed"]
 [connection signal="gui_input" from="MarginContainer/VBoxContainer/KeybindHBox/KeybindMenu" to="." method="_on_keybind_menu_gui_input"]
 [connection signal="gui_input" from="MarginContainer/VBoxContainer/SaveHBox/BackLabel" to="." method="_on_back_label_gui_input"]
 [connection signal="gui_input" from="MarginContainer/VBoxContainer/SaveHBox/SaveLabel" to="." method="_on_save_label_gui_input"]
