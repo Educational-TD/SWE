@@ -24,9 +24,9 @@ const DIFF_TO_STRING = {
 
 ## The default keybindings
 const default_keybinds: Dictionary[String, String] = {
-	"upgrade_damage": "49",
-	"upgrade_fire_rate": "50",
-	"upgrade_range": "51",
+	"upgrade_damage": "1",
+	"upgrade_fire_rate": "2",
+	"upgrade_range": "3",
 }
 const _file_path: String = "user://user_config.cfg" ## Default save location
 var _settings_config: ConfigFile ## Stores loaded settings
@@ -104,7 +104,7 @@ func _change_input_map() -> void:
 		var event: InputEventKey = InputEventKey.new()
 		if keybinds[action].is_valid_int():
 			var keycode: Key = OS.find_keycode_from_string(keybinds[action])
-			event.keycode = keycode
+			event.physical_keycode = keycode
 		else:
 			event = str_to_var(keybinds[action])
 		InputMap.action_add_event(action, event) # set keybind

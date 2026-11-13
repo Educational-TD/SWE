@@ -113,6 +113,11 @@ text = "Keybinds"
 
 [node name="DefaultsLabel" type="Label" parent="MarginContainer/VBoxContainer/KeybindHBox" unique_id=1197781190]
 layout_mode = 2
+focus_neighbor_left = NodePath("../KeybindMenu")
+focus_neighbor_top = NodePath("../../VolumeHBox/VolumeSlider")
+focus_neighbor_right = NodePath("../KeybindMenu")
+focus_neighbor_bottom = NodePath("../../SaveHBox/SaveLabel")
+focus_mode = 2
 mouse_filter = 0
 text = "Reset Keybinds"
 
@@ -122,8 +127,9 @@ text = "|"
 
 [node name="KeybindMenu" type="Label" parent="MarginContainer/VBoxContainer/KeybindHBox" unique_id=1134325659]
 layout_mode = 2
-focus_neighbor_left = NodePath("../../SaveHBox/BackLabel")
+focus_neighbor_left = NodePath("../DefaultsLabel")
 focus_neighbor_top = NodePath("../../VolumeHBox/VolumeSlider")
+focus_neighbor_right = NodePath("../DefaultsLabel")
 focus_neighbor_bottom = NodePath("../../SaveHBox/SaveLabel")
 focus_mode = 2
 mouse_filter = 0

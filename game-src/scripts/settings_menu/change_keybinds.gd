@@ -142,7 +142,7 @@ func _has_keybind_conflict(key: InputEventKey) -> bool:
 ## event - The new keybind
 func _on_change_keybind(event: InputEventKey) -> void:
 	Settings.keybinds[_action_to_remap] = var_to_str(event) # Update settings config
-	_update_input_map(event) # Update keybind immediately
+	_update_input_map(_action_to_remap, event) # Update keybind immediately
 	_keybind_item_to_remap.find_child("Keycode").text = _format_keybind_event(event)
 	
 	for key in _start_keybinds:
@@ -153,6 +153,7 @@ func _on_change_keybind(event: InputEventKey) -> void:
 	
 	_reset_keybind_change()
 
+
 ## Resets the keybind change variables
 func _reset_keybind_change() -> void:
 	_update_keybind = false
@@ -162,10 +163,11 @@ func _reset_keybind_change() -> void:
 
 ## Immediately update the InputMap
 ##
+## action - The action for which to set a new keybind
 ## event - The new keybinding
-func _update_input_map(event: InputEvent) -> void:
-	InputMap.action_erase_events(_action_to_remap) # remove existing keybind
-	InputMap.action_add_event(_action_to_remap, event) # add new keybind
+func _update_input_map(action: String, event: InputEvent) -> void:
+	InputMap.action_erase_events(action) # remove existing keybind
+	InputMap.action_add_event(action, event) # add new keybind
 
 
 ## Hides the keybind config popup when the 'back' label is clicked
@@ -189,3 +191,19 @@ func _on_keybind_menu_gui_input(event: InputEvent) -> void:
 		and event.is_pressed()
 	):
 		_keybinds_popup()
+
+
+## Resets the keybinds to the default settings
+func _on_defaults_label_gui_input(event: InputEvent) -> void:
+	if (
+		Input.is_action_just_pressed("ui_accept")
+		or event is InputEventMouseButton
+		and event.button_index == MOUSE_BUTTON_LEFT
+		and event.is_pressed()
+	):
+		Settings.keybinds = Settings.default_keybinds.duplicate()
+		for action in Settings.keybinds:
+			var default_event := InputEventKey.new()
+			var keycode := OS.find_keycode_from_string(Settings.keybinds[action])
+			default_event.physical_keycode = keycode
+			_update_input_map(action, default_event)
