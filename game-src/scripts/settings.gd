@@ -32,10 +32,10 @@ const _file_path: String = "user://user_config.cfg" ## Default save location
 var _settings_config: ConfigFile ## Stores loaded settings
 ## Question difficulty
 var difficulty: Difficulty = Difficulty.GRADE_6
-## Volume in range, 0 - 100
-var volume: int = 50
+## Volume in range, 0 - 1.0
+var volume: float = 0.5
  ## Game keybinds ["action": "keycode"]
-var keybinds: Dictionary[String, String] = default_keybinds
+var keybinds: Dictionary[String, String] = default_keybinds.duplicate()
 
 ## When this class is loaded the player config is loaded
 func _ready() -> void:
@@ -45,12 +45,14 @@ func _ready() -> void:
 	if err != OK:
 		pass # If loading config fails defaults get used
 	else: # Get current settings
-		sync_current_save()
+		load_from_config()
+		
+	_apply_settings() # apply settings
 
 
 ## Take the values saved in the ConfigFile and load them into
 ## the settings class attributes.
-func sync_current_save() -> void:
+func load_from_config() -> void:
 	difficulty = _settings_config.get_value(
 		"UserSettings",
 		"difficulty",
@@ -59,7 +61,7 @@ func sync_current_save() -> void:
 	volume = _settings_config.get_value(
 		"UserSettings",
 		"volume",
-		50,
+		0.5,
 	)
 	keybinds = _settings_config.get_value(
 		"UserSettings",
@@ -76,7 +78,19 @@ func save_user_config() -> void:
 	_settings_config.set_value("UserSettings", "keybinds", keybinds)
 	# save config to file system
 	var err = _settings_config.save(_file_path)
+	_apply_settings()
 	
 	if err != OK:
 		# TODO: handle this error case, add to use case possibly
 		print("error in saving config")
+
+
+func _apply_settings() -> void:
+	_change_master_volume() # set volume
+
+func _change_master_volume() -> void:
+	var bus_index = AudioServer.get_bus_index("Master")
+	
+	if volume != AudioServer.get_bus_volume_linear(bus_index):
+		AudioServer.set_bus_volume_linear(bus_index, volume) # set volume level
+		AudioServer.set_bus_mute(bus_index, volume == 0) # mute or unmute
