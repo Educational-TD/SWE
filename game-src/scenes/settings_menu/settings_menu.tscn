@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://i1xgnyc1rl6t" path="res://scenes/settings_menu/keybind_item.tscn" id="2_cr101"]
 [ext_resource type="Script" uid="uid://8tf1jjw3au2d" path="res://scripts/settings_menu/change_difficulty.gd" id="2_j2s20"]
 [ext_resource type="Script" uid="uid://tl67vek78xhp" path="res://scripts/settings_menu/change_volume.gd" id="2_vlvk0"]
+[ext_resource type="Script" uid="uid://b5efd61vj3xoh" path="res://scripts/settings_menu/change_keybinds.gd" id="4_5sljs"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5p8wc"]
 
@@ -105,6 +106,7 @@ ticks_on_borders = true
 [node name="KeybindHBox" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=2043701880]
 layout_mode = 2
 size_flags_vertical = 4
+script = ExtResource("4_5sljs")
 
 [node name="KeybindLabel" type="Label" parent="MarginContainer/VBoxContainer/KeybindHBox" unique_id=625236349]
 layout_mode = 2
@@ -138,6 +140,7 @@ mouse_filter = 0
 text = "Save settings"
 
 [node name="KeybindPopup" type="Control" parent="." unique_id=830721836]
+unique_name_in_owner = true
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -189,7 +192,7 @@ text = "back"
 
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/DifficultyHBox/DifficultySlider" to="MarginContainer/VBoxContainer/DifficultyHBox" method="_on_difficulty_slider_value_changed"]
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/VolumeHBox/VolumeSlider" to="MarginContainer/VBoxContainer/VolumeHBox" method="_on_volume_slider_value_changed"]
-[connection signal="gui_input" from="MarginContainer/VBoxContainer/KeybindHBox/KeybindMenu" to="." method="_on_keybind_menu_gui_input"]
+[connection signal="gui_input" from="MarginContainer/VBoxContainer/KeybindHBox/KeybindMenu" to="MarginContainer/VBoxContainer/KeybindHBox" method="_on_keybind_menu_gui_input"]
 [connection signal="gui_input" from="MarginContainer/VBoxContainer/SaveHBox/BackLabel" to="." method="_on_back_label_gui_input"]
 [connection signal="gui_input" from="MarginContainer/VBoxContainer/SaveHBox/SaveLabel" to="." method="_on_save_label_gui_input"]
-[connection signal="gui_input" from="KeybindPopup/PanelContainer/MarginContainer/KeybindPopupBack" to="." method="_on_keybind_popup_back_gui_input"]
+[connection signal="gui_input" from="KeybindPopup/PanelContainer/MarginContainer/KeybindPopupBack" to="MarginContainer/VBoxContainer/KeybindHBox" method="_on_keybind_popup_back_gui_input"]
