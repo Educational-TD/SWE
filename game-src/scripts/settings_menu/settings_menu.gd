@@ -67,8 +67,8 @@ func spawn_confirmation(changes: PackedStringArray) -> void:
 	var cancel_btn := _confirmation.get_cancel_button()
 	cancel_btn.pressed.connect(
 		func():
-			_back_to_title()
 			Settings.load_from_config() # Reset Settings attributes
+			_back_to_title()
 			_confirmation.queue_free()
 	) # exit without saving if they click 'Don't Save"
 	

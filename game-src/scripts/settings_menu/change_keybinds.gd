@@ -28,6 +28,7 @@ func _input(event) -> void:
 			accept_event()
 		else:
 			_keybind_item_to_remap.shake() # Indicate invalid keybind
+			accept_event()
 	# Exiting popup
 	if Input.is_action_just_pressed("ui_cancel"):
 		if keybind_popup.visible == true:
@@ -128,8 +129,10 @@ func _format_keybind_event(event: InputEvent) -> String:
 ## returns true if this keybind is already in use, false otherwise
 func _has_keybind_conflict(key: InputEventKey) -> bool:
 	for action in InputMap.get_actions():
+		if action == _action_to_remap: # allow set back to current keybind
+			continue
 		for event in InputMap.action_get_events(action):
-			if _format_keybind_event(event) == key.as_text():
+			if event.is_match(key):
 				return true
 	return false
 
