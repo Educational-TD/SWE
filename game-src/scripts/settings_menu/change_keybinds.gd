@@ -12,6 +12,7 @@ var _update_keybind: bool = false ## flag indicating if keybind is being remappe
 var _action_to_remap: String = "" ## the action being currently remapped
 var _keybind_item_to_remap: Button = null ## the visual representation of the keybing being remapped
 
+
 func _input(event) -> void:
 	# Setting new keybind
 	if (_update_keybind and event is InputEventKey): # Only allow keyboard inputs
@@ -26,9 +27,11 @@ func _input(event) -> void:
 			keybind_popup.visible = false
 			accept_event()
 
+
 ## Ensure keybind config popup isn't shown on scene entry
 func _ready() -> void:
 	keybind_popup.visible = false
+
 
 ## Gets the current keybind actions and their keycodes to populate the keybind
 ## config menu. After doing so the menu will be visible to the player.
@@ -43,7 +46,7 @@ func _keybinds_popup() -> void:
 		var action_label: Label = item.find_child("Action")
 		var keycode: Label = item.find_child("Keycode")
 		print(Settings.keybinds[action]) # TODO: rmv this once setting changes are concrete
-		action_label.text = action.replace("_", " ") # upgrade_dmg -> upgrade dmg
+		action_label.text = action.replace("_", " ").capitalize() # upgrade_dmg -> upgrade dmg
 		var events = InputMap.action_get_events(action)
 		keycode.text = _format_keybind_event(events[0])
 		
@@ -64,6 +67,7 @@ func _on_input_button_pressed(item: Button, action: String) -> void:
 		_action_to_remap = action
 		item.find_child("Keycode").text = "Input new keybind..."
 
+
 ## Removes the default ' - Physical' text from keyboard events
 ## 
 ## event - The user input event (i.e. 'p' key)
@@ -75,6 +79,7 @@ func _format_keybind_event(event: InputEvent) -> String:
 func _process(delta: float) -> void:
 	pass
 
+
 func is_left_click(event: InputEvent) -> bool:
 	if (
 		event is InputEventMouseButton 
@@ -84,6 +89,7 @@ func is_left_click(event: InputEvent) -> bool:
 		return true
 	else:
 		return false
+
 
 ## Hides the keybind config popup when the 'back' label is clicked
 func _on_keybind_popup_back_gui_input(event: InputEvent) -> void:
@@ -102,18 +108,27 @@ func _has_keybind_conflict(key: InputEventKey) -> bool:
 				return true
 	return false
 
+
+## If a keybind isn't already in use, save the new keybind
+##
+## event - The new keybind
 func _on_change_keybind(event: InputEventKey) -> void:
 	Settings.keybinds[_action_to_remap] = var_to_str(event) # Update settings config
-	_update_input_map(_action_to_remap, event) # Update keybind immediately
+	_update_input_map(event) # Update keybind immediately
 	_keybind_item_to_remap.find_child("Keycode").text = _format_keybind_event(event)
 
 	_update_keybind = false
 	_action_to_remap = ""
 	_keybind_item_to_remap = null
 
-func _update_input_map(_action_to_remap: String, event: InputEvent) -> void:
+
+## Immediately update the InputMap
+##
+## event - The new keybinding
+func _update_input_map(event: InputEvent) -> void:
 	InputMap.action_erase_events(_action_to_remap) # remove existing keybind
 	InputMap.action_add_event(_action_to_remap, event) # add new keybind
+
 
 ## Show the keybing config popup when 'edit keybinds...' is clicked
 func _on_keybind_menu_gui_input(event: InputEvent) -> void:

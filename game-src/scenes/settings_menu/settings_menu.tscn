@@ -119,7 +119,7 @@ size_flags_horizontal = 3
 [node name="KeybindMenu" type="Label" parent="MarginContainer/VBoxContainer/KeybindHBox" unique_id=1134325659]
 layout_mode = 2
 mouse_filter = 0
-text = "edit keybinds..."
+text = "Edit Keybinds..."
 
 [node name="SaveHBox" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1741418241]
 layout_mode = 2
@@ -137,7 +137,7 @@ size_flags_horizontal = 3
 [node name="SaveLabel" type="Label" parent="MarginContainer/VBoxContainer/SaveHBox" unique_id=1552765307]
 layout_mode = 2
 mouse_filter = 0
-text = "Save settings"
+text = "Save Settings"
 
 [node name="KeybindPopup" type="Control" parent="." unique_id=830721836]
 unique_name_in_owner = true
@@ -188,7 +188,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 mouse_filter = 0
-text = "back"
+text = "Back"
 
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/DifficultyHBox/DifficultySlider" to="MarginContainer/VBoxContainer/DifficultyHBox" method="_on_difficulty_slider_value_changed"]
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/VolumeHBox/VolumeSlider" to="MarginContainer/VBoxContainer/VolumeHBox" method="_on_volume_slider_value_changed"]
