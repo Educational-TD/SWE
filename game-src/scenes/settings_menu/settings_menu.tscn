@@ -101,7 +101,9 @@ custom_minimum_size = Vector2(320, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.0
+tick_count = 5
 ticks_on_borders = true
+ticks_position = 3
 
 [node name="KeybindHBox" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=2043701880]
 layout_mode = 2

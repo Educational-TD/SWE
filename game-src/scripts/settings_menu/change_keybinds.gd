@@ -12,8 +12,11 @@ var _update_keybind: bool = false ## flag indicating if keybind is being remappe
 var _action_to_remap: String = "" ## the action being currently remapped
 var _keybind_item_to_remap: Button = null ## the visual representation of the keybing being remapped
 
-signal keybind_change(flag: bool)
+signal keybind_change(flag: bool) ## Change setting indicator
 
+var _start_keybinds: Dictionary[String, String] ## Initial keybinds
+
+# Handle new keybind inputs
 func _input(event) -> void:
 	# Setting new keybind
 	if (_update_keybind and event is InputEventKey): # Only allow keyboard inputs
@@ -29,15 +32,16 @@ func _input(event) -> void:
 			accept_event()
 
 
-## Ensure keybind config popup isn't shown on scene entry
+# Ensure keybind config popup isn't shown on scene entry
 func _ready() -> void:
+	_start_keybinds = Settings.keybinds.duplicate()
 	keybind_popup.visible = false
 
 
 ## Gets the current keybind actions and their keycodes to populate the keybind
 ## config menu. After doing so the menu will be visible to the player.
 func _keybinds_popup() -> void:
-	InputMap.load_from_project_settings()
+	#InputMap.load_from_project_settings()
 
 	# Load a fresh popup
 	_reset_keybind_change()
@@ -113,8 +117,16 @@ func _has_keybind_conflict(key: InputEventKey) -> bool:
 func _on_change_keybind(event: InputEventKey) -> void:
 	Settings.keybinds[_action_to_remap] = var_to_str(event) # Update settings config
 	_update_input_map(event) # Update keybind immediately
-	keybind_change.emit(true) # Signal keybind change
 	_keybind_item_to_remap.find_child("Keycode").text = _format_keybind_event(event)
+	
+	for key in _start_keybinds:
+		print(_start_keybinds[key])
+		print("\n\n")
+		print(Settings.keybinds[key])
+		if _start_keybinds[key] != Settings.keybinds[key]:
+			keybind_change.emit(true) # emit true if any keybind changed
+			break
+		keybind_change.emit(false) # emit false if no keybinds are changed
 	
 	_reset_keybind_change()
 
@@ -131,6 +143,7 @@ func _reset_keybind_change() -> void:
 func _update_input_map(event: InputEvent) -> void:
 	InputMap.action_erase_events(_action_to_remap) # remove existing keybind
 	InputMap.action_add_event(_action_to_remap, event) # add new keybind
+	#InputMap.action_sav
 
 
 ## Show the keybing config popup when 'edit keybinds...' is clicked

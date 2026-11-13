@@ -15,7 +15,6 @@ func _ready() -> void:
 	difficulty.difficulty_change.connect(func(flag): _difficulty_change = flag)
 	volume.volume_change.connect(func(flag): _volume_change = flag)
 	keybind.keybind_change.connect(func(flag): _keybind_change = flag)
-	
 
 
 # The player pressing escape will initiate exiting the settings menu
@@ -100,16 +99,20 @@ func spawn_confirmation(changes: PackedStringArray) -> void:
 	_confirmation.get_label().horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_confirmation.title = "Save Changes?"
 	_confirmation.ok_button_text = "Save"
-	_confirmation.cancel_button_text = "Exit Without Saving"
+	_confirmation.cancel_button_text = "Don't Save"
 	
-	_confirmation.confirmed.connect(func():
-		Settings.save_user_config()
-		_back_to_title()
-		_confirmation.queue_free()
+	_confirmation.confirmed.connect(
+		func():
+			Settings.save_user_config()
+			_back_to_title()
+			_confirmation.queue_free()
 	) # save if user clicks 'Save'
-	_confirmation.canceled.connect(func():
-		_confirmation.queue_free()
-	) # else go back to title
+	var cancel_btn := _confirmation.get_cancel_button()
+	cancel_btn.pressed.connect(
+		func():
+			_back_to_title()
+			_confirmation.queue_free()
+	) # exit without saving if they click 'Don't Save"
 	
 	add_child(_confirmation)
 	_confirmation.popup_centered_clamped() # show _confirmation

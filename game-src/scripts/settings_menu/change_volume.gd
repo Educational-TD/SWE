@@ -1,17 +1,18 @@
 extends HBoxContainer
 
-signal volume_change(flag: bool)
+signal volume_change(flag: bool) ## Change setting indicator
 
-## Setup GUI on scene load
+var _start_volume: int ## Initial volume
+
+# Setup GUI on scene load
 func _ready() -> void:
 	# Setup volume slider and visual representation
-	var volume = Settings.volume
-	$CurrentVolumeLabel.text = "%d%%" % volume
-	$VolumeSlider.value = volume
+	_start_volume = Settings.volume
+	$CurrentVolumeLabel.text = "%d%%" % _start_volume
+	$VolumeSlider.value = _start_volume
 
 ## Handles updating the visual representation of chosen volume level
 func _on_volume_slider_value_changed(value: float) -> void:
-	var formatted := "%d%%"
 	Settings.volume = int(value)
-	$CurrentVolumeLabel.text = (formatted % value)
-	volume_change.emit(true)
+	$CurrentVolumeLabel.text = ("%d%%" % value)
+	volume_change.emit(_start_volume != value) # emit true if change, false if not
