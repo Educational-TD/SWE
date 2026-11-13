@@ -16,7 +16,7 @@ config/features=PackedStringArray("4.7", "GL Compatibility")
 
 [autoload]
 
-UserState="*uid://b8dpsdu2t6onr"
+Settings="*uid://b8dpsdu2t6onr"
 
 [display]
 

@@ -1,5 +1,4 @@
 extends Node
-class_name Settings
 ## This class is used for accessing and changing player settings.
 ##
 ## Instantiating this class loads saved player settings (if they exist).
@@ -30,22 +29,21 @@ const default_keybinds: Dictionary[String, String] = {
 	"upgrade_range": "51",
 }
 const _file_path: String = "user://user_config.cfg" ## Default save location
-
 var _settings_config: ConfigFile ## Stores loaded settings
-var difficulty: Difficulty ## Question difficulty
-var volume: int ## Volume in range of 0 - 100
-var keybinds: Dictionary[String, String] ## Game keybinds ["action": "keycode"]
+## Question difficulty
+var difficulty: Difficulty = Difficulty.GRADE_6
+## Volume in range, 0 - 100
+var volume: int = 50
+ ## Game keybinds ["action": "keycode"]
+var keybinds: Dictionary[String, String] = default_keybinds
 
-## On class construction, the player settings are loaded from the default
-## save location and assigned to this class' instance variables.
-func _init() -> void:
+## When this class is loaded the player config is loaded
+func _ready() -> void:
 	_settings_config = ConfigFile.new()
 	var err = _settings_config.load(_file_path)
 	
-	if err != OK: # if settings cannot be loaded use defaults
-		difficulty = Difficulty.GRADE_6
-		volume = 50
-		keybinds = default_keybinds.duplicate()
+	if err != OK:
+		pass # If loading config fails defaults get used
 	else: # Get current settings
 		difficulty = _settings_config.get_value(
 			"UserSettings",
