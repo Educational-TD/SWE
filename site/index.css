@@ -108,9 +108,6 @@ a {
     background-color: color-mix(in srgb, var(--secondary-accent-color) 10%, transparent);
     backdrop-filter: blur(6px);
 }
-@media (width <= 600px) {
-    
-}
 
 *:has(> .bg-image:first-child) {
     position: relative;
