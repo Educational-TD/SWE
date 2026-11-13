@@ -11,6 +11,7 @@ func _ready() -> void:
 	$DifficultySlider.max_value = Settings.Difficulty.size() - 1 # 0 indexed
 	$CurrentDifficultyLabel.text = Settings.DIFF_TO_STRING[_start_difficulty]
 	$DifficultySlider.value = _start_difficulty
+	$DifficultySlider.grab_focus()
 
 ## Handles updating the visual representation of chosen difficulty level
 func _on_difficulty_slider_value_changed(value: float) -> void:

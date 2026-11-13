@@ -6,19 +6,16 @@ var SCENES = {
 }
 
 
-func is_left_click(event: InputEvent) -> bool:
+func _ready() -> void:
+	$MarginContainer/VBoxContainer/MenuOptions/NewGame.grab_focus()
+
+func _on_new_game_gui_input(event: InputEvent) -> void:
 	if (
-		event is InputEventMouseButton 
+		Input.is_action_just_pressed("ui_accept")
+		or event is InputEventMouseButton 
 		and event.button_index == MOUSE_BUTTON_LEFT
 		and event.is_pressed()
 	):
-		return true
-	else:
-		return false
-
-
-func _on_new_game_gui_input(event: InputEvent) -> void:
-	if (is_left_click(event)):
 		fade_hello_world()
 		print("Hello World")
 
@@ -33,7 +30,12 @@ func fade_hello_world() -> void:
 
 
 func _on_settings_gui_input(event: InputEvent) -> void:
-	if (is_left_click(event)):
+	if (
+		Input.is_action_just_pressed("ui_accept")
+		or event is InputEventMouseButton 
+		and event.button_index == MOUSE_BUTTON_LEFT
+		and event.is_pressed()
+	):
 		transition_scene(SCENES["settings"])
 
 

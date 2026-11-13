@@ -58,6 +58,9 @@ theme_override_constants/separation = 12
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
+focus_neighbor_top = NodePath("../Credits")
+focus_neighbor_bottom = NodePath("../Settings")
+focus_mode = 2
 mouse_filter = 0
 text = "New Game"
 
@@ -65,6 +68,9 @@ text = "New Game"
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
+focus_neighbor_top = NodePath("../NewGame")
+focus_neighbor_bottom = NodePath("../Scoreboard")
+focus_mode = 2
 mouse_filter = 0
 text = "Settings"
 
@@ -72,6 +78,9 @@ text = "Settings"
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
+focus_neighbor_top = NodePath("../Settings")
+focus_neighbor_bottom = NodePath("../Credits")
+focus_mode = 2
 mouse_filter = 0
 text = "Scoreboard"
 
@@ -79,6 +88,9 @@ text = "Scoreboard"
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
+focus_neighbor_top = NodePath("../Scoreboard")
+focus_neighbor_bottom = NodePath("../NewGame")
+focus_mode = 2
 mouse_filter = 0
 text = "Credits"
 

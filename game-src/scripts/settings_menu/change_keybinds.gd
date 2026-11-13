@@ -26,7 +26,7 @@ func _input(event) -> void:
 		else:
 			_keybind_item_to_remap.shake() # Indicate invalid keybind
 	# Exiting popup
-	if Input.is_action_just_pressed("escape"):
+	if Input.is_action_just_pressed("ui_cancel"):
 		if keybind_popup.visible == true:
 			keybind_popup.visible = false
 			accept_event()
@@ -82,23 +82,6 @@ func _format_keybind_event(event: InputEvent) -> String:
 	return event.as_text().trim_suffix(" - Physical")
 
 
-func is_left_click(event: InputEvent) -> bool:
-	if (
-		event is InputEventMouseButton 
-		and event.button_index == MOUSE_BUTTON_LEFT
-		and event.is_pressed()
-	):
-		return true
-	else:
-		return false
-
-
-## Hides the keybind config popup when the 'back' label is clicked
-func _on_keybind_popup_back_gui_input(event: InputEvent) -> void:
-	if is_left_click(event):
-		keybind_popup.visible = false
-
-
 ## Validate if a given key is already bound
 ##
 ## key - The new keybind
@@ -145,8 +128,23 @@ func _update_input_map(event: InputEvent) -> void:
 	InputMap.action_add_event(_action_to_remap, event) # add new keybind
 	#InputMap.action_sav
 
+## Hides the keybind config popup when the 'back' label is clicked
+func _on_keybind_popup_back_gui_input(event: InputEvent) -> void:
+	if (
+		Input.is_action_just_pressed("ui_accept")
+		or event is InputEventMouseButton 
+		and event.button_index == MOUSE_BUTTON_LEFT
+		and event.is_pressed()
+	):
+		keybind_popup.visible = false
+
 
 ## Show the keybing config popup when 'edit keybinds...' is clicked
 func _on_keybind_menu_gui_input(event: InputEvent) -> void:
-	if is_left_click(event):
+	if (
+		Input.is_action_just_pressed("ui_accept")
+		or event is InputEventMouseButton 
+		and event.button_index == MOUSE_BUTTON_LEFT
+		and event.is_pressed()
+	):
 		_keybinds_popup()

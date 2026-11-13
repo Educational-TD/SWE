@@ -72,6 +72,7 @@ custom_minimum_size = Vector2(320, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.0
+focus_neighbor_bottom = NodePath("../../VolumeHBox/VolumeSlider")
 theme_override_styles/grabber_area = SubResource("StyleBoxEmpty_5p8wc")
 theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_r6d6q")
 tick_count = 3
@@ -101,6 +102,8 @@ custom_minimum_size = Vector2(320, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.0
+focus_neighbor_top = NodePath("../../DifficultyHBox/DifficultySlider")
+focus_neighbor_bottom = NodePath("../../KeybindHBox/KeybindMenu")
 tick_count = 5
 ticks_on_borders = true
 ticks_position = 3
@@ -120,6 +123,10 @@ size_flags_horizontal = 3
 
 [node name="KeybindMenu" type="Label" parent="MarginContainer/VBoxContainer/KeybindHBox" unique_id=1134325659]
 layout_mode = 2
+focus_neighbor_left = NodePath("../../SaveHBox/BackLabel")
+focus_neighbor_top = NodePath("../../VolumeHBox/VolumeSlider")
+focus_neighbor_bottom = NodePath("../../SaveHBox/SaveLabel")
+focus_mode = 2
 mouse_filter = 0
 text = "Edit Keybinds..."
 
@@ -129,6 +136,9 @@ size_flags_vertical = 10
 
 [node name="BackLabel" type="Label" parent="MarginContainer/VBoxContainer/SaveHBox" unique_id=1791434890]
 layout_mode = 2
+focus_neighbor_top = NodePath("../../KeybindHBox/KeybindMenu")
+focus_neighbor_right = NodePath("../SaveLabel")
+focus_mode = 2
 mouse_filter = 0
 text = "Back"
 
@@ -138,6 +148,9 @@ size_flags_horizontal = 3
 
 [node name="SaveLabel" type="Label" parent="MarginContainer/VBoxContainer/SaveHBox" unique_id=1552765307]
 layout_mode = 2
+focus_neighbor_left = NodePath("../BackLabel")
+focus_neighbor_top = NodePath("../../KeybindHBox/KeybindMenu")
+focus_mode = 2
 mouse_filter = 0
 text = "Save Settings"
 

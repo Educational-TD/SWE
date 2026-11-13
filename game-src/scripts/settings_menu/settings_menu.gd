@@ -19,9 +19,8 @@ func _ready() -> void:
 
 # The player pressing escape will initiate exiting the settings menu
 func _input(event: InputEvent) -> void:
-	
 	# Exiting menus
-	if Input.is_action_just_pressed("escape"):
+	if Input.is_action_just_pressed("ui_cancel"):
 		print(_volume_change)
 		var changes = _settings_unsaved()
 		if changes.size() > 0:
@@ -31,44 +30,6 @@ func _input(event: InputEvent) -> void:
 				accept_event()
 		else:
 			_back_to_title()
-
-
-## Handler for when player clicks the 'Back' button
-func _on_back_label_gui_input(event: InputEvent) -> void:
-	if is_left_click(event):
-		var changes = _settings_unsaved()
-		if changes.size() > 0:
-			spawn_confirmation(changes)
-		else:
-			_back_to_title()
-
-
-## Handler for when the player clicks the 'Save' button
-func _on_save_label_gui_input(event: InputEvent) -> void:
-	if is_left_click(event):
-		Settings.save_user_config()
-		#_changes_unsaved.fill(false)
-		_back_to_title() # TODO: decide if saving should go back to title
-
-
-## Validates if an event is a left mouse click
-##
-## event - The GUI input event
-## returns true if the event is a left click, false otherwise
-func is_left_click(event: InputEvent) -> bool:
-	if (
-		event is InputEventMouseButton
-		and event.button_index == MOUSE_BUTTON_LEFT
-		and event.is_pressed()
-	):
-		return true
-	else:
-		return false
-
-
-## Change the scene back to the title menu
-func _back_to_title() -> void:
-	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
 
 
 ## Compares settings node values with currently saved settings.
@@ -116,3 +77,35 @@ func spawn_confirmation(changes: PackedStringArray) -> void:
 	
 	add_child(_confirmation)
 	_confirmation.popup_centered_clamped() # show _confirmation
+
+
+## Change the scene back to the title menu
+func _back_to_title() -> void:
+	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
+
+
+## Handler for when the player clicks the 'Save' button
+func _on_save_label_gui_input(event: InputEvent) -> void:
+	if (
+		Input.is_action_just_pressed("ui_accept")
+		or event is InputEventMouseButton 
+		and event.button_index == MOUSE_BUTTON_LEFT
+		and event.is_pressed()
+	):
+		Settings.save_user_config()
+		_back_to_title()
+
+
+## Handler for when player clicks the 'Back' button
+func _on_back_label_gui_input(event: InputEvent) -> void:
+	if (
+		Input.is_action_just_pressed("ui_accept")
+		or event is InputEventMouseButton 
+		and event.button_index == MOUSE_BUTTON_LEFT
+		and event.is_pressed()
+	):
+		var changes = _settings_unsaved()
+		if changes.size() > 0:
+			spawn_confirmation(changes)
+		else:
+			_back_to_title()
