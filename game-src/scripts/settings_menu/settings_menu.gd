@@ -1,12 +1,6 @@
 extends Control
 ## This script handles all player interaction within the settings menu
 
-# Difficulty nodes
-@onready var _difficulty_hbox: HBoxContainer = $MarginContainer/VBoxContainer/DifficultyHBox
-## Slider used to change the difficulty setting
-@onready var difficulty_slider: HSlider = _difficulty_hbox.get_node("DifficultySlider")
-## Visually represents the difficulty level
-@onready var current_difficulty: Label = _difficulty_hbox.get_node("CurrentDifficultyLabel")
 # Keybind nodes
 ## Keybind popup menu
 @onready var keybind_popup: Control = $KeybindPopup
@@ -26,12 +20,6 @@ var _changes_unsaved: Array[bool] = [false, false, false] ## flags indicating if
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	# Setup difficulty slider and visual representation
-	var diff = Settings.difficulty # Current or default difficulty
-	difficulty_slider.max_value = Difficulty.size() - 1 # 0 indexed
-	current_difficulty.text = Settings.DIFF_TO_STRING[diff]
-	difficulty_slider.value = diff
-
 	# Setup keybinds menu
 	keybind_popup.visible = false # ensure keybind popup begins hidden
 	
@@ -60,13 +48,6 @@ func _input(event: InputEvent) -> void:
 				_back_to_title()
 
 # ------- setting change handlers ------- #
-
-## Handles updating the visual representation of chosen difficulty level
-func _on_difficulty_slider_value_changed(value: float) -> void:
-	var selected: Difficulty = int(value) as Difficulty
-	Settings.difficulty = selected
-	current_difficulty.text = Settings.DIFF_TO_STRING[selected]
-	_changes_unsaved[0] = true
 
 func _on_change_keybind(event: InputEventKey) -> void:
 	Settings.keybinds[_action_to_remap] = var_to_str(event)

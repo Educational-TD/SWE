@@ -1,7 +1,6 @@
 extends HBoxContainer
 
-#signal volume_changed
-
+## Setup GUI on scene load
 func _ready() -> void:
 	# Setup volume slider and visual representation
 	var volume = Settings.volume
@@ -13,4 +12,3 @@ func _on_volume_slider_value_changed(value: float) -> void:
 	var formatted := "%d%%"
 	Settings.volume = int(value)
 	$CurrentVolumeLabel.text = (formatted % value)
-	#_changes_unsaved[1] = true
