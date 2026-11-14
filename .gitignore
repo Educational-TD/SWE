@@ -1,8 +1,1 @@
-# LaTeX outpout files
-*.aux
-*.log
-*.out
-*.pdf
-*.synctex.gz
-*.fdb_latexmk
-*.fls
+!documents/*
