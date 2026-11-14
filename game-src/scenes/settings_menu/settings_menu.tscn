@@ -12,7 +12,14 @@
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r6d6q"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wswnh"]
-bg_color = Color(0.16745102, 0.16745105, 0.16745093, 1)
+bg_color = Color(0.3529412, 0.47058824, 0.5058824, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+corner_detail = 16
+shadow_color = Color(0, 0, 0, 0.12900001)
+shadow_size = 2
 
 [node name="Control" type="Control" unique_id=800033000]
 layout_mode = 3
@@ -163,7 +170,6 @@ text = "Save Settings"
 
 [node name="KeybindPopup" type="Control" parent="." unique_id=830721836]
 unique_name_in_owner = true
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

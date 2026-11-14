@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://b8qnlkcy5bkf" path="res://scripts/settings_menu/keybind_item.gd" id="1_d38se"]
 
 [node name="KeybindItem" type="Button" unique_id=1010215126]
+self_modulate = Color(1, 1, 1, 0.5)
 custom_minimum_size = Vector2(0, 20)
 anchors_preset = 10
 anchor_right = 1.0
