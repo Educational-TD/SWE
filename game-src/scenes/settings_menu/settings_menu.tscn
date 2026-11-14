@@ -1,0 +1,227 @@
+[gd_scene format=3 uid="uid://dmhf23eymv0gb"]
+
+[ext_resource type="Script" uid="uid://cdn316455ctts" path="res://scripts/settings_menu/settings_menu.gd" id="1_05p07"]
+[ext_resource type="PackedScene" uid="uid://dkqvcap8snwrq" path="res://scenes/menu_background/menu_backgound.tscn" id="2_bsihy"]
+[ext_resource type="PackedScene" uid="uid://i1xgnyc1rl6t" path="res://scenes/settings_menu/keybind_item.tscn" id="2_cr101"]
+[ext_resource type="Script" uid="uid://8tf1jjw3au2d" path="res://scripts/settings_menu/change_difficulty.gd" id="2_j2s20"]
+[ext_resource type="Script" uid="uid://tl67vek78xhp" path="res://scripts/settings_menu/change_volume.gd" id="2_vlvk0"]
+[ext_resource type="Script" uid="uid://b5efd61vj3xoh" path="res://scripts/settings_menu/change_keybinds.gd" id="4_5sljs"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5p8wc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r6d6q"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wswnh"]
+bg_color = Color(0.3529412, 0.47058824, 0.5058824, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+corner_detail = 16
+shadow_color = Color(0, 0, 0, 0.12900001)
+shadow_size = 2
+
+[node name="Control" type="Control" unique_id=800033000]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_05p07")
+
+[node name="MenuBackground" parent="." unique_id=835496907 instance=ExtResource("2_bsihy")]
+layout_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=829188091]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 11.0
+offset_top = 23.0
+offset_right = 11.0
+offset_bottom = 23.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 180
+theme_override_constants/margin_top = 90
+theme_override_constants/margin_right = 180
+theme_override_constants/margin_bottom = 90
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=779249188]
+layout_mode = 2
+
+[node name="HeaderLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1471419085]
+layout_mode = 2
+size_flags_vertical = 6
+size_flags_stretch_ratio = 0.5
+text = "Settings"
+horizontal_alignment = 1
+
+[node name="DifficultyHBox" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1932257124]
+layout_mode = 2
+size_flags_vertical = 4
+script = ExtResource("2_j2s20")
+
+[node name="DifficultyLabel" type="Label" parent="MarginContainer/VBoxContainer/DifficultyHBox" unique_id=1256636850]
+layout_mode = 2
+size_flags_horizontal = 2
+text = "Difficulty"
+
+[node name="CurrentDifficultyLabel" type="Label" parent="MarginContainer/VBoxContainer/DifficultyHBox" unique_id=1225882706]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="DifficultySlider" type="HSlider" parent="MarginContainer/VBoxContainer/DifficultyHBox" unique_id=221637054]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+focus_neighbor_bottom = NodePath("../../VolumeHBox/VolumeSlider")
+theme_override_styles/grabber_area = SubResource("StyleBoxEmpty_5p8wc")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_r6d6q")
+tick_count = 3
+ticks_on_borders = true
+ticks_position = 3
+
+[node name="VolumeHBox" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1986397624]
+layout_mode = 2
+size_flags_vertical = 4
+script = ExtResource("2_vlvk0")
+
+[node name="VolumeLabel" type="Label" parent="MarginContainer/VBoxContainer/VolumeHBox" unique_id=74578595]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Volume"
+
+[node name="CurrentVolumeLabel" type="Label" parent="MarginContainer/VBoxContainer/VolumeHBox" unique_id=1102212221]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="VolumeSlider" type="HSlider" parent="MarginContainer/VBoxContainer/VolumeHBox" unique_id=1012710301]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+focus_neighbor_top = NodePath("../../DifficultyHBox/DifficultySlider")
+focus_neighbor_bottom = NodePath("../../KeybindHBox/KeybindMenu")
+max_value = 1.0
+step = 0.01
+tick_count = 5
+ticks_on_borders = true
+ticks_position = 3
+
+[node name="KeybindHBox" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=2043701880]
+layout_mode = 2
+size_flags_vertical = 4
+script = ExtResource("4_5sljs")
+
+[node name="KeybindLabel" type="Label" parent="MarginContainer/VBoxContainer/KeybindHBox" unique_id=625236349]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Keybinds"
+
+[node name="DefaultsLabel" type="Label" parent="MarginContainer/VBoxContainer/KeybindHBox" unique_id=1197781190]
+layout_mode = 2
+focus_neighbor_left = NodePath("../KeybindMenu")
+focus_neighbor_top = NodePath("../../VolumeHBox/VolumeSlider")
+focus_neighbor_right = NodePath("../KeybindMenu")
+focus_neighbor_bottom = NodePath("../../SaveHBox/SaveLabel")
+focus_mode = 2
+mouse_filter = 0
+text = "Reset Keybinds"
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/KeybindHBox" unique_id=2067462356]
+layout_mode = 2
+text = "|"
+
+[node name="KeybindMenu" type="Label" parent="MarginContainer/VBoxContainer/KeybindHBox" unique_id=1134325659]
+layout_mode = 2
+focus_neighbor_left = NodePath("../DefaultsLabel")
+focus_neighbor_top = NodePath("../../VolumeHBox/VolumeSlider")
+focus_neighbor_right = NodePath("../DefaultsLabel")
+focus_neighbor_bottom = NodePath("../../SaveHBox/SaveLabel")
+focus_mode = 2
+mouse_filter = 0
+text = "Edit Keybinds..."
+
+[node name="SaveHBox" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1741418241]
+layout_mode = 2
+size_flags_vertical = 10
+
+[node name="BackLabel" type="Label" parent="MarginContainer/VBoxContainer/SaveHBox" unique_id=1791434890]
+layout_mode = 2
+size_flags_horizontal = 2
+focus_neighbor_top = NodePath("../../KeybindHBox/KeybindMenu")
+focus_neighbor_right = NodePath("../SaveLabel")
+focus_mode = 2
+mouse_filter = 0
+text = "Back"
+
+[node name="SaveLabel" type="Label" parent="MarginContainer/VBoxContainer/SaveHBox" unique_id=1552765307]
+layout_mode = 2
+size_flags_horizontal = 8
+focus_neighbor_left = NodePath("../BackLabel")
+focus_neighbor_top = NodePath("../../KeybindHBox/KeybindMenu")
+focus_mode = 2
+mouse_filter = 0
+text = "Save Settings"
+
+[node name="KeybindPopup" type="Control" parent="." unique_id=830721836]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="KeybindPopup" unique_id=454691774]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -202.0
+offset_top = -119.0
+offset_right = 202.0
+offset_bottom = 119.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_wswnh")
+
+[node name="MarginContainer" type="MarginContainer" parent="KeybindPopup/PanelContainer" unique_id=2110194498]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 30
+
+[node name="KeybindItemList" type="VBoxContainer" parent="KeybindPopup/PanelContainer/MarginContainer" unique_id=1394915718]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="KeybindItem" parent="KeybindPopup/PanelContainer/MarginContainer/KeybindItemList" unique_id=1010215126 instance=ExtResource("2_cr101")]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+
+[node name="KeybindPopupBack" type="Label" parent="KeybindPopup/PanelContainer/MarginContainer" unique_id=552501617]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+focus_mode = 2
+mouse_filter = 0
+text = "Back"
+
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/DifficultyHBox/DifficultySlider" to="MarginContainer/VBoxContainer/DifficultyHBox" method="_on_difficulty_slider_value_changed"]
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/VolumeHBox/VolumeSlider" to="MarginContainer/VBoxContainer/VolumeHBox" method="_on_volume_slider_value_changed"]
+[connection signal="gui_input" from="MarginContainer/VBoxContainer/KeybindHBox/DefaultsLabel" to="MarginContainer/VBoxContainer/KeybindHBox" method="_on_defaults_label_gui_input"]
+[connection signal="gui_input" from="MarginContainer/VBoxContainer/KeybindHBox/KeybindMenu" to="MarginContainer/VBoxContainer/KeybindHBox" method="_on_keybind_menu_gui_input"]
+[connection signal="gui_input" from="MarginContainer/VBoxContainer/SaveHBox/BackLabel" to="." method="_on_back_label_gui_input"]
+[connection signal="gui_input" from="MarginContainer/VBoxContainer/SaveHBox/SaveLabel" to="." method="_on_save_label_gui_input"]
+[connection signal="hidden" from="KeybindPopup" to="MarginContainer/VBoxContainer/KeybindHBox" method="_on_keybind_popup_hidden"]
+[connection signal="visibility_changed" from="KeybindPopup" to="MarginContainer/VBoxContainer/KeybindHBox" method="_on_keybind_popup_visibility_changed"]
+[connection signal="gui_input" from="KeybindPopup/PanelContainer/MarginContainer/KeybindPopupBack" to="MarginContainer/VBoxContainer/KeybindHBox" method="_on_keybind_popup_back_gui_input"]
