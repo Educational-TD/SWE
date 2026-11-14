@@ -303,6 +303,10 @@ ul#bibliography {
         flex: 1;
         margin-left: 2rem;
 
+        & > h3 {
+            min-height: 2lh;
+        }
+
         & > ul {
             list-style-type: circle;
         }
