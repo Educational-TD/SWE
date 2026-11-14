@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dmhf23eymv0gb"]
 
 [ext_resource type="Script" uid="uid://cdn316455ctts" path="res://scripts/settings_menu/settings_menu.gd" id="1_05p07"]
+[ext_resource type="PackedScene" uid="uid://dkqvcap8snwrq" path="res://scenes/menu_background/menu_backgound.tscn" id="2_bsihy"]
 [ext_resource type="PackedScene" uid="uid://i1xgnyc1rl6t" path="res://scenes/settings_menu/keybind_item.tscn" id="2_cr101"]
 [ext_resource type="Script" uid="uid://8tf1jjw3au2d" path="res://scripts/settings_menu/change_difficulty.gd" id="2_j2s20"]
 [ext_resource type="Script" uid="uid://tl67vek78xhp" path="res://scripts/settings_menu/change_volume.gd" id="2_vlvk0"]
@@ -21,6 +22,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_05p07")
+
+[node name="MenuBackground" parent="." unique_id=835496907 instance=ExtResource("2_bsihy")]
+layout_mode = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=829188091]
 layout_mode = 1
@@ -43,7 +47,7 @@ layout_mode = 2
 
 [node name="HeaderLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1471419085]
 layout_mode = 2
-size_flags_vertical = 2
+size_flags_vertical = 6
 size_flags_stretch_ratio = 0.5
 text = "Settings"
 horizontal_alignment = 1

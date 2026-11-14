@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://33k1fu103tyb"]
 
 [ext_resource type="Script" uid="uid://qayhru2o3646" path="res://scripts/main_menu.gd" id="1_l6cm7"]
+[ext_resource type="PackedScene" uid="uid://dkqvcap8snwrq" path="res://scenes/menu_background/menu_backgound.tscn" id="2_ekxnf"]
 
 [node name="Control" type="Control" unique_id=1764844499]
 layout_mode = 3
@@ -10,6 +11,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_l6cm7")
+
+[node name="MenuBackground" parent="." unique_id=835496907 instance=ExtResource("2_ekxnf")]
+layout_mode = 1
 
 [node name="HelloWorld" type="Label" parent="." unique_id=1068841649]
 self_modulate = Color(1, 1, 1, 0)
