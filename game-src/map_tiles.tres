@@ -1,6 +1,6 @@
 [gd_resource type="TileSet" format=3 uid="uid://c36vnycwxo04i"]
 
-[ext_resource type="Texture2D" uid="uid://b2ys87mlf8w8j" path="res://map_tiles.svg" id="1_oadck"]
+[ext_resource type="Texture2D" uid="uid://b2ys87mlf8w8j" path="res://sprites/map_tiles.svg" id="1_oadck"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_paxxb"]
 resource_name = "map_tiles"

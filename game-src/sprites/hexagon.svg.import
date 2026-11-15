@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://4k3od4ffdbly"
-path="res://.godot/imported/ship.svg-b5ef03cb39b509d8bae0e1546d07cd6a.ctex"
+uid="uid://orlf5bl1q27r"
+path="res://.godot/imported/hexagon.svg-0bafc5197b1fcd4338ef4452aa3d6c8d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ship.svg"
-dest_files=["res://.godot/imported/ship.svg-b5ef03cb39b509d8bae0e1546d07cd6a.ctex"]
+source_file="res://sprites/hexagon.svg"
+dest_files=["res://.godot/imported/hexagon.svg-0bafc5197b1fcd4338ef4452aa3d6c8d.ctex"]
 
 [params]
 

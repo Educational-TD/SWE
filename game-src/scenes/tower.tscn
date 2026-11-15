@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://ugcnl5hq67ne"]
 
-[ext_resource type="Texture2D" uid="uid://4k3od4ffdbly" path="res://ship.svg" id="1_2x682"]
-[ext_resource type="Texture2D" uid="uid://bailfd4d7wfx2" path="res://sail.svg" id="2_ay4al"]
+[ext_resource type="Texture2D" uid="uid://4k3od4ffdbly" path="res://sprites/ship.svg" id="1_2x682"]
+[ext_resource type="Texture2D" uid="uid://bailfd4d7wfx2" path="res://sprites/sail.svg" id="2_ay4al"]
 
 [node name="Tower" type="Node2D" unique_id=1694556828]
 

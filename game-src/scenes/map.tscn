@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://cdte5ovofw1qd"]
 
 [ext_resource type="TileSet" uid="uid://c36vnycwxo04i" path="res://map_tiles.tres" id="1_4xfga"]
-[ext_resource type="Texture2D" uid="uid://b2ys87mlf8w8j" path="res://map_tiles.svg" id="2_gldc4"]
+[ext_resource type="Texture2D" uid="uid://b2ys87mlf8w8j" path="res://sprites/map_tiles.svg" id="2_gldc4"]
 [ext_resource type="PackedScene" uid="uid://ugcnl5hq67ne" path="res://scenes/tower.tscn" id="2_paxxb"]
 [ext_resource type="Script" uid="uid://bpdh46ftrgd17" path="res://scripts/map/path.gd" id="3_0cso3"]
 
