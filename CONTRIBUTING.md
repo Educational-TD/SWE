@@ -15,7 +15,7 @@
     cd ./SWE
     ```
 
-3) Setup your local git config
+3) Setup your git config
 
     If you'd like your commits to be linked to your GitHub account then use the same email associated with your account.
 
@@ -24,6 +24,16 @@
     ```bash
     git config add --global user.name "Your Name"
     git config add --global user.email "yourEmail@provider.com"
+    ```
+
+4) Install git lfs
+
+    Follow [the instructions](https://git-lfs.com/) for installing git large file storage for your operating system.
+
+    After doing so, run the following command to finish setup (this only needs to be done once).
+
+    ```bash
+    git lfs install
     ```
 
 ## Workflow
