@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://cv2t3dr3tgajo"]
 
+[ext_resource type="Script" uid="uid://cgqsipiintsy1" path="res://scripts/credits_display/return_title_screen_btn.gd" id="1_e2qjs"]
+
 [node name="CreditsScene" type="Control" unique_id=397347171]
 layout_mode = 3
 anchors_preset = 15
@@ -20,74 +22,107 @@ theme_override_constants/margin_top = 90
 theme_override_constants/margin_right = 180
 theme_override_constants/margin_bottom = 90
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1932958289]
-layout_mode = 2
-theme_override_constants/separation = 25
-
-[node name="Title" type="Label" parent="MarginContainer/VBoxContainer" unique_id=79237877]
+[node name="Title" type="Label" parent="MarginContainer" unique_id=79237877]
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 6
+size_flags_vertical = 2
+theme_override_font_sizes/font_size = 20
 text = "credits"
 uppercase = true
 
-[node name="Developers" type="VBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=800579644]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=1564993816]
 layout_mode = 2
-size_flags_horizontal = 4
+theme_override_constants/separation = 75
+
+[node name="developers_vbox" type="VBoxContainer" parent="MarginContainer/HBoxContainer" unique_id=800579644]
+layout_mode = 2
+size_flags_horizontal = 0
 size_flags_vertical = 6
 theme_override_constants/separation = 12
 
-[node name="Dev_Title" type="Label" parent="MarginContainer/VBoxContainer/Developers" unique_id=1306704103]
+[node name="dev_title" type="Label" parent="MarginContainer/HBoxContainer/developers_vbox" unique_id=1306704103]
 layout_mode = 2
+theme_override_font_sizes/font_size = 20
 text = "Developers"
 horizontal_alignment = 1
 uppercase = true
 max_lines_visible = 1
 
-[node name="Dev1" type="Label" parent="MarginContainer/VBoxContainer/Developers" unique_id=883510666]
+[node name="dev_1" type="Label" parent="MarginContainer/HBoxContainer/developers_vbox" unique_id=883510666]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
 mouse_filter = 0
 text = "Aurora Theriault"
 
-[node name="Dev2" type="Label" parent="MarginContainer/VBoxContainer/Developers" unique_id=1123078399]
+[node name="dev_2" type="Label" parent="MarginContainer/HBoxContainer/developers_vbox" unique_id=1123078399]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
 mouse_filter = 0
 text = "Leo Dang"
 
-[node name="Dev3" type="Label" parent="MarginContainer/VBoxContainer/Developers" unique_id=534083429]
+[node name="dev_3" type="Label" parent="MarginContainer/HBoxContainer/developers_vbox" unique_id=534083429]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
 mouse_filter = 0
 text = "Marcus Hernandez"
 
-[node name="Dev4" type="Label" parent="MarginContainer/VBoxContainer/Developers" unique_id=145117315]
+[node name="dev_4" type="Label" parent="MarginContainer/HBoxContainer/developers_vbox" unique_id=145117315]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
 mouse_filter = 1
 text = "Quinlin Taylor"
 
-[node name="References" type="VBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=729103218]
+[node name="references_vbox" type="VBoxContainer" parent="MarginContainer/HBoxContainer" unique_id=729103218]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
 theme_override_constants/separation = 12
 
-[node name="Ref_Title" type="Label" parent="MarginContainer/VBoxContainer/References" unique_id=1456919089]
+[node name="ref_title" type="Label" parent="MarginContainer/HBoxContainer/references_vbox" unique_id=1456919089]
 layout_mode = 2
+theme_override_font_sizes/font_size = 20
 text = "References"
 horizontal_alignment = 1
 uppercase = true
 max_lines_visible = 1
 
-[node name="Ref1" type="Label" parent="MarginContainer/VBoxContainer/References" unique_id=749320952]
+[node name="ref_1" type="Label" parent="MarginContainer/HBoxContainer/references_vbox" unique_id=749320952]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
 mouse_filter = 0
 text = "Map Design - https://kenney.nl/"
+
+[node name="acknowledgments_vbox" type="VBoxContainer" parent="MarginContainer/HBoxContainer" unique_id=1493387490]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 6
+theme_override_constants/separation = 12
+
+[node name="ack_title" type="Label" parent="MarginContainer/HBoxContainer/acknowledgments_vbox" unique_id=575455726]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Acknowledgements"
+horizontal_alignment = 1
+uppercase = true
+max_lines_visible = 1
+
+[node name="ack_1" type="Label" parent="MarginContainer/HBoxContainer/acknowledgments_vbox" unique_id=94841040]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+mouse_filter = 0
+text = "Dr. Daly"
+
+[node name="return_title_screen_btn" type="Button" parent="MarginContainer" unique_id=1696672480]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+text = "Title Screen"
+script = ExtResource("1_e2qjs")
+
+[connection signal="pressed" from="MarginContainer/return_title_screen_btn" to="MarginContainer/return_title_screen_btn" method="_on_pressed"]
