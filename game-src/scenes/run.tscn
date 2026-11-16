@@ -52,7 +52,7 @@ grow_vertical = 2
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="Bottom/BottomInfo/SelectedShipDisplay" unique_id=1425785615]
+[node name="Box" type="TextureRect" parent="Bottom/BottomInfo/SelectedShipDisplay" unique_id=1425785615]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -65,7 +65,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_8xxqn")
 
-[node name="Ship" type="TextureRect" parent="Bottom/BottomInfo/SelectedShipDisplay/TextureRect" unique_id=1141562850]
+[node name="Ship" type="TextureRect" parent="Bottom/BottomInfo/SelectedShipDisplay/Box" unique_id=1141562850]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -261,7 +261,7 @@ fit_content = true
 autowrap_mode = 0
 horizontal_alignment = 1
 
-[node name="ProgressBar" type="ProgressBar" parent="Right/RightInfo" unique_id=1116730491]
+[node name="LifeBar" type="ProgressBar" parent="Right/RightInfo" unique_id=1116730491]
 layout_mode = 2
 size_flags_vertical = 3
 offset_transform_enabled = true
