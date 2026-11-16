@@ -10,6 +10,6 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
-
+# Returns the user back to title screen when title screen button is pressed
 func _on_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")

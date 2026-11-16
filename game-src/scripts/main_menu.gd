@@ -16,7 +16,7 @@ func fade_hello_world() -> void:
 	tween.tween_interval(1.0) # sleep 1 sec
 	tween.tween_property($HelloWorld, "self_modulate:a", 0, 1.0) # fade out
 
-# Credits inputEvent	
+# Credits inputEvent function to bring user to credit scene when credits is pressed	
 func _on_credits_gui_input(event: InputEvent) -> void:
 	if (
 		event is InputEventMouseButton 
