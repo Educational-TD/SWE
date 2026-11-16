@@ -23,4 +23,4 @@ func _on_credits_gui_input(event: InputEvent) -> void:
 		and event.button_index == MOUSE_BUTTON_LEFT
 		and event.is_pressed()
 	):
-		get_tree().change_scene_to_file("res://scenes/credits_display/credits_display.tscn")
+		get_tree().change_scene_to_file("res://scenes/credits_screen/credits_screen.tscn")
