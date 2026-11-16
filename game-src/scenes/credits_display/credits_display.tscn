@@ -1,0 +1,113 @@
+[gd_scene format=3 uid="uid://cv2t3dr3tgajo"]
+
+[node name="CreditsScene" type="Control" unique_id=397347171]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1123700986]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 180
+theme_override_constants/margin_top = 90
+theme_override_constants/margin_right = 180
+theme_override_constants/margin_bottom = 90
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1932958289]
+layout_mode = 2
+
+[node name="Developers2" type="VBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=729103218]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 6
+theme_override_constants/separation = 12
+
+[node name="Dev_Title" type="Label" parent="MarginContainer/VBoxContainer/Developers2" unique_id=1456919089]
+layout_mode = 2
+text = "Developers"
+horizontal_alignment = 1
+uppercase = true
+max_lines_visible = 1
+
+[node name="Dev1" type="Label" parent="MarginContainer/VBoxContainer/Developers2" unique_id=749320952]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+mouse_filter = 0
+text = "Aurora Theriault"
+
+[node name="Dev2" type="Label" parent="MarginContainer/VBoxContainer/Developers2" unique_id=1510824012]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+mouse_filter = 0
+text = "Leo Dang"
+
+[node name="Dev3" type="Label" parent="MarginContainer/VBoxContainer/Developers2" unique_id=87384954]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+mouse_filter = 0
+text = "Marcus Hernandez"
+
+[node name="Dev4" type="Label" parent="MarginContainer/VBoxContainer/Developers2" unique_id=526226638]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+mouse_filter = 1
+text = "Quinlin Taylor"
+
+[node name="Title" type="Label" parent="MarginContainer/VBoxContainer" unique_id=79237877]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+text = "credits"
+uppercase = true
+
+[node name="Developers" type="VBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=800579644]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 6
+theme_override_constants/separation = 12
+
+[node name="Dev_Title" type="Label" parent="MarginContainer/VBoxContainer/Developers" unique_id=1306704103]
+layout_mode = 2
+text = "Developers"
+horizontal_alignment = 1
+uppercase = true
+max_lines_visible = 1
+
+[node name="Dev1" type="Label" parent="MarginContainer/VBoxContainer/Developers" unique_id=883510666]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+mouse_filter = 0
+text = "Aurora Theriault"
+
+[node name="Dev2" type="Label" parent="MarginContainer/VBoxContainer/Developers" unique_id=1123078399]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+mouse_filter = 0
+text = "Leo Dang"
+
+[node name="Dev3" type="Label" parent="MarginContainer/VBoxContainer/Developers" unique_id=534083429]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+mouse_filter = 0
+text = "Marcus Hernandez"
+
+[node name="Dev4" type="Label" parent="MarginContainer/VBoxContainer/Developers" unique_id=145117315]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+mouse_filter = 1
+text = "Quinlin Taylor"
