@@ -22,47 +22,7 @@ theme_override_constants/margin_bottom = 90
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1932958289]
 layout_mode = 2
-
-[node name="Developers2" type="VBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=729103218]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 6
-theme_override_constants/separation = 12
-
-[node name="Dev_Title" type="Label" parent="MarginContainer/VBoxContainer/Developers2" unique_id=1456919089]
-layout_mode = 2
-text = "Developers"
-horizontal_alignment = 1
-uppercase = true
-max_lines_visible = 1
-
-[node name="Dev1" type="Label" parent="MarginContainer/VBoxContainer/Developers2" unique_id=749320952]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 6
-mouse_filter = 0
-text = "Aurora Theriault"
-
-[node name="Dev2" type="Label" parent="MarginContainer/VBoxContainer/Developers2" unique_id=1510824012]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 6
-mouse_filter = 0
-text = "Leo Dang"
-
-[node name="Dev3" type="Label" parent="MarginContainer/VBoxContainer/Developers2" unique_id=87384954]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 6
-mouse_filter = 0
-text = "Marcus Hernandez"
-
-[node name="Dev4" type="Label" parent="MarginContainer/VBoxContainer/Developers2" unique_id=526226638]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 6
-mouse_filter = 1
-text = "Quinlin Taylor"
+theme_override_constants/separation = 25
 
 [node name="Title" type="Label" parent="MarginContainer/VBoxContainer" unique_id=79237877]
 layout_mode = 2
@@ -73,7 +33,7 @@ uppercase = true
 
 [node name="Developers" type="VBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=800579644]
 layout_mode = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 4
 size_flags_vertical = 6
 theme_override_constants/separation = 12
 
@@ -111,3 +71,23 @@ size_flags_horizontal = 4
 size_flags_vertical = 6
 mouse_filter = 1
 text = "Quinlin Taylor"
+
+[node name="References" type="VBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=729103218]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme_override_constants/separation = 12
+
+[node name="Ref_Title" type="Label" parent="MarginContainer/VBoxContainer/References" unique_id=1456919089]
+layout_mode = 2
+text = "References"
+horizontal_alignment = 1
+uppercase = true
+max_lines_visible = 1
+
+[node name="Ref1" type="Label" parent="MarginContainer/VBoxContainer/References" unique_id=749320952]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+mouse_filter = 0
+text = "Map Design - https://kenney.nl/"
