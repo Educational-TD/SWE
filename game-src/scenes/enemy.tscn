@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://brhmrdto8vpcy"]
+
+[ext_resource type="Script" uid="uid://d2sigy5vabtbj" path="res://scripts/enemy/enemy.gd" id="1_7p1mj"]
+[ext_resource type="Texture2D" uid="uid://dcxdtbbh1f7ak" path="res://sprites/triangleTEMP.svg" id="2_md0e3"]
+
+[node name="Enemy" type="PathFollow2D" unique_id=48614933]
+script = ExtResource("1_7p1mj")
+
+[node name="EnemyShapeTEMP" type="Sprite2D" parent="." unique_id=1501389146]
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("2_md0e3")

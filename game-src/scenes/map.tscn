@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://b2ys87mlf8w8j" path="res://sprites/map_tiles.svg" id="2_gldc4"]
 [ext_resource type="PackedScene" uid="uid://ugcnl5hq67ne" path="res://scenes/tower.tscn" id="2_paxxb"]
 [ext_resource type="Script" uid="uid://bpdh46ftrgd17" path="res://scripts/map/path.gd" id="3_0cso3"]
+[ext_resource type="PackedScene" uid="uid://brhmrdto8vpcy" path="res://scenes/enemy.tscn" id="4_2klcf"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gldc4"]
 resource_name = "map_tiles"
@@ -1077,6 +1078,10 @@ collision_enabled = false
 [node name="Path" type="Path2D" parent="." unique_id=343171588]
 curve = SubResource("Curve2D_hrmi8")
 script = ExtResource("3_0cso3")
+
+[node name="Enemy" parent="Path" unique_id=48614933 instance=ExtResource("4_2klcf")]
+position = Vector2(200, 800)
+rotation = 0.4636476
 
 [node name="Towers" type="Node2D" parent="." unique_id=1587599338]
 

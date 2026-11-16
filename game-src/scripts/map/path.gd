@@ -5,3 +5,7 @@ extends Path2D
 
 func _draw() -> void:
 	draw_polyline(curve.get_baked_points(), path_color, path_width)
+
+
+func spawn_enemy() -> void:
+	pass
