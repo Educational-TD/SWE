@@ -1,0 +1,413 @@
+[gd_scene format=3 uid="uid://b18dtv01m0b3g"]
+
+[ext_resource type="PackedScene" uid="uid://cdte5ovofw1qd" path="res://scenes/map.tscn" id="1_hnrwf"]
+[ext_resource type="Texture2D" uid="uid://do55afjg2tq6t" path="res://sprites/menu.svg" id="2_nv0xg"]
+[ext_resource type="Texture2D" uid="uid://4k3od4ffdbly" path="res://sprites/ship.svg" id="3_wkjl6"]
+[ext_resource type="Texture2D" uid="uid://orlf5bl1q27r" path="res://sprites/hexagon.svg" id="4_8hhj8"]
+[ext_resource type="Script" uid="uid://yy5h8gbe76mr" path="res://scripts/run/upgrade.gd" id="5_e6u14"]
+[ext_resource type="Texture2D" uid="uid://br4oadyjre8sa" path="res://sprites/pause.svg" id="5_nv0xg"]
+[ext_resource type="Script" uid="uid://dp1xcpndacfds" path="res://scripts/run/resume.gd" id="6_8hhj8"]
+[ext_resource type="Script" uid="uid://bmil3jdwhntdw" path="res://scripts/run/pause.gd" id="6_brq1p"]
+[ext_resource type="Script" uid="uid://cujklx1xmitmy" path="res://scripts/run/exit_run.gd" id="6_wkjl6"]
+[ext_resource type="Script" uid="uid://d1bqbllupw2sr" path="res://scripts/run/question.gd" id="10_gk3tk"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x7644"]
+bg_color = Color(0.8995955, 0.45605642, 0.28619048, 0.654902)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rfrv7"]
+bg_color = Color(0.80784315, 0.15686275, 0.15686275, 1)
+
+[node name="RunView" type="Control" unique_id=1798593918]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Map" parent="." unique_id=815279230 instance=ExtResource("1_hnrwf")]
+position = Vector2(-10, -16)
+scale = Vector2(0.9, 0.9)
+
+[node name="Bottom" type="Control" parent="." unique_id=994029867]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -80.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Background" type="NinePatchRect" parent="Bottom" unique_id=322250688]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -13.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_nv0xg")
+region_rect = Rect2(32, 0, 192, 224)
+
+[node name="SelectedShipDisplay" type="NinePatchRect" parent="Bottom" unique_id=139811998]
+custom_minimum_size = Vector2(200, 150)
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_bottom = 1.0
+grow_vertical = 0
+texture = ExtResource("2_nv0xg")
+region_rect = Rect2(32, 0, 224, 224)
+
+[node name="Ship" type="TextureRect" parent="Bottom/SelectedShipDisplay" unique_id=1141562850]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 22.0
+offset_right = -29.0
+grow_horizontal = 2
+grow_vertical = 2
+offset_transform_enabled = true
+offset_transform_scale = Vector2(0.9, 0.9)
+offset_transform_rotation = -1.7418386
+texture = ExtResource("3_wkjl6")
+stretch_mode = 3
+
+[node name="Upgrades" type="HBoxContainer" parent="Bottom" unique_id=188660329]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 200.0
+offset_right = -250.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DamageUpgrade" type="Control" parent="Bottom/Upgrades" unique_id=350579065]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Background" type="TextureRect" parent="Bottom/Upgrades/DamageUpgrade" unique_id=1577954891]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+offset_transform_enabled = true
+offset_transform_scale = Vector2(0.35, 0.6)
+offset_transform_rotation = 1.5707964
+texture = ExtResource("4_8hhj8")
+stretch_mode = 3
+
+[node name="UpgradeText" type="RichTextLabel" parent="Bottom/Upgrades/DamageUpgrade" unique_id=839734929]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "[color=black][font_size=\"20\"]Damage[/font_size][/color]"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InputDetector" type="Button" parent="Bottom/Upgrades/DamageUpgrade" unique_id=749401217 node_paths=PackedStringArray("QuestionMenu")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
+script = ExtResource("5_e6u14")
+QuestionMenu = NodePath("../../../../QuestionMenu")
+
+[node name="FireRateUpgrade" type="Control" parent="Bottom/Upgrades" unique_id=243059290]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Background" type="TextureRect" parent="Bottom/Upgrades/FireRateUpgrade" unique_id=1755800606]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+offset_transform_enabled = true
+offset_transform_scale = Vector2(0.35, 0.6)
+offset_transform_rotation = 1.5707964
+texture = ExtResource("4_8hhj8")
+stretch_mode = 3
+
+[node name="UpgradeText" type="RichTextLabel" parent="Bottom/Upgrades/FireRateUpgrade" unique_id=1071378141]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "[color=black][font_size=\"20\"]Fire Rate[/font_size][/color]"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InputDetector" type="Button" parent="Bottom/Upgrades/FireRateUpgrade" unique_id=1419629207 node_paths=PackedStringArray("QuestionMenu")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
+script = ExtResource("5_e6u14")
+attribute = 1
+QuestionMenu = NodePath("../../../../QuestionMenu")
+
+[node name="RangeUpgrade" type="Control" parent="Bottom/Upgrades" unique_id=744084179]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Background" type="TextureRect" parent="Bottom/Upgrades/RangeUpgrade" unique_id=6612653]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+offset_transform_enabled = true
+offset_transform_scale = Vector2(0.35, 0.6)
+offset_transform_rotation = 1.5707964
+texture = ExtResource("4_8hhj8")
+stretch_mode = 3
+
+[node name="UpgradeText" type="RichTextLabel" parent="Bottom/Upgrades/RangeUpgrade" unique_id=358707803]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "[color=black][font_size=\"20\"]Range[/font_size][/color]"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InputDetector" type="Button" parent="Bottom/Upgrades/RangeUpgrade" unique_id=73164317 node_paths=PackedStringArray("QuestionMenu")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
+script = ExtResource("5_e6u14")
+attribute = 2
+QuestionMenu = NodePath("../../../../QuestionMenu")
+
+[node name="Right" type="Control" parent="." unique_id=2069147041]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -100.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="NinePatchRect" parent="Right" unique_id=365980297]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -17.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_nv0xg")
+region_rect = Rect2(0, 32, 224, 192)
+
+[node name="RightInfo" type="VBoxContainer" parent="Right" unique_id=621741213]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 30.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 16
+
+[node name="WaveCount" type="Control" parent="Right/RightInfo" unique_id=693202413]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+tooltip_text = "Wave Count"
+
+[node name="Background" type="TextureRect" parent="Right/RightInfo/WaveCount" unique_id=2122622700]
+propagate_maximum_size = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+offset_transform_enabled = true
+offset_transform_scale = Vector2(0.35, 0.35)
+offset_transform_rotation = 1.5707964
+texture = ExtResource("4_8hhj8")
+stretch_mode = 3
+
+[node name="CountText" type="RichTextLabel" parent="Right/RightInfo/WaveCount" unique_id=1900106747]
+layout_mode = 0
+offset_top = 16.0
+offset_right = 100.0
+offset_bottom = 72.0
+bbcode_enabled = true
+text = "[color=black][font_size=\"20\"]25[/font_size][/color]"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+
+[node name="RunTime" type="Control" parent="Right/RightInfo" unique_id=752441974]
+custom_minimum_size = Vector2(0, 60)
+propagate_maximum_size = true
+layout_mode = 2
+
+[node name="Background" type="TextureRect" parent="Right/RightInfo/RunTime" unique_id=1659723825]
+propagate_maximum_size = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -32.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+offset_transform_enabled = true
+offset_transform_scale = Vector2(0.35, 0.35)
+offset_transform_rotation = 1.5707964
+texture = ExtResource("4_8hhj8")
+stretch_mode = 3
+
+[node name="RunTime" type="RichTextLabel" parent="Right/RightInfo/RunTime" unique_id=1788230432]
+layout_mode = 0
+offset_top = 16.0
+offset_right = 100.0
+offset_bottom = 72.0
+bbcode_enabled = true
+text = "[color=black][font_size=\"20\"]12:34[/font_size][/color]"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+
+[node name="LifeBar" type="ProgressBar" parent="Right/RightInfo" unique_id=1116730491]
+layout_mode = 2
+size_flags_vertical = 3
+offset_transform_enabled = true
+offset_transform_scale = Vector2(0.9, 0.9)
+theme_override_styles/background = SubResource("StyleBoxFlat_x7644")
+theme_override_styles/fill = SubResource("StyleBoxFlat_rfrv7")
+max_value = 20.0
+step = 1.0
+value = 15.0
+fill_mode = 3
+show_percentage = false
+
+[node name="PauseButton" type="TextureButton" parent="." unique_id=257981221 node_paths=PackedStringArray("PauseMenu")]
+custom_maximum_size = Vector2(48, 48)
+layout_mode = 1
+offset_right = 640.0
+offset_bottom = 640.0
+texture_normal = ExtResource("5_nv0xg")
+stretch_mode = 0
+script = ExtResource("6_brq1p")
+PauseMenu = NodePath("../PauseMenu")
+
+[node name="PauseMenu" type="CenterContainer" parent="." unique_id=1512642904]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -130.0
+offset_bottom = -100.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="TextureRect" parent="PauseMenu" unique_id=1547906547]
+layout_mode = 2
+offset_transform_enabled = true
+texture = ExtResource("2_nv0xg")
+expand_mode = 1
+stretch_mode = 3
+
+[node name="Buttons" type="VBoxContainer" parent="PauseMenu" unique_id=613093703]
+layout_mode = 2
+
+[node name="Resume" type="Button" parent="PauseMenu/Buttons" unique_id=1995727111 node_paths=PackedStringArray("PauseMenu")]
+layout_mode = 2
+text = "Resume"
+script = ExtResource("6_8hhj8")
+PauseMenu = NodePath("../..")
+
+[node name="Settings" type="Button" parent="PauseMenu/Buttons" unique_id=593318213]
+layout_mode = 2
+text = "Settings"
+
+[node name="ExitRun" type="Button" parent="PauseMenu/Buttons" unique_id=484941888]
+layout_mode = 2
+text = "Exit Run"
+script = ExtResource("6_wkjl6")
+
+[node name="QuestionMenu" type="CenterContainer" parent="." unique_id=1409103099 node_paths=PackedStringArray("Answer", "Submit")]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -130.0
+offset_bottom = -100.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("10_gk3tk")
+Answer = NodePath("QuestionData/AnswerSpace/Answer")
+Submit = NodePath("QuestionData/AnswerSpace/Submit")
+
+[node name="Background" type="TextureRect" parent="QuestionMenu" unique_id=1763739594]
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_scale = Vector2(1.5, 1.5)
+texture = ExtResource("2_nv0xg")
+expand_mode = 1
+stretch_mode = 3
+
+[node name="QuestionData" type="VBoxContainer" parent="QuestionMenu" unique_id=1967667459]
+custom_minimum_size = Vector2(250, 250)
+layout_mode = 2
+
+[node name="Question" type="RichTextLabel" parent="QuestionMenu/QuestionData" unique_id=1990315442]
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "[color=black][font_size=\"20\"]This is an example question![/font_size][/color]"
+fit_content = true
+
+[node name="AnswerSpace" type="HBoxContainer" parent="QuestionMenu/QuestionData" unique_id=960360877]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Answer" type="LineEdit" parent="QuestionMenu/QuestionData/AnswerSpace" unique_id=527563295]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+placeholder_text = "Answer..."
+emoji_menu_enabled = false
+
+[node name="Submit" type="Button" parent="QuestionMenu/QuestionData/AnswerSpace" unique_id=890706894]
+layout_mode = 2
+text = "Submit"
