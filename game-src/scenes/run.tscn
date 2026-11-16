@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://dp1xcpndacfds" path="res://scripts/run/resume.gd" id="6_8hhj8"]
 [ext_resource type="Script" uid="uid://bmil3jdwhntdw" path="res://scripts/run/pause.gd" id="6_brq1p"]
 [ext_resource type="Script" uid="uid://cujklx1xmitmy" path="res://scripts/run/exit_run.gd" id="6_wkjl6"]
+[ext_resource type="Script" uid="uid://d1bqbllupw2sr" path="res://scripts/run/question.gd" id="10_gk3tk"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x7644"]
 bg_color = Color(0.8995955, 0.45605642, 0.28619048, 0.654902)
@@ -115,7 +116,7 @@ autowrap_mode = 0
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="InputDetector" type="Button" parent="Bottom/Upgrades/DamageUpgrade" unique_id=749401217]
+[node name="InputDetector" type="Button" parent="Bottom/Upgrades/DamageUpgrade" unique_id=749401217 node_paths=PackedStringArray("QuestionMenu")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -124,6 +125,7 @@ grow_horizontal = 2
 grow_vertical = 2
 flat = true
 script = ExtResource("5_e6u14")
+QuestionMenu = NodePath("../../../../QuestionMenu")
 
 [node name="FireRateUpgrade" type="Control" parent="Bottom/Upgrades" unique_id=243059290]
 layout_mode = 2
@@ -156,7 +158,7 @@ autowrap_mode = 0
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="InputDetector" type="Button" parent="Bottom/Upgrades/FireRateUpgrade" unique_id=1419629207]
+[node name="InputDetector" type="Button" parent="Bottom/Upgrades/FireRateUpgrade" unique_id=1419629207 node_paths=PackedStringArray("QuestionMenu")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -166,6 +168,7 @@ grow_vertical = 2
 flat = true
 script = ExtResource("5_e6u14")
 attribute = 1
+QuestionMenu = NodePath("../../../../QuestionMenu")
 
 [node name="RangeUpgrade" type="Control" parent="Bottom/Upgrades" unique_id=744084179]
 layout_mode = 2
@@ -198,7 +201,7 @@ autowrap_mode = 0
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="InputDetector" type="Button" parent="Bottom/Upgrades/RangeUpgrade" unique_id=73164317]
+[node name="InputDetector" type="Button" parent="Bottom/Upgrades/RangeUpgrade" unique_id=73164317 node_paths=PackedStringArray("QuestionMenu")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -208,6 +211,7 @@ grow_vertical = 2
 flat = true
 script = ExtResource("5_e6u14")
 attribute = 2
+QuestionMenu = NodePath("../../../../QuestionMenu")
 
 [node name="Right" type="Control" parent="." unique_id=2069147041]
 layout_mode = 1
@@ -326,6 +330,7 @@ script = ExtResource("6_brq1p")
 PauseMenu = NodePath("../PauseMenu")
 
 [node name="PauseMenu" type="CenterContainer" parent="." unique_id=1512642904]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -359,3 +364,50 @@ text = "Settings"
 layout_mode = 2
 text = "Exit Run"
 script = ExtResource("6_wkjl6")
+
+[node name="QuestionMenu" type="CenterContainer" parent="." unique_id=1409103099 node_paths=PackedStringArray("Answer", "Submit")]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -130.0
+offset_bottom = -100.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("10_gk3tk")
+Answer = NodePath("QuestionData/AnswerSpace/Answer")
+Submit = NodePath("QuestionData/AnswerSpace/Submit")
+
+[node name="Background" type="TextureRect" parent="QuestionMenu" unique_id=1763739594]
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_scale = Vector2(1.5, 1.5)
+texture = ExtResource("2_nv0xg")
+expand_mode = 1
+stretch_mode = 3
+
+[node name="QuestionData" type="VBoxContainer" parent="QuestionMenu" unique_id=1967667459]
+custom_minimum_size = Vector2(250, 250)
+layout_mode = 2
+
+[node name="Question" type="RichTextLabel" parent="QuestionMenu/QuestionData" unique_id=1990315442]
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "[color=black][font_size=\"20\"]This is an example question![/font_size][/color]"
+fit_content = true
+
+[node name="AnswerSpace" type="HBoxContainer" parent="QuestionMenu/QuestionData" unique_id=960360877]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Answer" type="LineEdit" parent="QuestionMenu/QuestionData/AnswerSpace" unique_id=527563295]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+placeholder_text = "Answer..."
+emoji_menu_enabled = false
+
+[node name="Submit" type="Button" parent="QuestionMenu/QuestionData/AnswerSpace" unique_id=890706894]
+layout_mode = 2
+text = "Submit"
