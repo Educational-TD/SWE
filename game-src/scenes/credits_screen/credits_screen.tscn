@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dcuty8exbmjh3" path="res://scripts/credits_screen/return_title_screen_esc_key.gd" id="1_o77a0"]
 [ext_resource type="Script" uid="uid://cgqsipiintsy1" path="res://scripts/credits_screen/return_title_screen_btn.gd" id="2_520cl"]
+[ext_resource type="PackedScene" uid="uid://bruffyg5kxj2a" path="res://scenes/credits_background/credits_backround.tscn" id="2_vwmq1"]
 
 [node name="CreditsScene" type="Control" unique_id=397347171]
 layout_mode = 3
@@ -11,6 +12,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_o77a0")
+
+[node name="CreditsBackround" parent="." unique_id=288054549 instance=ExtResource("2_vwmq1")]
+layout_mode = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1123700986]
 layout_mode = 1
@@ -34,7 +38,7 @@ uppercase = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=1564993816]
 layout_mode = 2
-theme_override_constants/separation = 75
+theme_override_constants/separation = 90
 
 [node name="developers_vbox" type="VBoxContainer" parent="MarginContainer/HBoxContainer" unique_id=800579644]
 layout_mode = 2
@@ -87,7 +91,7 @@ theme_override_constants/separation = 12
 [node name="ref_title" type="Label" parent="MarginContainer/HBoxContainer/references_vbox" unique_id=1456919089]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
-text = "References"
+text = "Materials & assets"
 horizontal_alignment = 1
 uppercase = true
 max_lines_visible = 1
@@ -97,7 +101,35 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
 mouse_filter = 0
-text = "Map Design - https://kenney.nl/"
+text = "Github Pages Wesite Hosting"
+
+[node name="ref_2" type="Label" parent="MarginContainer/HBoxContainer/references_vbox" unique_id=1231509312]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+mouse_filter = 0
+text = "Godot Engine"
+
+[node name="ref_3" type="Label" parent="MarginContainer/HBoxContainer/references_vbox" unique_id=914857641]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+mouse_filter = 0
+text = "Tikz-UML LaTex Library"
+
+[node name="ref_4" type="Label" parent="MarginContainer/HBoxContainer/references_vbox" unique_id=1521431005]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+mouse_filter = 0
+text = "Kenney's Pirate Pack (CC0)"
+
+[node name="ref_5" type="Label" parent="MarginContainer/HBoxContainer/references_vbox" unique_id=1045268637]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+mouse_filter = 0
+text = "Font Awesome Icons (CC BY 4.0)"
 
 [node name="acknowledgments_vbox" type="VBoxContainer" parent="MarginContainer/HBoxContainer" unique_id=1493387490]
 layout_mode = 2

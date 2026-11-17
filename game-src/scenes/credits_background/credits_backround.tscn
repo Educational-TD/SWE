@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://bruffyg5kxj2a"]
+
+[ext_resource type="Texture2D" uid="uid://c5ysgu0a81c83" path="res://scenes/credits_background/water.svg" id="1_gac2f"]
+[ext_resource type="Texture2D" uid="uid://b6ekqkf7tg1th" path="res://scenes/credits_background/rock_sand.svg" id="2_3ihm5"]
+[ext_resource type="Texture2D" uid="uid://cgvmvlyy1rwme" path="res://scenes/credits_background/grass_sand.svg" id="2_yehlv"]
+
+[node name="CreditsBackround" type="Control" unique_id=288054549]
+modulate = Color(0.78352344, 0.7835234, 0.7835234, 1)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="water_texture_rect" type="TextureRect" parent="." unique_id=2145752532]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_gac2f")
+
+[node name="sand_texture_rect" type="TextureRect" parent="." unique_id=119082499]
+layout_mode = 1
+offset_right = 317.0
+offset_bottom = 317.0
+texture = ExtResource("2_yehlv")
+
+[node name="sand_texture_rect2" type="TextureRect" parent="." unique_id=142294080]
+layout_mode = 0
+offset_left = 317.0
+offset_right = 518.0
+offset_bottom = 317.0
+texture = ExtResource("2_yehlv")
+
+[node name="sand_texture_rect3" type="TextureRect" parent="." unique_id=1912902299]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -58.0
+offset_right = 259.0
+offset_bottom = 317.0
+grow_horizontal = 2
+texture = ExtResource("2_yehlv")
+
+[node name="rock_sand_texture_rect" type="TextureRect" parent="." unique_id=1020619450]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -317.0
+offset_bottom = 317.0
+grow_horizontal = 0
+texture = ExtResource("2_3ihm5")
