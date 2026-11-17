@@ -1,14 +1,14 @@
 [gd_scene format=4 uid="uid://cdte5ovofw1qd"]
 
-[ext_resource type="TileSet" uid="uid://c36vnycwxo04i" path="res://map_tiles.tres" id="1_4xfga"]
-[ext_resource type="Texture2D" uid="uid://b2ys87mlf8w8j" path="res://sprites/map_tiles.svg" id="2_gldc4"]
-[ext_resource type="PackedScene" uid="uid://ugcnl5hq67ne" path="res://scenes/tower.tscn" id="2_paxxb"]
-[ext_resource type="Script" uid="uid://bpdh46ftrgd17" path="res://scripts/map/path.gd" id="3_0cso3"]
-[ext_resource type="PackedScene" uid="uid://brhmrdto8vpcy" path="res://scenes/enemy.tscn" id="4_2klcf"]
+[ext_resource type="Texture2D" uid="uid://b2ys87mlf8w8j" path="res://sprites/map_tiles.svg" id="1_lyww7"]
+[ext_resource type="TileSet" uid="uid://c36vnycwxo04i" path="res://map_tiles.tres" id="2_26gay"]
+[ext_resource type="Script" uid="uid://bpdh46ftrgd17" path="res://scripts/run/map/path.gd" id="3_ns2jj"]
+[ext_resource type="PackedScene" uid="uid://brhmrdto8vpcy" path="res://scenes/run/enemy.tscn" id="4_lf2i6"]
+[ext_resource type="PackedScene" uid="uid://ugcnl5hq67ne" path="res://scenes/run/tower.tscn" id="5_go1rd"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gldc4"]
 resource_name = "map_tiles"
-texture = ExtResource("2_gldc4")
+texture = ExtResource("1_lyww7")
 margins = Vector2i(48, 44)
 separation = Vector2i(10, 10)
 texture_region_size = Vector2i(64, 64)
@@ -527,7 +527,7 @@ sources/0 = SubResource("TileSetAtlasSource_gldc4")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0cso3"]
 resource_name = "map_tiles"
-texture = ExtResource("2_gldc4")
+texture = ExtResource("1_lyww7")
 margins = Vector2i(48, 44)
 separation = Vector2i(10, 10)
 texture_region_size = Vector2i(64, 64)
@@ -1066,34 +1066,34 @@ collision_enabled = false
 
 [node name="GroundLayer" type="TileMapLayer" parent="Background" unique_id=1799017167]
 tile_map_data = PackedByteArray("AAAAAAAAAAAGAAEAAAABAAAAAAAHAAIAAAACAAAAAAAHAAIAAAADAAAAAAAHAAEAAAAEAAAAAAAHAAEAAAAAAAEAAAAHAAEAAAABAAEAAAAHAAEAAAACAAEAAAAGAAEAAAADAAEAAAAHAAEAAAAEAAEAAAADAAIAAAARAAkAAAAGAAEAAAAQAAkAAAAGAAIAAAAPAAkAAAAHAAEAAAAOAAkAAAAGAAIAAAANAAkAAAAHAAIAAAAMAAkAAAAHAAEAAAAMAAgAAAAGAAIAAAALAAgAAAAHAAIAAAALAAkAAAAGAAIAAAAKAAkAAAAHAAEAAAAJAAkAAAAGAAIAAAAIAAkAAAAHAAIAAAAHAAkAAAAGAAIAAAAGAAkAAAAHAAIAAAAFAAkAAAAHAAEAAAAEAAkAAAAGAAEAAAADAAkAAAAGAAIAAAACAAkAAAAGAAEAAAADAAgAAAAHAAIAAAAEAAgAAAAHAAEAAAAFAAgAAAAHAAIAAAAGAAgAAAAGAAIAAAAHAAgAAAAHAAIAAAAIAAgAAAAHAAEAAAAJAAgAAAAHAAEAAAAKAAgAAAAHAAIAAAAHAAcAAAAGAAIAAAAGAAcAAAAHAAEAAAAIAAcAAAAGAAIAAAAJAAcAAAAHAAIAAAAKAAcAAAAHAAEAAAALAAcAAAAHAAIAAAAMAAcAAAAGAAEAAAANAAcAAAAHAAEAAAAKAAYAAAAGAAEAAAAJAAYAAAAHAAEAAAAIAAYAAAAHAAEAAAALAAYAAAAGAAIAAAAMAAYAAAAGAAIAAAANAAYAAAAHAAIAAAAOAAYAAAAGAAEAAAAPAAYAAAAHAAEAAAAQAAYAAAADAAMAAAAOAAcAAAAGAAEAAAAPAAcAAAAGAAIAAAAPAAgAAAAGAAEAAAAQAAgAAAAHAAIAAAAOAAgAAAAGAAIAAAANAAgAAAAHAAIAAAAAAAIAAAAGAAIAAAABAAIAAAADAAIAAAAQAAcAAAAGAAEAAAARAAYAAAAGAAAAAAARAAcAAAAGAAIAAAARAAgAAAAHAAIAAAASAAYAAAAHAAAAAAASAAcAAAAGAAEAAAASAAgAAAAHAAIAAAASAAkAAAAGAAEAAAASAAoAAAAGAAIAAAARAAoAAAAHAAIAAAAQAAoAAAAGAAEAAAAPAAoAAAAGAAEAAAAOAAoAAAAGAAIAAAANAAoAAAAGAAIAAAAMAAoAAAAGAAEAAAALAAoAAAAHAAEAAAAKAAoAAAAGAAIAAAAJAAoAAAAGAAEAAAAIAAoAAAAHAAEAAAAHAAoAAAAGAAIAAAAGAAoAAAAHAAEAAAAFAAoAAAAGAAIAAAAEAAoAAAAHAAEAAAADAAoAAAAGAAEAAAACAAoAAAAHAAIAAAABAAoAAAAHAAEAAAAAAAoAAAAGAAEAAAD//woAAAAGAAIAAAD//wkAAAAHAAAAAAAAAAkAAAAHAAAAAAABAAkAAAAEAAMAAAABAAgAAAAFAAAAAAACAAgAAAAEAAMAAAACAAcAAAAFAAAAAAADAAcAAAAHAAAAAAAEAAcAAAAGAAAAAAAFAAcAAAAEAAMAAAAFAAYAAAAFAAAAAAAGAAYAAAAGAAAAAAAHAAYAAAAEAAMAAAAHAAUAAAAFAAAAAAAIAAUAAAAHAAAAAAAJAAUAAAAGAAAAAAAKAAUAAAAHAAAAAAALAAUAAAAGAAAAAAAMAAUAAAAHAAAAAAANAAUAAAAHAAAAAAAOAAUAAAAGAAAAAAAPAAUAAAAHAAAAAAAQAAUAAAAIAAAAAAACAAIAAAAHAAMAAAADAAIAAAABAAUAAAAEAAIAAAAIAAMAAAAFAAAAAAAIAAEAAAAFAAEAAAAIAAMAAAAAAAMAAAAGAAMAAAABAAMAAAAIAAMAAAD//wIAAAAHAAEAAAD//wEAAAAHAAIAAAD//wAAAAAHAAIAAAAEAP//AAAHAAIAAAADAP//AAAHAAEAAAACAP//AAAGAAEAAAABAP//AAAGAAIAAAAAAP//AAAGAAEAAAD/////AAAGAAIAAAAFAP//AAAIAAAAAAD//wMAAAAFAAMAAAARAAAAAAAEAAAAAAAQAAAAAAAAAAIAAAARAAEAAAAAAAIAAAASAAEAAAACAAIAAAASAAAAAAACAAEAAAASAP//AAACAAAAAAARAP//AAABAAAAAAAQAP//AAAAAAAAAAA=")
-tile_set = ExtResource("1_4xfga")
+tile_set = ExtResource("2_26gay")
 collision_enabled = false
 
 [node name="DecoLayer" type="TileMapLayer" parent="Background" unique_id=239644896]
 position = Vector2(25, 5)
 tile_map_data = PackedByteArray("AAAKAAYAAAAFAAQAAAACAAEAAAABAAMAAAAOAAcAAAAAAAMAAAAIAAkAAAAHAAQAAAA=")
-tile_set = ExtResource("1_4xfga")
+tile_set = ExtResource("2_26gay")
 collision_enabled = false
 
 [node name="Path" type="Path2D" parent="." unique_id=343171588]
 curve = SubResource("Curve2D_hrmi8")
-script = ExtResource("3_0cso3")
+script = ExtResource("3_ns2jj")
 
-[node name="Enemy" parent="Path" unique_id=48614933 instance=ExtResource("4_2klcf")]
+[node name="Enemy" parent="Path" unique_id=48614933 instance=ExtResource("4_lf2i6")]
 position = Vector2(200, 800)
 rotation = 0.4636476
 
 [node name="Towers" type="Node2D" parent="." unique_id=1587599338]
 
-[node name="Tower" parent="Towers" unique_id=320076079 instance=ExtResource("2_paxxb")]
+[node name="Tower" parent="Towers" unique_id=320076079 instance=ExtResource("5_go1rd")]
 position = Vector2(448, 190)
 rotation = 0.8150688
 
-[node name="Tower2" parent="Towers" unique_id=614351089 instance=ExtResource("2_paxxb")]
+[node name="Tower2" parent="Towers" unique_id=614351089 instance=ExtResource("5_go1rd")]
 position = Vector2(843, 250)
 rotation = -1.0471976
 
-[node name="Tower3" parent="Towers" unique_id=723500749 instance=ExtResource("2_paxxb")]
+[node name="Tower3" parent="Towers" unique_id=723500749 instance=ExtResource("5_go1rd")]
 position = Vector2(208, 382)
 rotation = -1.7453293
 

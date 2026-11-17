@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://brhmrdto8vpcy"]
 
-[ext_resource type="Script" uid="uid://d2sigy5vabtbj" path="res://scripts/enemy/enemy.gd" id="1_7p1mj"]
+[ext_resource type="Script" uid="uid://d2sigy5vabtbj" path="res://scripts/run/map/enemy.gd" id="1_7p1mj"]
 [ext_resource type="Texture2D" uid="uid://dcxdtbbh1f7ak" path="res://sprites/triangleTEMP.svg" id="2_md0e3"]
 
 [node name="Enemy" type="PathFollow2D" unique_id=48614933]
