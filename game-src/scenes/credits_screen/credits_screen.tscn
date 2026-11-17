@@ -14,6 +14,7 @@ grow_vertical = 2
 script = ExtResource("1_o77a0")
 
 [node name="CreditsBackround" parent="." unique_id=288054549 instance=ExtResource("2_vwmq1")]
+modulate = Color(0.5137255, 0.5137255, 0.5137255, 1)
 layout_mode = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1123700986]
