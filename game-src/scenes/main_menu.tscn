@@ -88,7 +88,7 @@ focus_mode = 2
 mouse_filter = 0
 text = "Scoreboard"
 
-[node name="Credits" type="Label" parent="MarginContainer/VBoxContainer/MenuOptions" unique_id=1218111348]
+[node name="Credits" type="Label" parent="MarginContainer/VBoxContainer/MenuOptions" unique_id=828897280]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
@@ -100,3 +100,4 @@ text = "Credits"
 
 [connection signal="gui_input" from="MarginContainer/VBoxContainer/MenuOptions/NewGame" to="." method="_on_new_game_gui_input"]
 [connection signal="gui_input" from="MarginContainer/VBoxContainer/MenuOptions/Settings" to="." method="_on_settings_gui_input"]
+[connection signal="gui_input" from="MarginContainer/VBoxContainer/MenuOptions/Credits" to="." method="_on_credits_gui_input"]
