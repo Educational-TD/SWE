@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://yy5h8gbe76mr" path="res://scripts/run/upgrade.gd" id="5_fo0ly"]
 [ext_resource type="Texture2D" uid="uid://br4oadyjre8sa" path="res://sprites/pause.svg" id="6_x53nd"]
 [ext_resource type="Script" uid="uid://bmil3jdwhntdw" path="res://scripts/run/pause.gd" id="7_l6p45"]
-[ext_resource type="Script" uid="uid://dp1xcpndacfds" path="res://scripts/run/resume.gd" id="8_kdgoc"]
+[ext_resource type="Texture2D" uid="uid://0012wbvcvqbi" path="res://sprites/pause-focus.svg" id="7_yeia0"]
 [ext_resource type="Script" uid="uid://cujklx1xmitmy" path="res://scripts/run/exit_run.gd" id="9_y3spc"]
 [ext_resource type="Script" uid="uid://d1bqbllupw2sr" path="res://scripts/run/question.gd" id="10_0pc8y"]
 
@@ -17,7 +17,7 @@ bg_color = Color(0.8995955, 0.45605642, 0.28619048, 0.654902)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rfrv7"]
 bg_color = Color(0.80784315, 0.15686275, 0.15686275, 1)
 
-[node name="RunView" type="Control" unique_id=1798593918]
+[node name="Run" type="Control" unique_id=1798593918]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -123,6 +123,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_default_cursor_shape = 2
 flat = true
 script = ExtResource("5_fo0ly")
 QuestionMenu = NodePath("../../../../QuestionMenu")
@@ -165,6 +166,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_default_cursor_shape = 2
 flat = true
 script = ExtResource("5_fo0ly")
 attribute = 1
@@ -208,6 +210,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_default_cursor_shape = 2
 flat = true
 script = ExtResource("5_fo0ly")
 attribute = 2
@@ -319,17 +322,29 @@ value = 15.0
 fill_mode = 3
 show_percentage = false
 
-[node name="PauseButton" type="TextureButton" parent="." unique_id=257981221 node_paths=PackedStringArray("PauseMenu")]
+[node name="PauseButton" type="TextureButton" parent="." unique_id=257981221]
 custom_maximum_size = Vector2(48, 48)
 layout_mode = 1
 offset_right = 640.0
 offset_bottom = 640.0
+mouse_default_cursor_shape = 2
 texture_normal = ExtResource("6_x53nd")
+texture_hover = ExtResource("7_yeia0")
+texture_focused = ExtResource("7_yeia0")
 stretch_mode = 0
-script = ExtResource("7_l6p45")
-PauseMenu = NodePath("../PauseMenu")
 
-[node name="PauseMenu" type="CenterContainer" parent="." unique_id=1512642904]
+[node name="MenuDarken" type="ColorRect" parent="." unique_id=1258251087]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.49803922)
+
+[node name="PauseMenu" type="CenterContainer" parent="." unique_id=1512642904 node_paths=PackedStringArray("MenuDarken", "OnPauseFocus", "OnUnpauseFocus")]
+process_mode = 3
 visible = false
 layout_mode = 1
 anchors_preset = -1
@@ -339,6 +354,10 @@ offset_right = -130.0
 offset_bottom = -100.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("7_l6p45")
+MenuDarken = NodePath("../MenuDarken")
+OnPauseFocus = NodePath("Buttons/Resume")
+OnUnpauseFocus = NodePath("../PauseButton")
 
 [node name="Background" type="TextureRect" parent="PauseMenu" unique_id=1547906547]
 layout_mode = 2
@@ -350,22 +369,41 @@ stretch_mode = 3
 [node name="Buttons" type="VBoxContainer" parent="PauseMenu" unique_id=613093703]
 layout_mode = 2
 
-[node name="Resume" type="Button" parent="PauseMenu/Buttons" unique_id=1995727111 node_paths=PackedStringArray("PauseMenu")]
+[node name="Resume" type="Button" parent="PauseMenu/Buttons" unique_id=1995727111]
 layout_mode = 2
+focus_neighbor_left = NodePath("../ExitRun")
+focus_neighbor_top = NodePath("../ExitRun")
+focus_neighbor_right = NodePath("../Settings")
+focus_neighbor_bottom = NodePath("../Settings")
+focus_next = NodePath("../Settings")
+focus_previous = NodePath("../ExitRun")
+mouse_default_cursor_shape = 2
 text = "Resume"
-script = ExtResource("8_kdgoc")
-PauseMenu = NodePath("../..")
 
 [node name="Settings" type="Button" parent="PauseMenu/Buttons" unique_id=593318213]
 layout_mode = 2
+focus_neighbor_left = NodePath("../Resume")
+focus_neighbor_top = NodePath("../Resume")
+focus_neighbor_right = NodePath("../ExitRun")
+focus_neighbor_bottom = NodePath("../ExitRun")
+focus_next = NodePath("../ExitRun")
+focus_previous = NodePath("../Resume")
+mouse_default_cursor_shape = 2
 text = "Settings"
 
 [node name="ExitRun" type="Button" parent="PauseMenu/Buttons" unique_id=484941888]
 layout_mode = 2
+focus_neighbor_left = NodePath("../Settings")
+focus_neighbor_top = NodePath("../Settings")
+focus_neighbor_right = NodePath("../Resume")
+focus_neighbor_bottom = NodePath("../Resume")
+focus_next = NodePath("../Resume")
+focus_previous = NodePath("../Settings")
+mouse_default_cursor_shape = 2
 text = "Exit Run"
 script = ExtResource("9_y3spc")
 
-[node name="QuestionMenu" type="CenterContainer" parent="." unique_id=1409103099 node_paths=PackedStringArray("Answer", "Submit")]
+[node name="QuestionMenu" type="CenterContainer" parent="." unique_id=1409103099 node_paths=PackedStringArray("MenuDarken", "Answer")]
 visible = false
 layout_mode = 1
 anchors_preset = -1
@@ -376,8 +414,8 @@ offset_bottom = -100.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("10_0pc8y")
+MenuDarken = NodePath("../MenuDarken")
 Answer = NodePath("QuestionData/AnswerSpace/Answer")
-Submit = NodePath("QuestionData/AnswerSpace/Submit")
 
 [node name="Background" type="TextureRect" parent="QuestionMenu" unique_id=1763739594]
 layout_mode = 2
@@ -405,9 +443,27 @@ size_flags_horizontal = 4
 [node name="Answer" type="LineEdit" parent="QuestionMenu/QuestionData/AnswerSpace" unique_id=527563295]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
+focus_neighbor_left = NodePath("../Submit")
+focus_neighbor_top = NodePath("../Submit")
+focus_neighbor_right = NodePath("../Submit")
+focus_neighbor_bottom = NodePath("../Submit")
+focus_next = NodePath("../Submit")
+focus_previous = NodePath("../Submit")
 placeholder_text = "Answer..."
 emoji_menu_enabled = false
 
 [node name="Submit" type="Button" parent="QuestionMenu/QuestionData/AnswerSpace" unique_id=890706894]
 layout_mode = 2
+focus_neighbor_left = NodePath("../Answer")
+focus_neighbor_top = NodePath("../Answer")
+focus_neighbor_right = NodePath("../Answer")
+focus_neighbor_bottom = NodePath("../Answer")
+focus_next = NodePath("../Answer")
+focus_previous = NodePath("../Answer")
+mouse_default_cursor_shape = 2
 text = "Submit"
+
+[connection signal="pressed" from="PauseButton" to="PauseMenu" method="_on_pause"]
+[connection signal="pressed" from="PauseMenu/Buttons/Resume" to="PauseMenu" method="_on_unpause"]
+[connection signal="text_submitted" from="QuestionMenu/QuestionData/AnswerSpace/Answer" to="QuestionMenu" method="_on_answer_submitted"]
+[connection signal="pressed" from="QuestionMenu/QuestionData/AnswerSpace/Submit" to="QuestionMenu" method="_on_answer_submitted"]

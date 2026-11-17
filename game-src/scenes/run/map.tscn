@@ -1097,6 +1097,4 @@ rotation = -1.0471976
 position = Vector2(208, 382)
 rotation = -1.7453293
 
-[node name="Enemies" type="Node2D" parent="." unique_id=2047075685]
-
 [node name="Projectiles" type="Node2D" parent="." unique_id=635529316]
