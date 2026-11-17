@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://8tf1jjw3au2d" path="res://scripts/settings_menu/change_difficulty.gd" id="2_j2s20"]
 [ext_resource type="Script" uid="uid://tl67vek78xhp" path="res://scripts/settings_menu/change_volume.gd" id="2_vlvk0"]
 [ext_resource type="Script" uid="uid://b5efd61vj3xoh" path="res://scripts/settings_menu/change_keybinds.gd" id="4_5sljs"]
+[ext_resource type="Script" uid="uid://cv3k1l565bhw0" path="res://scripts/settings_menu/confirm_changes.gd" id="6_rcdfy"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5p8wc"]
 
@@ -149,6 +150,7 @@ text = "Edit Keybinds..."
 [node name="SaveHBox" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1741418241]
 layout_mode = 2
 size_flags_vertical = 10
+script = ExtResource("6_rcdfy")
 
 [node name="BackLabel" type="Label" parent="MarginContainer/VBoxContainer/SaveHBox" unique_id=1791434890]
 layout_mode = 2
@@ -168,8 +170,83 @@ focus_mode = 2
 mouse_filter = 0
 text = "Save Settings"
 
+[node name="ConfirmationPopup" type="Control" parent="." unique_id=1789459040]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="ConfirmationPopup" unique_id=1554664008]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -202.0
+offset_top = -119.0
+offset_right = 202.0
+offset_bottom = 119.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_wswnh")
+
+[node name="MarginContainer" type="MarginContainer" parent="ConfirmationPopup/PanelContainer" unique_id=1258831857]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 30
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ConfirmationPopup/PanelContainer/MarginContainer" unique_id=865949904]
+layout_mode = 2
+
+[node name="Header" type="Label" parent="ConfirmationPopup/PanelContainer/MarginContainer/VBoxContainer" unique_id=1114236948]
+layout_mode = 2
+size_flags_vertical = 2
+text = "Save Changes?"
+horizontal_alignment = 1
+
+[node name="InfoBox" type="Label" parent="ConfirmationPopup/PanelContainer/MarginContainer/VBoxContainer" unique_id=1264195316]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "The following settings"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ConfirmationPopup/PanelContainer/MarginContainer/VBoxContainer" unique_id=446674074]
+layout_mode = 2
+size_flags_vertical = 10
+
+[node name="DontSave" type="Label" parent="ConfirmationPopup/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=2102398907]
+layout_mode = 2
+size_flags_horizontal = 2
+focus_neighbor_left = NodePath("../Save")
+focus_neighbor_right = NodePath("../Save")
+focus_mode = 2
+mouse_filter = 0
+text = "Don't Save"
+
+[node name="Save" type="Label" parent="ConfirmationPopup/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1458690135]
+layout_mode = 2
+size_flags_horizontal = 10
+focus_neighbor_left = NodePath("../DontSave")
+focus_neighbor_right = NodePath("../DontSave")
+focus_mode = 2
+mouse_filter = 0
+text = "Save"
+
 [node name="KeybindPopup" type="Control" parent="." unique_id=830721836]
 unique_name_in_owner = true
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -222,6 +299,8 @@ text = "Back"
 [connection signal="gui_input" from="MarginContainer/VBoxContainer/KeybindHBox/KeybindMenu" to="MarginContainer/VBoxContainer/KeybindHBox" method="_on_keybind_menu_gui_input"]
 [connection signal="gui_input" from="MarginContainer/VBoxContainer/SaveHBox/BackLabel" to="." method="_on_back_label_gui_input"]
 [connection signal="gui_input" from="MarginContainer/VBoxContainer/SaveHBox/SaveLabel" to="." method="_on_save_label_gui_input"]
+[connection signal="gui_input" from="ConfirmationPopup/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/DontSave" to="MarginContainer/VBoxContainer/SaveHBox" method="_on_dont_save_gui_input"]
+[connection signal="gui_input" from="ConfirmationPopup/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Save" to="MarginContainer/VBoxContainer/SaveHBox" method="_on_save_gui_input"]
 [connection signal="hidden" from="KeybindPopup" to="MarginContainer/VBoxContainer/KeybindHBox" method="_on_keybind_popup_hidden"]
 [connection signal="visibility_changed" from="KeybindPopup" to="MarginContainer/VBoxContainer/KeybindHBox" method="_on_keybind_popup_visibility_changed"]
 [connection signal="gui_input" from="KeybindPopup/PanelContainer/MarginContainer/KeybindPopupBack" to="MarginContainer/VBoxContainer/KeybindHBox" method="_on_keybind_popup_back_gui_input"]
