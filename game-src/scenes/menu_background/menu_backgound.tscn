@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://dkqvcap8snwrq"]
+
+[ext_resource type="Texture2D" uid="uid://dlafacks2eqqe" path="res://scenes/menu_background/water.svg" id="1_k7fed"]
+[ext_resource type="Texture2D" uid="uid://ba0a0x6gp2nfa" path="res://scenes/menu_background/grass.svg" id="2_e7ijg"]
+[ext_resource type="Texture2D" uid="uid://3orpquw53fpj" path="res://scenes/menu_background/grass-edge.svg" id="3_uqsss"]
+
+[node name="MenuBackground" type="TextureRect" unique_id=164930175]
+modulate = Color(0.5132329, 0.5132329, 0.5132329, 1)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_k7fed")
+stretch_mode = 1
+
+[node name="Grass" type="TextureRect" parent="." unique_id=739739759]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 64.0
+grow_horizontal = 2
+texture = ExtResource("2_e7ijg")
+stretch_mode = 1
+flip_v = true
+
+[node name="Sand" type="TextureRect" parent="." unique_id=493079842]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 43.0
+offset_bottom = 107.0
+grow_horizontal = 2
+texture = ExtResource("3_uqsss")
+stretch_mode = 1

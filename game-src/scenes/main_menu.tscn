@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://33k1fu103tyb"]
 
 [ext_resource type="Script" uid="uid://qayhru2o3646" path="res://scripts/main_menu.gd" id="1_l6cm7"]
+[ext_resource type="PackedScene" uid="uid://dkqvcap8snwrq" path="res://scenes/menu_background/menu_backgound.tscn" id="2_ekxnf"]
 
 [node name="Control" type="Control" unique_id=1764844499]
 layout_mode = 3
@@ -10,6 +11,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_l6cm7")
+
+[node name="MenuBackground" parent="." unique_id=835496907 instance=ExtResource("2_ekxnf")]
+layout_mode = 1
 
 [node name="HelloWorld" type="Label" parent="." unique_id=1068841649]
 self_modulate = Color(1, 1, 1, 0)
@@ -58,6 +62,9 @@ theme_override_constants/separation = 12
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
+focus_neighbor_top = NodePath("../Credits")
+focus_neighbor_bottom = NodePath("../Settings")
+focus_mode = 2
 mouse_filter = 0
 text = "New Game"
 
@@ -65,6 +72,9 @@ text = "New Game"
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
+focus_neighbor_top = NodePath("../NewGame")
+focus_neighbor_bottom = NodePath("../Scoreboard")
+focus_mode = 2
 mouse_filter = 0
 text = "Settings"
 
@@ -72,6 +82,9 @@ text = "Settings"
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
+focus_neighbor_top = NodePath("../Settings")
+focus_neighbor_bottom = NodePath("../Credits")
+focus_mode = 2
 mouse_filter = 0
 text = "Scoreboard"
 
@@ -79,7 +92,11 @@ text = "Scoreboard"
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
+focus_neighbor_top = NodePath("../Scoreboard")
+focus_neighbor_bottom = NodePath("../NewGame")
+focus_mode = 2
 mouse_filter = 0
 text = "Credits"
 
 [connection signal="gui_input" from="MarginContainer/VBoxContainer/MenuOptions/NewGame" to="." method="_on_new_game_gui_input"]
+[connection signal="gui_input" from="MarginContainer/VBoxContainer/MenuOptions/Settings" to="." method="_on_settings_gui_input"]
