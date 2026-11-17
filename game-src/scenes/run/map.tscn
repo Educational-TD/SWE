@@ -3,7 +3,6 @@
 [ext_resource type="Texture2D" uid="uid://b2ys87mlf8w8j" path="res://sprites/map_tiles.svg" id="1_lyww7"]
 [ext_resource type="TileSet" uid="uid://c36vnycwxo04i" path="res://map_tiles.tres" id="2_26gay"]
 [ext_resource type="Script" uid="uid://bpdh46ftrgd17" path="res://scripts/run/map/path.gd" id="3_ns2jj"]
-[ext_resource type="PackedScene" uid="uid://brhmrdto8vpcy" path="res://scenes/run/enemy.tscn" id="4_lf2i6"]
 [ext_resource type="PackedScene" uid="uid://ugcnl5hq67ne" path="res://scenes/run/tower.tscn" id="5_go1rd"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gldc4"]
@@ -1079,9 +1078,8 @@ collision_enabled = false
 curve = SubResource("Curve2D_hrmi8")
 script = ExtResource("3_ns2jj")
 
-[node name="Enemy" parent="Path" unique_id=48614933 instance=ExtResource("4_lf2i6")]
-position = Vector2(200, 800)
-rotation = 0.4636476
+[node name="EnemySpawnTimer" type="Timer" parent="Path" unique_id=53653245]
+autostart = true
 
 [node name="Towers" type="Node2D" parent="." unique_id=1587599338]
 
@@ -1098,3 +1096,5 @@ position = Vector2(208, 382)
 rotation = -1.7453293
 
 [node name="Projectiles" type="Node2D" parent="." unique_id=635529316]
+
+[connection signal="timeout" from="Path/EnemySpawnTimer" to="Path" method="spawn_enemy"]

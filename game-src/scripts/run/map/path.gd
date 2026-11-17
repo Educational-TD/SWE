@@ -7,5 +7,6 @@ func _draw() -> void:
 	draw_polyline(curve.get_baked_points(), path_color, path_width)
 
 
+var enemy = preload("res://scenes/run/enemy.tscn")
 func spawn_enemy() -> void:
-	pass
+	add_child(enemy.instantiate())
