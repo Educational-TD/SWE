@@ -25,7 +25,7 @@ func update() -> void:
 	_set_background(index.text)
 
 func _set_background(index) -> void:
-	var style := StyleBoxFlat.new()
+	var style := self.get_theme_stylebox("panel").duplicate()
 	if (int(index) % 2 ==  0):
 		style.bg_color = _grey
 	else:
