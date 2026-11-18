@@ -23,6 +23,11 @@ func _ready() -> void:
 	get_highscores()
 
 
+func _input(_event: InputEvent) -> void:
+	if Input.is_action_just_pressed("ui_cancel"):
+		get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
+
+
 func get_highscores() -> void:
 	var same_wave = "12" # Simulate same score sorting
 	var same_time = "12:34:56" # Simulate same time sorting
@@ -107,3 +112,13 @@ func _compare_date(score1, score2) -> bool:
 	var comp1 = "%s%02d%s" % [year1, month1, day1]
 	var comp2 = "%s%02d%s" % [year2, month2, day2]
 	return comp1.naturalnocasecmp_to(comp2) < 0 # Earlier date comes first
+
+
+func _on_back_gui_input(event: InputEvent) -> void:
+	if (
+		Input.is_action_just_pressed("ui_accept")
+		or event is InputEventMouseButton
+		and event.button_index == MOUSE_BUTTON_LEFT
+		and event.is_pressed()
+	):
+		get_tree().change_scene_to_file("res://scenes/main_menu.tscn")

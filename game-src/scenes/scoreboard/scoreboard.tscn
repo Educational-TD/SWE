@@ -81,3 +81,13 @@ text = "Achieved On"
 layout_mode = 2
 size_flags_vertical = 2
 size_flags_stretch_ratio = 4.0
+
+[node name="Back" type="Label" parent="MarginContainer/VBoxContainer" unique_id=71888445]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+focus_mode = 2
+mouse_filter = 0
+text = "Back"
+
+[connection signal="gui_input" from="MarginContainer/VBoxContainer/Back" to="." method="_on_back_gui_input"]
