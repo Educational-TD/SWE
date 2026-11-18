@@ -5,6 +5,7 @@
 [ext_resource type="TileSet" uid="uid://c36vnycwxo04i" path="res://map_tiles.tres" id="2_26gay"]
 [ext_resource type="Script" uid="uid://bpdh46ftrgd17" path="res://scripts/run/map/path.gd" id="3_ns2jj"]
 [ext_resource type="PackedScene" uid="uid://ugcnl5hq67ne" path="res://scenes/run/tower.tscn" id="5_go1rd"]
+[ext_resource type="Script" uid="uid://cv3mhimrogoma" path="res://scripts/run/map/projectile_factory.gd" id="6_26gay"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gldc4"]
 resource_name = "map_tiles"
@@ -1080,43 +1081,47 @@ collision_enabled = false
 curve = SubResource("Curve2D_hrmi8")
 script = ExtResource("3_ns2jj")
 
-[node name="EnemySpawnTimer" type="Timer" parent="Path" unique_id=53653245]
+[node name="EnemySpawnTimer" type="Timer" parent="." unique_id=53653245]
+wait_time = 1.67
 autostart = true
 
 [node name="Towers" type="Node2D" parent="." unique_id=1587599338]
 
 [node name="Tower" parent="Towers" unique_id=320076079 instance=ExtResource("5_go1rd")]
-anchors_preset = 0
 offset_left = 580.00006
 offset_top = 198.00005
 offset_right = 580.00006
 offset_bottom = 198.00005
 
 [node name="Tower2" parent="Towers" unique_id=614351089 instance=ExtResource("5_go1rd")]
-anchors_preset = 0
 offset_left = 981.00006
 offset_top = 252.00002
 offset_right = 981.00006
 offset_bottom = 252.00002
 
 [node name="Tower3" parent="Towers" unique_id=723500749 instance=ExtResource("5_go1rd")]
-anchors_preset = 0
 offset_left = 280.99997
 offset_top = 366.0
 offset_right = 280.99997
 offset_bottom = 366.0
 
 [node name="Tower4" parent="Towers" unique_id=1522263315 instance=ExtResource("5_go1rd")]
-anchors_preset = 0
 offset_left = 790.0
 offset_top = 76.0
 offset_right = 790.0
 offset_bottom = 76.0
 
-[node name="Projectiles" type="Node2D" parent="." unique_id=1931693139]
+[node name="Projectiles" type="Node2D" parent="." unique_id=1931693139 node_paths=PackedStringArray("Enemies")]
+script = ExtResource("6_26gay")
+Enemies = NodePath("../Path")
 
-[connection signal="timeout" from="Path/EnemySpawnTimer" to="Path" method="spawn_enemy"]
+[connection signal="timeout" from="EnemySpawnTimer" to="Path" method="spawn_enemy"]
+[connection signal="fire" from="Towers/Tower" to="Projectiles" method="_on_tower_fire"]
 [connection signal="select" from="Towers/Tower" to="." method="_on_tower_select"]
+[connection signal="fire" from="Towers/Tower2" to="Projectiles" method="_on_tower_fire"]
 [connection signal="select" from="Towers/Tower2" to="." method="_on_tower_select"]
+[connection signal="fire" from="Towers/Tower3" to="Projectiles" method="_on_tower_fire"]
 [connection signal="select" from="Towers/Tower3" to="." method="_on_tower_select"]
+[connection signal="fire" from="Towers/Tower4" to="Projectiles" method="_on_tower_fire"]
 [connection signal="select" from="Towers/Tower4" to="." method="_on_tower_select"]
+[connection signal="successful_fire" from="Projectiles" to="." method="_on_tower_fire"]

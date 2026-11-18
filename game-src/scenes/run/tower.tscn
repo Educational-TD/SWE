@@ -3,9 +3,11 @@
 [ext_resource type="Script" uid="uid://bmmcb08ujgusq" path="res://scripts/run/map/tower.gd" id="1_78fx3"]
 [ext_resource type="PackedScene" uid="uid://d1kr7mrxxw5qa" path="res://scenes/run/tower_graphics.tscn" id="2_huopb"]
 [ext_resource type="Script" uid="uid://6kkmtjr1thor" path="res://scripts/run/map/attack_cooldown.gd" id="3_78fx3"]
+[ext_resource type="Script" uid="uid://beutknsxbm1xw" path="res://scripts/run/map/start_tower_rotation.gd" id="3_b2vec"]
 
 [node name="Tower" type="Control" unique_id=1522263315 node_paths=PackedStringArray("ExtraInfo")]
 layout_mode = 3
+anchors_preset = 0
 script = ExtResource("1_78fx3")
 ExtraInfo = NodePath("ExtraInfo")
 
@@ -16,6 +18,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("3_b2vec")
 
 [node name="TowerHitbox" type="Button" parent="." unique_id=61435227]
 custom_minimum_size = Vector2(60, 120)

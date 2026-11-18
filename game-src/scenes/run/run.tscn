@@ -2,8 +2,9 @@
 
 [ext_resource type="PackedScene" uid="uid://cdte5ovofw1qd" path="res://scenes/run/map.tscn" id="1_yeia0"]
 [ext_resource type="Texture2D" uid="uid://do55afjg2tq6t" path="res://sprites/menu.svg" id="2_g42ja"]
-[ext_resource type="Texture2D" uid="uid://4k3od4ffdbly" path="res://sprites/ship.svg" id="3_cnkn7"]
+[ext_resource type="PackedScene" uid="uid://d1kr7mrxxw5qa" path="res://scenes/run/tower_graphics.tscn" id="3_cnkn7"]
 [ext_resource type="Texture2D" uid="uid://orlf5bl1q27r" path="res://sprites/hexagon.svg" id="4_7yo0l"]
+[ext_resource type="Script" uid="uid://c7mssm71670lr" path="res://scripts/run/selected_tower_ui.gd" id="4_fo0ly"]
 [ext_resource type="Script" uid="uid://yy5h8gbe76mr" path="res://scripts/run/upgrade.gd" id="5_fo0ly"]
 [ext_resource type="Texture2D" uid="uid://b1nbkntkcw8yy" path="res://sprites/forward.svg" id="6_g42ja"]
 [ext_resource type="Texture2D" uid="uid://br4oadyjre8sa" path="res://sprites/pause.svg" id="6_x53nd"]
@@ -62,20 +63,18 @@ grow_vertical = 0
 texture = ExtResource("2_g42ja")
 region_rect = Rect2(32, 0, 224, 224)
 
-[node name="Ship" type="TextureRect" parent="Bottom/SelectedShipDisplay" unique_id=1141562850]
+[node name="SelectedShip" parent="Bottom/SelectedShipDisplay" unique_id=876598960 instance=ExtResource("3_cnkn7")]
+visible = false
 layout_mode = 1
 anchors_preset = -1
-anchor_right = 1.0
+anchor_top = 0.145
+anchor_right = 0.855
 anchor_bottom = 1.0
-offset_top = 22.0
-offset_right = -29.0
 grow_horizontal = 2
 grow_vertical = 2
 offset_transform_enabled = true
 offset_transform_scale = Vector2(0.9, 0.9)
-offset_transform_rotation = -1.7418386
-texture = ExtResource("3_cnkn7")
-stretch_mode = 3
+script = ExtResource("4_fo0ly")
 
 [node name="Upgrades" type="HBoxContainer" parent="Bottom" unique_id=188660329]
 layout_mode = 1
@@ -476,6 +475,7 @@ focus_previous = NodePath("../Answer")
 mouse_default_cursor_shape = 2
 text = "Submit"
 
+[connection signal="selected_tower_update" from="Map" to="Bottom/SelectedShipDisplay/SelectedShip" method="_on_selected_tower_update"]
 [connection signal="pressed" from="PauseButton" to="PauseMenu" method="_on_pause"]
 [connection signal="pressed" from="PauseMenu/Buttons/Resume" to="PauseMenu" method="_on_unpause"]
 [connection signal="text_submitted" from="QuestionMenu/QuestionData/AnswerSpace/Answer" to="QuestionMenu" method="_on_answer_submitted"]
