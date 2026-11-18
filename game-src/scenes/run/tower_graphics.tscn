@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://d1kr7mrxxw5qa"]
+
+[ext_resource type="Texture2D" uid="uid://4k3od4ffdbly" path="res://sprites/ship.svg" id="1_xnpsq"]
+[ext_resource type="Texture2D" uid="uid://bailfd4d7wfx2" path="res://sprites/sail.svg" id="2_7n7l1"]
+
+[node name="TowerGraphics" type="Control" unique_id=876598960]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="ShipBody" type="TextureRect" parent="." unique_id=1247766802]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_xnpsq")
+stretch_mode = 3
+
+[node name="ShipSail" type="TextureRect" parent="." unique_id=1661037354]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_7n7l1")
+stretch_mode = 3

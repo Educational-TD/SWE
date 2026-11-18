@@ -1,5 +1,6 @@
 [gd_scene format=4 uid="uid://cdte5ovofw1qd"]
 
+[ext_resource type="Script" uid="uid://bbhuq47ntfru5" path="res://scripts/run/map/map.gd" id="1_26gay"]
 [ext_resource type="Texture2D" uid="uid://b2ys87mlf8w8j" path="res://sprites/map_tiles.svg" id="1_lyww7"]
 [ext_resource type="TileSet" uid="uid://c36vnycwxo04i" path="res://map_tiles.tres" id="2_26gay"]
 [ext_resource type="Script" uid="uid://bpdh46ftrgd17" path="res://scripts/run/map/path.gd" id="3_ns2jj"]
@@ -1050,6 +1051,7 @@ _data = {
 point_count = 5
 
 [node name="Map" type="Node2D" unique_id=815279230]
+script = ExtResource("1_26gay")
 
 [node name="Background" type="Node2D" parent="." unique_id=313121363]
 
@@ -1084,17 +1086,37 @@ autostart = true
 [node name="Towers" type="Node2D" parent="." unique_id=1587599338]
 
 [node name="Tower" parent="Towers" unique_id=320076079 instance=ExtResource("5_go1rd")]
-position = Vector2(448, 190)
-rotation = 0.8150688
+anchors_preset = 0
+offset_left = 580.00006
+offset_top = 198.00005
+offset_right = 580.00006
+offset_bottom = 198.00005
 
 [node name="Tower2" parent="Towers" unique_id=614351089 instance=ExtResource("5_go1rd")]
-position = Vector2(843, 250)
-rotation = -1.0471976
+anchors_preset = 0
+offset_left = 981.00006
+offset_top = 252.00002
+offset_right = 981.00006
+offset_bottom = 252.00002
 
 [node name="Tower3" parent="Towers" unique_id=723500749 instance=ExtResource("5_go1rd")]
-position = Vector2(208, 382)
-rotation = -1.7453293
+anchors_preset = 0
+offset_left = 280.99997
+offset_top = 366.0
+offset_right = 280.99997
+offset_bottom = 366.0
 
-[node name="Projectiles" type="Node2D" parent="." unique_id=635529316]
+[node name="Tower4" parent="Towers" unique_id=1522263315 instance=ExtResource("5_go1rd")]
+anchors_preset = 0
+offset_left = 790.0
+offset_top = 76.0
+offset_right = 790.0
+offset_bottom = 76.0
+
+[node name="Projectiles" type="Node2D" parent="." unique_id=1931693139]
 
 [connection signal="timeout" from="Path/EnemySpawnTimer" to="Path" method="spawn_enemy"]
+[connection signal="select" from="Towers/Tower" to="." method="_on_tower_select"]
+[connection signal="select" from="Towers/Tower2" to="." method="_on_tower_select"]
+[connection signal="select" from="Towers/Tower3" to="." method="_on_tower_select"]
+[connection signal="select" from="Towers/Tower4" to="." method="_on_tower_select"]

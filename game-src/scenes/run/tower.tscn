@@ -1,12 +1,65 @@
 [gd_scene format=3 uid="uid://ugcnl5hq67ne"]
 
-[ext_resource type="Texture2D" uid="uid://4k3od4ffdbly" path="res://sprites/ship.svg" id="1_2x682"]
-[ext_resource type="Texture2D" uid="uid://bailfd4d7wfx2" path="res://sprites/sail.svg" id="2_ay4al"]
+[ext_resource type="Script" uid="uid://bmmcb08ujgusq" path="res://scripts/run/map/tower.gd" id="1_78fx3"]
+[ext_resource type="PackedScene" uid="uid://d1kr7mrxxw5qa" path="res://scenes/run/tower_graphics.tscn" id="2_huopb"]
+[ext_resource type="Script" uid="uid://6kkmtjr1thor" path="res://scripts/run/map/attack_cooldown.gd" id="3_78fx3"]
 
-[node name="Tower" type="Node2D" unique_id=1694556828]
+[node name="Tower" type="Control" unique_id=1522263315 node_paths=PackedStringArray("ExtraInfo")]
+layout_mode = 3
+script = ExtResource("1_78fx3")
+ExtraInfo = NodePath("ExtraInfo")
 
-[node name="ShipBody" type="Sprite2D" parent="." unique_id=503433056]
-texture = ExtResource("1_2x682")
+[node name="TowerGraphics" parent="." unique_id=876598960 instance=ExtResource("2_huopb")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="Sail" type="Sprite2D" parent="." unique_id=1508791497]
-texture = ExtResource("2_ay4al")
+[node name="TowerHitbox" type="Button" parent="." unique_id=61435227]
+custom_minimum_size = Vector2(60, 120)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
+
+[node name="ExtraInfo" type="Control" parent="." unique_id=1796212828]
+visible = false
+anchors_preset = 0
+offset_left = -30.0
+offset_top = 45.0
+offset_right = 30.0
+offset_bottom = 60.0
+
+[node name="AttackCooldown" type="ProgressBar" parent="ExtraInfo" unique_id=249207877 node_paths=PackedStringArray("timer")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+max_value = 1.0
+fill_mode = 1
+show_percentage = false
+script = ExtResource("3_78fx3")
+timer = NodePath("ProjectileTimer")
+
+[node name="ProjectileTimer" type="Timer" parent="ExtraInfo/AttackCooldown" unique_id=749932714]
+autostart = true
+
+[node name="AttackDamage" type="Label" parent="ExtraInfo" unique_id=1141525740]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "12"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="TowerHitbox" to="." method="_on_hitbox_pressed"]
+[connection signal="timeout" from="ExtraInfo/AttackCooldown/ProjectileTimer" to="." method="_on_projectile_timer_timeout"]
