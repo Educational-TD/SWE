@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://cfpvgdjdsvr4l"]
 
+[ext_resource type="Script" uid="uid://ba6xsi2ygfoa1" path="res://scripts/scoreboard/high_score.gd" id="1_gbrey"]
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p8ruo"]
 bg_color = Color(0.10980392, 0.10980392, 0.10980392, 0.6039216)
 corner_radius_top_left = 3
@@ -14,6 +16,7 @@ offset_right = 250.0
 offset_bottom = 50.0
 size_flags_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_p8ruo")
+script = ExtResource("1_gbrey")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1345054591]
 layout_mode = 2

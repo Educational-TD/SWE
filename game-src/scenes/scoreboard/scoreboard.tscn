@@ -61,13 +61,14 @@ grow_vertical = 2
 theme_override_constants/margin_left = 180
 theme_override_constants/margin_top = 120
 theme_override_constants/margin_right = 180
-theme_override_constants/margin_bottom = 90
+theme_override_constants/margin_bottom = 60
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=503667522]
 layout_mode = 2
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1989059720]
 layout_mode = 2
+size_flags_horizontal = 4
 size_flags_vertical = 6
 size_flags_stretch_ratio = 1.5
 text = "Hall of Fame"
@@ -82,6 +83,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_y455q")
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 size_flags_vertical = 0
+size_flags_stretch_ratio = 0.0
 
 [node name="Index" type="Label" parent="MarginContainer/VBoxContainer/Columns/HBoxContainer" unique_id=798692834]
 layout_mode = 2
@@ -108,26 +110,26 @@ layout_mode = 2
 size_flags_horizontal = 6
 text = "Achieved On"
 
-[node name="HighScore" parent="MarginContainer/VBoxContainer" unique_id=757875034 instance=ExtResource("3_3mbri")]
+[node name="Scores" type="VBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1288315523]
 layout_mode = 2
-size_flags_vertical = 6
+size_flags_vertical = 2
+size_flags_stretch_ratio = 4.0
+
+[node name="HighScore" parent="MarginContainer/VBoxContainer/Scores" unique_id=757875034 instance=ExtResource("3_3mbri")]
+layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_3mbri")
 
-[node name="HighScore2" parent="MarginContainer/VBoxContainer" unique_id=1821742613 instance=ExtResource("3_3mbri")]
+[node name="HighScore2" parent="MarginContainer/VBoxContainer/Scores" unique_id=1821742613 instance=ExtResource("3_3mbri")]
 layout_mode = 2
-size_flags_vertical = 6
 theme_override_styles/panel = SubResource("StyleBoxFlat_6q72m")
 
-[node name="HighScore3" parent="MarginContainer/VBoxContainer" unique_id=739912885 instance=ExtResource("3_3mbri")]
+[node name="HighScore3" parent="MarginContainer/VBoxContainer/Scores" unique_id=739912885 instance=ExtResource("3_3mbri")]
 layout_mode = 2
-size_flags_vertical = 6
 theme_override_styles/panel = SubResource("StyleBoxFlat_rqydg")
 
-[node name="HighScore4" parent="MarginContainer/VBoxContainer" unique_id=92034725 instance=ExtResource("3_3mbri")]
+[node name="HighScore4" parent="MarginContainer/VBoxContainer/Scores" unique_id=92034725 instance=ExtResource("3_3mbri")]
 layout_mode = 2
-size_flags_vertical = 6
 
-[node name="HighScore5" parent="MarginContainer/VBoxContainer" unique_id=1367323370 instance=ExtResource("3_3mbri")]
+[node name="HighScore5" parent="MarginContainer/VBoxContainer/Scores" unique_id=1367323370 instance=ExtResource("3_3mbri")]
 layout_mode = 2
-size_flags_vertical = 6
 theme_override_styles/panel = SubResource("StyleBoxFlat_x2icb")
