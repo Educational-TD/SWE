@@ -15,22 +15,6 @@ script = ExtResource("1_l6cm7")
 [node name="MenuBackground" parent="." unique_id=835496907 instance=ExtResource("2_ekxnf")]
 layout_mode = 1
 
-[node name="HelloWorld" type="Label" parent="." unique_id=1068841649]
-self_modulate = Color(1, 1, 1, 0)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -104.0
-offset_top = -36.0
-offset_right = 107.0
-offset_bottom = -13.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "STILL WAITING FOR GODOT"
-
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1403075409]
 layout_mode = 1
 anchors_preset = 15
@@ -50,7 +34,7 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
-text = "Game Title"
+text = "Geometry Defense"
 
 [node name="MenuOptions" type="VBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=551721352]
 layout_mode = 2
@@ -58,7 +42,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 6
 theme_override_constants/separation = 12
 
-[node name="NewGame" type="Label" parent="MarginContainer/VBoxContainer/MenuOptions" unique_id=1763684282]
+[node name="NewRun" type="Button" parent="MarginContainer/VBoxContainer/MenuOptions" unique_id=1862943232]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6

@@ -1,14 +1,16 @@
 extends Control
 
 var SCENES = {
-	"title": "res://scenes/main_menu.tscn",
+	"run": "res://scenes/run.tscn",
 	"settings": "res://scenes/settings_menu/settings_menu.tscn",
 	"scoreboard": "res://scenes/scoreboard/scoreboard.tscn",
+	"credits": "res://scenes/credits_screen/credits_screen.tscn",
 }
 
 
 func _ready() -> void:
 	$MarginContainer/VBoxContainer/MenuOptions/NewGame.grab_focus()
+
 
 func _on_new_game_gui_input(event: InputEvent) -> void:
 	if (
@@ -17,16 +19,7 @@ func _on_new_game_gui_input(event: InputEvent) -> void:
 		and event.button_index == MOUSE_BUTTON_LEFT
 		and event.is_pressed()
 	):
-		fade_hello_world()
-		print("Hello World")
-
-
-func fade_hello_world() -> void:
-	var tween := get_tree().create_tween()
-	
-	tween.tween_property($HelloWorld, "self_modulate:a", 1.0, 1.0) # fade in
-	tween.tween_interval(1.0) # sleep 1 sec
-	tween.tween_property($HelloWorld, "self_modulate:a", 0, 1.0) # fade out
+		transition_scene(SCENES["run"])
 	
 
 func _on_settings_gui_input(event: InputEvent) -> void:
@@ -47,7 +40,7 @@ func _on_credits_gui_input(event: InputEvent) -> void:
 		and event.button_index == MOUSE_BUTTON_LEFT
 		and event.is_pressed()
 	):
-		get_tree().change_scene_to_file("res://scenes/credits_screen/credits_screen.tscn")
+		transition_scene(SCENES["credits"])
 
 
 func _on_scoreboard_gui_input(event: InputEvent) -> void:
