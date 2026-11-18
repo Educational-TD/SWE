@@ -40,3 +40,13 @@ func _on_settings_gui_input(event: InputEvent) -> void:
 
 func transition_scene(path: String) -> void:
 	get_tree().change_scene_to_file(path)
+
+# Credits inputEvent function to bring user to credit scene when credits is pressed	
+func _on_credits_gui_input(event: InputEvent) -> void:
+	if (
+		Input.is_action_just_pressed("ui_accept")
+		or event is InputEventMouseButton
+		and event.button_index == MOUSE_BUTTON_LEFT
+		and event.is_pressed()
+	):
+		get_tree().change_scene_to_file("res://scenes/credits_screen/credits_screen.tscn")
