@@ -2,42 +2,9 @@
 
 [ext_resource type="Script" uid="uid://dp56k3c8dkirs" path="res://scripts/scoreboard/scoreboard.gd" id="1_6nlyo"]
 [ext_resource type="PackedScene" uid="uid://dkqvcap8snwrq" path="res://scenes/menu_background/menu_backgound.tscn" id="1_l7co6"]
-[ext_resource type="PackedScene" uid="uid://cfpvgdjdsvr4l" path="res://scenes/scoreboard/high_score.tscn" id="3_3mbri"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y455q"]
 bg_color = Color(0, 0, 0, 0)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3mbri"]
-bg_color = Color(0.009982083, 0.12708446, 0.15056363, 0.6039216)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-corner_detail = 5
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6q72m"]
-bg_color = Color(0.10980392, 0.10980392, 0.10980392, 0.6039216)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-corner_detail = 5
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rqydg"]
-bg_color = Color(0.009982083, 0.12708446, 0.15056363, 0.6039216)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-corner_detail = 5
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x2icb"]
-bg_color = Color(0.009982083, 0.12708446, 0.15056363, 0.6039216)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-corner_detail = 5
 
 [node name="Control" type="Control" unique_id=76972046]
 layout_mode = 3
@@ -114,22 +81,3 @@ text = "Achieved On"
 layout_mode = 2
 size_flags_vertical = 2
 size_flags_stretch_ratio = 4.0
-
-[node name="HighScore" parent="MarginContainer/VBoxContainer/Scores" unique_id=757875034 instance=ExtResource("3_3mbri")]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_3mbri")
-
-[node name="HighScore2" parent="MarginContainer/VBoxContainer/Scores" unique_id=1821742613 instance=ExtResource("3_3mbri")]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_6q72m")
-
-[node name="HighScore3" parent="MarginContainer/VBoxContainer/Scores" unique_id=739912885 instance=ExtResource("3_3mbri")]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_rqydg")
-
-[node name="HighScore4" parent="MarginContainer/VBoxContainer/Scores" unique_id=92034725 instance=ExtResource("3_3mbri")]
-layout_mode = 2
-
-[node name="HighScore5" parent="MarginContainer/VBoxContainer/Scores" unique_id=1367323370 instance=ExtResource("3_3mbri")]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_x2icb")

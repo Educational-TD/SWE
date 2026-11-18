@@ -9,7 +9,7 @@ extends HBoxContainer
 @onready var keybind_back: Label = keybind_popup.find_child("KeybindPopupBack")
 ## Keybind item template
 const KeybindItemScene: PackedScene = preload("res://scenes/settings_menu/keybind_item.tscn")
-const KeybindItem := preload("res://scripts/settings_menu/keybind_item.gd")
+const KeybindItem := preload("res://scripts/settings_menu/keybind_item.gd") # REMOVE THIS
 
 var _update_keybind: bool = false ## flag indicating if keybind is being remapped
 var _action_to_remap: String = "" ## the action being currently remapped
