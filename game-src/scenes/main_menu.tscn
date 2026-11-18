@@ -39,7 +39,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 180
-theme_override_constants/margin_top = 90
+theme_override_constants/margin_top = 120
 theme_override_constants/margin_right = 180
 theme_override_constants/margin_bottom = 90
 
@@ -101,3 +101,4 @@ text = "Credits"
 [connection signal="gui_input" from="MarginContainer/VBoxContainer/MenuOptions/NewGame" to="." method="_on_new_game_gui_input"]
 [connection signal="gui_input" from="MarginContainer/VBoxContainer/MenuOptions/Settings" to="." method="_on_settings_gui_input"]
 [connection signal="gui_input" from="MarginContainer/VBoxContainer/MenuOptions/Credits" to="." method="_on_credits_gui_input"]
+[connection signal="gui_input" from="MarginContainer/VBoxContainer/MenuOptions/Scoreboard" to="." method="_on_scoreboard_gui_input"]

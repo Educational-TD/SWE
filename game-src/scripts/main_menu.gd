@@ -2,7 +2,8 @@ extends Control
 
 var SCENES = {
 	"title": "res://scenes/main_menu.tscn",
-	"settings": "res://scenes/settings_menu/settings_menu.tscn"
+	"settings": "res://scenes/settings_menu/settings_menu.tscn",
+	"scoreboard": "res://scenes/scoreboard/scoreboard.tscn",
 }
 
 
@@ -38,9 +39,6 @@ func _on_settings_gui_input(event: InputEvent) -> void:
 		transition_scene(SCENES["settings"])
 
 
-func transition_scene(path: String) -> void:
-	get_tree().change_scene_to_file(path)
-
 # Credits inputEvent function to bring user to credit scene when credits is pressed	
 func _on_credits_gui_input(event: InputEvent) -> void:
 	if (
@@ -50,3 +48,17 @@ func _on_credits_gui_input(event: InputEvent) -> void:
 		and event.is_pressed()
 	):
 		get_tree().change_scene_to_file("res://scenes/credits_screen/credits_screen.tscn")
+
+
+func _on_scoreboard_gui_input(event: InputEvent) -> void:
+	if (
+		Input.is_action_just_pressed("ui_accept")
+		or event is InputEventMouseButton
+		and event.button_index == MOUSE_BUTTON_LEFT
+		and event.is_pressed()
+	):
+		get_tree().change_scene_to_file(SCENES["scoreboard"])
+
+
+func transition_scene(path: String) -> void:
+	get_tree().change_scene_to_file(path)
