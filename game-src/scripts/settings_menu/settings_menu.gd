@@ -5,17 +5,22 @@ var _difficulty_change := false
 var _volume_change := false
 var _keybind_change := false
 
+signal closed
+
 @onready var difficulty = $MarginContainer/VBoxContainer/DifficultyHBox
 @onready var volume = $MarginContainer/VBoxContainer/VolumeHBox
 @onready var keybind = $MarginContainer/VBoxContainer/KeybindHBox
+@onready var confirm = $MarginContainer/VBoxContainer/SaveHBox
 @onready var confirmation_popup = %ConfirmationPopup
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	$MarginContainer/VBoxContainer/DifficultyHBox/DifficultySlider.grab_focus()
 	# Setup listeners for setting change signals
 	difficulty.difficulty_change.connect(func(flag): _difficulty_change = flag)
 	volume.volume_change.connect(func(flag): _volume_change = flag)
 	keybind.keybind_change.connect(func(flag): _keybind_change = flag)
+	confirm.closed.connect(func(): closed.emit())
 
 
 # The player pressing escape will initiate exiting the settings menu
@@ -30,6 +35,7 @@ func _input(_event: InputEvent) -> void:
 			spawn_confirmation(changes)
 		else:
 			_back_to_title()
+		accept_event()
 
 
 ## Compares settings node values with currently saved settings.
@@ -64,7 +70,11 @@ func spawn_confirmation(changes: PackedStringArray) -> void:
 
 ## Change the scene back to the title menu
 func _back_to_title() -> void:
-	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
+	if Settings.scene_to_return != "RUN":
+		print("TEST")
+		get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
+	else:
+		closed.emit()
 
 
 ## Handler for when the player clicks the 'Save' button

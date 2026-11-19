@@ -23,6 +23,7 @@ shadow_color = Color(0, 0, 0, 0.12900001)
 shadow_size = 2
 
 [node name="Control" type="Control" unique_id=800033000]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -119,28 +120,26 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "Keybinds"
 
-[node name="DefaultsLabel" type="Label" parent="MarginContainer/VBoxContainer/KeybindHBox" unique_id=1197781190]
+[node name="DefaultsLabel" type="Button" parent="MarginContainer/VBoxContainer/KeybindHBox" unique_id=1247105296]
+custom_minimum_size = Vector2(130, 0)
 layout_mode = 2
 focus_neighbor_left = NodePath("../KeybindMenu")
 focus_neighbor_top = NodePath("../../VolumeHBox/VolumeSlider")
 focus_neighbor_right = NodePath("../KeybindMenu")
 focus_neighbor_bottom = NodePath("../../SaveHBox/SaveLabel")
-focus_mode = 2
-mouse_filter = 0
 text = "Reset Keybinds"
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/KeybindHBox" unique_id=2067462356]
 layout_mode = 2
 text = "|"
 
-[node name="KeybindMenu" type="Label" parent="MarginContainer/VBoxContainer/KeybindHBox" unique_id=1134325659]
+[node name="KeybindMenu" type="Button" parent="MarginContainer/VBoxContainer/KeybindHBox" unique_id=2135014472]
+custom_minimum_size = Vector2(130, 0)
 layout_mode = 2
 focus_neighbor_left = NodePath("../DefaultsLabel")
 focus_neighbor_top = NodePath("../../VolumeHBox/VolumeSlider")
 focus_neighbor_right = NodePath("../DefaultsLabel")
 focus_neighbor_bottom = NodePath("../../SaveHBox/SaveLabel")
-focus_mode = 2
-mouse_filter = 0
 text = "Edit Keybinds..."
 
 [node name="SaveHBox" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1741418241]
@@ -148,22 +147,18 @@ layout_mode = 2
 size_flags_vertical = 10
 script = ExtResource("6_rcdfy")
 
-[node name="BackLabel" type="Label" parent="MarginContainer/VBoxContainer/SaveHBox" unique_id=1791434890]
+[node name="BackLabel" type="Button" parent="MarginContainer/VBoxContainer/SaveHBox" unique_id=1780336228]
 layout_mode = 2
 size_flags_horizontal = 2
 focus_neighbor_top = NodePath("../../KeybindHBox/KeybindMenu")
 focus_neighbor_right = NodePath("../SaveLabel")
-focus_mode = 2
-mouse_filter = 0
 text = "Back"
 
-[node name="SaveLabel" type="Label" parent="MarginContainer/VBoxContainer/SaveHBox" unique_id=1552765307]
+[node name="SaveLabel" type="Button" parent="MarginContainer/VBoxContainer/SaveHBox" unique_id=708891715]
 layout_mode = 2
 size_flags_horizontal = 8
 focus_neighbor_left = NodePath("../BackLabel")
 focus_neighbor_top = NodePath("../../KeybindHBox/KeybindMenu")
-focus_mode = 2
-mouse_filter = 0
 text = "Save Settings"
 
 [node name="ConfirmationPopup" type="Control" parent="." unique_id=1789459040]

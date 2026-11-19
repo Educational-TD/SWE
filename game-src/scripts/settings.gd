@@ -22,6 +22,8 @@ const DIFF_TO_STRING = {
 }
 
 
+var scene_to_return: String = "res://scenes/main_menu.tscn"
+
 ## The default keybindings
 const default_keybinds: Dictionary[String, String] = {
 	"upgrade_damage": "1",

@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://0012wbvcvqbi" path="res://sprites/pause-focus.svg" id="7_yeia0"]
 [ext_resource type="Script" uid="uid://cujklx1xmitmy" path="res://scripts/run/exit_run.gd" id="9_y3spc"]
 [ext_resource type="Script" uid="uid://d1bqbllupw2sr" path="res://scripts/run/question.gd" id="10_0pc8y"]
+[ext_resource type="Script" uid="uid://c36d3mfi3vr06" path="res://scripts/run/settings.gd" id="12_fo0ly"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x7644"]
 bg_color = Color(0.8995955, 0.45605642, 0.28619048, 0.654902)
@@ -385,14 +386,15 @@ layout_mode = 2
 layout_mode = 2
 focus_neighbor_left = NodePath("../ExitRun")
 focus_neighbor_top = NodePath("../ExitRun")
-focus_neighbor_right = NodePath("../Settings")
-focus_neighbor_bottom = NodePath("../Settings")
-focus_next = NodePath("../Settings")
+focus_neighbor_right = NodePath("../SettingsBtn")
+focus_neighbor_bottom = NodePath("../SettingsBtn")
+focus_next = NodePath("../SettingsBtn")
 focus_previous = NodePath("../ExitRun")
 mouse_default_cursor_shape = 2
 text = "Resume"
 
-[node name="Settings" type="Button" parent="PauseMenu/Buttons" unique_id=593318213]
+[node name="SettingsBtn" type="Button" parent="PauseMenu/Buttons" unique_id=593318213]
+unique_name_in_owner = true
 layout_mode = 2
 focus_neighbor_left = NodePath("../Resume")
 focus_neighbor_top = NodePath("../Resume")
@@ -402,15 +404,16 @@ focus_next = NodePath("../ExitRun")
 focus_previous = NodePath("../Resume")
 mouse_default_cursor_shape = 2
 text = "Settings"
+script = ExtResource("12_fo0ly")
 
 [node name="ExitRun" type="Button" parent="PauseMenu/Buttons" unique_id=484941888]
 layout_mode = 2
-focus_neighbor_left = NodePath("../Settings")
-focus_neighbor_top = NodePath("../Settings")
+focus_neighbor_left = NodePath("../SettingsBtn")
+focus_neighbor_top = NodePath("../SettingsBtn")
 focus_neighbor_right = NodePath("../Resume")
 focus_neighbor_bottom = NodePath("../Resume")
 focus_next = NodePath("../Resume")
-focus_previous = NodePath("../Settings")
+focus_previous = NodePath("../SettingsBtn")
 mouse_default_cursor_shape = 2
 text = "Exit Run"
 script = ExtResource("9_y3spc")
@@ -474,6 +477,10 @@ focus_next = NodePath("../Answer")
 focus_previous = NodePath("../Answer")
 mouse_default_cursor_shape = 2
 text = "Submit"
+
+[node name="SettingsMenu" type="CanvasLayer" parent="." unique_id=1438582884]
+unique_name_in_owner = true
+process_priority = 10
 
 [connection signal="selected_tower_update" from="Map" to="Bottom/SelectedShipDisplay/SelectedShip" method="_on_selected_tower_update"]
 [connection signal="pressed" from="PauseButton" to="PauseMenu" method="_on_pause"]

@@ -43,46 +43,42 @@ size_flags_vertical = 6
 theme_override_constants/separation = 12
 
 [node name="NewRun" type="Button" parent="MarginContainer/VBoxContainer/MenuOptions" unique_id=1862943232]
+custom_minimum_size = Vector2(95, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
 focus_neighbor_top = NodePath("../Credits")
 focus_neighbor_bottom = NodePath("../Settings")
-focus_mode = 2
-mouse_filter = 0
 text = "New Game"
 
-[node name="Settings" type="Label" parent="MarginContainer/VBoxContainer/MenuOptions" unique_id=985029943]
+[node name="Settings" type="Button" parent="MarginContainer/VBoxContainer/MenuOptions" unique_id=286646294]
+custom_minimum_size = Vector2(95, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
-focus_neighbor_top = NodePath("../NewGame")
+focus_neighbor_top = NodePath("../NewRun")
 focus_neighbor_bottom = NodePath("../Scoreboard")
-focus_mode = 2
-mouse_filter = 0
 text = "Settings"
 
-[node name="Scoreboard" type="Label" parent="MarginContainer/VBoxContainer/MenuOptions" unique_id=354645614]
+[node name="Scoreboard" type="Button" parent="MarginContainer/VBoxContainer/MenuOptions" unique_id=1680700534]
+custom_minimum_size = Vector2(95, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
 focus_neighbor_top = NodePath("../Settings")
 focus_neighbor_bottom = NodePath("../Credits")
-focus_mode = 2
-mouse_filter = 0
 text = "Scoreboard"
 
-[node name="Credits" type="Label" parent="MarginContainer/VBoxContainer/MenuOptions" unique_id=828897280]
+[node name="Credits" type="Button" parent="MarginContainer/VBoxContainer/MenuOptions" unique_id=1647679911]
+custom_minimum_size = Vector2(95, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
 focus_neighbor_top = NodePath("../Scoreboard")
-focus_neighbor_bottom = NodePath("../NewGame")
-focus_mode = 2
-mouse_filter = 0
+focus_neighbor_bottom = NodePath("../NewRun")
 text = "Credits"
 
-[connection signal="gui_input" from="MarginContainer/VBoxContainer/MenuOptions/NewGame" to="." method="_on_new_game_gui_input"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/MenuOptions/NewRun" to="." method="_on_new_run_pressed"]
 [connection signal="gui_input" from="MarginContainer/VBoxContainer/MenuOptions/Settings" to="." method="_on_settings_gui_input"]
-[connection signal="gui_input" from="MarginContainer/VBoxContainer/MenuOptions/Credits" to="." method="_on_credits_gui_input"]
 [connection signal="gui_input" from="MarginContainer/VBoxContainer/MenuOptions/Scoreboard" to="." method="_on_scoreboard_gui_input"]
+[connection signal="gui_input" from="MarginContainer/VBoxContainer/MenuOptions/Credits" to="." method="_on_credits_gui_input"]
