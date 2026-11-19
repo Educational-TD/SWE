@@ -6,6 +6,14 @@ extends CenterContainer
 ## Answer submissions can be triggered by *either* the LineEdit
 ## or the Submit button. This merges these options to work in one await.
 signal submit_answer(answer: String)
+
+func _input(_event: InputEvent) -> void:
+	if Input.is_action_just_pressed("ui_cancel"):
+		if MenuDarken.visible == true:
+			_on_answer_submitted()
+			accept_event()
+
+
 func _on_answer_submitted() -> void:
 	submit_answer.emit(Answer.text)
 

@@ -8,8 +8,10 @@ func _input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("ui_cancel"):
 		if get_tree().paused == true:
 			_on_unpause()
+			accept_event()
 		else:
 			_on_pause()
+			accept_event()
 
 func _on_pause() -> void:
 	MenuDarken.show()
