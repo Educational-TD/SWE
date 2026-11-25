@@ -1,3 +1,6 @@
+# Handle text files automatically and normalize them to LF on check-in
+* text=auto  eol=lf
+
 # 3D Models
 *.fbx filter=lfs diff=lfs merge=lfs -text
 *.gltf filter=lfs diff=lfs merge=lfs -text                                                                                                   
