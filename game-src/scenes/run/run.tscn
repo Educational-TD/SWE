@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://0012wbvcvqbi" path="res://sprites/pause-focus.svg" id="7_yeia0"]
 [ext_resource type="Script" uid="uid://cujklx1xmitmy" path="res://scripts/run/exit_run.gd" id="9_y3spc"]
 [ext_resource type="Script" uid="uid://d1bqbllupw2sr" path="res://scripts/run/question.gd" id="10_0pc8y"]
+[ext_resource type="Script" uid="uid://bshqhqub3xhmr" path="res://scenes/run/open_settings.gd" id="12_fo0ly"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x7644"]
 bg_color = Color(0.8995955, 0.45605642, 0.28619048, 0.654902)
@@ -402,6 +403,7 @@ focus_next = NodePath("../ExitRun")
 focus_previous = NodePath("../Resume")
 mouse_default_cursor_shape = 2
 text = "Settings"
+script = ExtResource("12_fo0ly")
 
 [node name="ExitRun" type="Button" parent="PauseMenu/Buttons" unique_id=484941888]
 layout_mode = 2
