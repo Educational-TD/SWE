@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://brhmrdto8vpcy"]
+
+[ext_resource type="Script" uid="uid://d2sigy5vabtbj" path="res://scripts/run/map/enemy.gd" id="1_7p1mj"]
+
+[node name="Enemy" type="PathFollow2D" unique_id=48614933]
+loop = false
+script = ExtResource("1_7p1mj")

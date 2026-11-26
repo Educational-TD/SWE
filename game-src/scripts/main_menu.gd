@@ -2,6 +2,7 @@ extends Control
 
 var SCENES = {
 	"title": "res://scenes/main_menu.tscn",
+	"game": "res://scenes/run/run.tscn",
 	"settings": "res://scenes/settings_menu/settings_menu.tscn"
 }
 
@@ -16,17 +17,7 @@ func _on_new_game_gui_input(event: InputEvent) -> void:
 		and event.button_index == MOUSE_BUTTON_LEFT
 		and event.is_pressed()
 	):
-		fade_hello_world()
-		print("Hello World")
-
-
-func fade_hello_world() -> void:
-	var tween := get_tree().create_tween()
-	
-	tween.tween_property($HelloWorld, "self_modulate:a", 1.0, 1.0) # fade in
-	tween.tween_interval(1.0) # sleep 1 sec
-	tween.tween_property($HelloWorld, "self_modulate:a", 0, 1.0) # fade out
-	
+		transition_scene(SCENES["game"])
 
 func _on_settings_gui_input(event: InputEvent) -> void:
 	if (

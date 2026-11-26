@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://dc4q62l1n8lou"]
+
+[ext_resource type="Texture2D" uid="uid://b07vt30sri703" path="res://sprites/bullet.svg" id="1_espw4"]
+[ext_resource type="Script" uid="uid://ca7t2f1wpssqh" path="res://scripts/run/map/projectile.gd" id="2_4lwi6"]
+
+[node name="Projectile" type="Sprite2D" unique_id=244375234]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("1_espw4")
+script = ExtResource("2_4lwi6")
