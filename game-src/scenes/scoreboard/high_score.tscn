@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://cfpvgdjdsvr4l"]
+
+[ext_resource type="Script" uid="uid://ba6xsi2ygfoa1" path="res://scripts/scoreboard/high_score.gd" id="1_gbrey"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p8ruo"]
+bg_color = Color(0.10980392, 0.10980392, 0.10980392, 0.6039216)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[node name="HighScore" type="PanelContainer" unique_id=1821742613]
+custom_minimum_size = Vector2(0, 50)
+offset_right = 250.0
+offset_bottom = 50.0
+size_flags_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_p8ruo")
+script = ExtResource("1_gbrey")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1345054591]
+layout_mode = 2
+
+[node name="Index" type="Label" parent="HBoxContainer" unique_id=31430178]
+layout_mode = 2
+size_flags_horizontal = 6
+text = "1"
+
+[node name="Score" type="Label" parent="HBoxContainer" unique_id=1063740047]
+layout_mode = 2
+size_flags_horizontal = 6
+text = "1234"
+
+[node name="Wave" type="Label" parent="HBoxContainer" unique_id=1701422781]
+layout_mode = 2
+size_flags_horizontal = 6
+text = "13"
+
+[node name="Time" type="Label" parent="HBoxContainer" unique_id=783300492]
+layout_mode = 2
+size_flags_horizontal = 6
+text = "12:34:56"
+
+[node name="Date" type="Label" parent="HBoxContainer" unique_id=36792647]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+text = "April 20, 2027"
